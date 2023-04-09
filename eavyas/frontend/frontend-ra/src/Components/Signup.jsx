@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9e3e2211a4d91fafe62a326f9f7cea2e169aff5b
 import React, { useState } from 'react'
 import './Signup.css';
 import axios from 'axios';
