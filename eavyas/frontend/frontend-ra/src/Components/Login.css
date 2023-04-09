@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+
+* {
+    box-sizing: border-box;
+    font-family: Raleway, sans-serif;
+}
+
+body {
+    background-color: #f2f2f2;
+    
+}
+
+.container {
+    
+    background-image: url('container1.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    border-radius: 3px;
+
+}
+
+
+
+.login {
+    width: 300px;
+    background-color: #fff;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.login__field {
+	padding: 20px 0px;	
+	position: relative;	
+    margin-top:-20px;
+}
+
+.login__icon {
+	position: absolute;
+	top: 30px;
+	color: #7875B5;
+    
+}
+.login__input {
+	border: none;
+	border-bottom: 2px solid #D1D1D4;
+	background: none;
+	padding: 10px;
+	padding-left: 24px;
+	font-weight: 700;
+	width: 75%;
+	transition: .2s;
+    text-indent: 20px;
+    
+}
+.login h2 {
+    text-align: center;
+    color: #333;
+}
+
+.login input[type="text"],
+.login input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-link-fp{
+    text-align: left;
+    margin-top: -30px;
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+.form-link-sgn{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom:50px;
+    font-size: 12px;
+}
+.line{
+    position: relative;
+    height: 1px;
+    width: 100%;
+    margin: 36px 0;
+    background-color: #d4d4d4;
+}
+.line::before{
+    content: 'Or';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFF;
+    color: #8b8b8b;
+    padding: 0 15px;
+}
+.submit-btn{
+    margin: 10px 0;
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    line-height: 50px;
+    font-weight: 600;
+    background: #dde1e7;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #595959;
+    box-shadow: 2px 2px 5px #BABECC,
+               -5px -5px 10px #ffffff73;
+  }
+.submit-btn:focus{
+    color: #3498db;
+    box-shadow: inset 2px 2px 5px #BABECC,
+               inset -5px -5px 10px #ffffff73;
+  }
+.social-login__icon {
+   
+    padding: 20px 10px;
+    color: #fff;
+    text-decoration: none;
+
+   
+    
+}
+
+.fab.fa-facebook-f {
+    
+    color: #3b5998;
+    background-image: linear-gradient( to bottom, transparent 20%, white 20%, white 93%, transparent 93% );
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 24px;
+    border-radius: 15%;
+    transition: background-color 0.3s ease;
+}
+
+.fab.fa-facebook-f:hover {
+    background-color:transparent;
+    color: #2f4c88;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /* #2f4c88  */
+}
+.fab.fa-instagram {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    font-size: 24px;
+    border-radius: 15%;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+    margin-left: 100px;
+}
+
+.fab.fa-instagram:hover {
+    background-color: #d81d60;
+}
+.fab.fa-google {
+    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    font-size: 24px;
+    border-radius: 15%;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+ .fab.fa-google:hover {
+    background-color: #f1f1f1;
+  }
