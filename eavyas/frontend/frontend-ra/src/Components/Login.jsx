@@ -21,7 +21,7 @@ const Login = (props) => {
             // 'email':email,
             'password':password
         };
-        axios.post('http::/localhost:8000/dj-rest-auth/login/',loginData).then(res=>{
+        axios.post('http://localhost:8000/dj-rest-auth/login/',loginData).then(res=>{
             let authToken=localStorage.setItem('token',res.data.key)
             props.setToken(authToken);
             let authUser=localStorage.setItem('user',username)
@@ -46,14 +46,14 @@ const Login = (props) => {
             <FontAwesomeIcon icon={faUser} className="login__icon" />
             <input type="text" className="login__input" placeholder="Username/Email" 
             value={username} 
-            onChange={(e)=>props.setUsername(e.target.value)}
+            onChange={(e)=>setUsername(e.target.value)}
             />
           </div>
           <div className="login__field">
             <FontAwesomeIcon icon={faLock} className="login__icon" />
             <input type="password" className="login__input" placeholder="Password" 
             value={password}  
-            onChange={(e)=>props.setPassword(e.target.value)}
+            onChange={(e)=>setPassword(e.target.value)}
             />
           </div>
           <div className="form-link-fp">
