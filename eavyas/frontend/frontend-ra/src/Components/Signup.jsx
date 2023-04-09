@@ -1,14 +1,10 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 9e3e2211a4d91fafe62a326f9f7cea2e169aff5b
 import React, { useState } from 'react'
 import './Signup.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPhoneSquare, faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
 
-const SignUp = () => {
+const SignUp = () => { 
   
   const [formData, setFormData] = useState({
     username: "",
