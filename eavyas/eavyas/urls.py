@@ -16,12 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.views.generic import TemplateView
-from backend.views import GoogleLogin
+from backend.views import GoogleLogin,google_auth
+from backend import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),  
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
-    path('dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login')
+    path('dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
+    path('google-auth/', views.google_auth, name='google_auth'),
+
+
 ]

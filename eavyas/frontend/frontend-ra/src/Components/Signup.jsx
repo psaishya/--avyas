@@ -53,7 +53,7 @@ const SignUp = () => {
       <div className="signup">
         <h2>SignUp</h2>
         <form onSubmit={(e) => onSubmit(e)}>
-          <div className="box">
+          {/* <div className="box">
             <label htmlFor="firstName" className="fl fontLabel"> First Name: </label>
             <div className="new iconBox">
               <FontAwesomeIcon icon={faUser} />
@@ -82,7 +82,7 @@ const SignUp = () => {
               <input type="text" name="phoneNo" maxLength={10} placeholder="Phone No." className="textBox" required={true} />
             </div>
             <div className="clr"></div>
-          </div>
+          </div> */}
           <div className="box">
             <label htmlFor="email" className="fl fontLabel"> Email ID: </label>
             <div className="fl iconBox">
@@ -114,14 +114,14 @@ const SignUp = () => {
               <FontAwesomeIcon icon={faKey} />
             </div>
             <div className="fr">
-              <input type="password1" name="password1" placeholder="Password" className="textBox" 
+              <input type="password" name="password1" placeholder="Password" className="textBox" 
               value={password1}  onChange={(e) => onChange(e)}
               required={true} />
             </div>
             <div className="clr"></div>
           </div>
           <div className="box">
-            <label htmlFor="password2" className="fl fontLabel"> Password </label>
+            <label htmlFor="password2" className="fl fontLabel"> Re-enter Password </label>
             <div className="fl iconBox">
               <FontAwesomeIcon icon={faKey} />
             </div>

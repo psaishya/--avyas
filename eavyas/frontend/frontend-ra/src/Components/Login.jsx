@@ -36,6 +36,39 @@ const Login = (props) => {
         ;
         
     }
+
+    
+    const loginwg=(e)=>{
+      e.preventDefault();
+      // https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=<CALLBACK_URL_YOU_SET_ON_GOOGLE>&prompt=consent&response_type=code&client_id=<1050321826751-0eh5heri6umccqffjceagt85e61hi98g.apps.googleusercontent.com>&scope=openid%20email%20profile&access_type=offline
+  //     axios.get(`https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:8000/accounts/google/login/callback/&prompt=consent&response_type=code&client_id=1050321826751-0eh5heri6umccqffjceagt85e61hi98g.apps.googleusercontent.com&scope=openid%20email%20profile`)
+  // .then(response => {
+    // axios.get(`http://localhost:8000/google-auth/`)
+    // .then(response => {
+      axios.get(`https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:8000/accounts/google/login/callback/&prompt=consent&response_type=code&client_id=1050321826751-0eh5heri6umccqffjceagt85e61hi98g.apps.googleusercontent.com&scope=openid%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile`)
+      .then(response => {  
+   
+    const token_or_code = response.data; // assuming the response contains the token or code
+    console.log(response);
+    // Assuming the request was successful and returned the code or token, you could then construct a POST request to the specified URL to send it to the server:
+    const post_data = {
+      token_or_code: token_or_code
+    };
+
+    axios.post('http://localhost:8000/dj-rest-auth/google/', post_data)
+      .then(response => {
+        console.log(response);
+        console.log("successfullll");
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+    }
   return (
     <div>
       <div className="container" >
@@ -71,7 +104,7 @@ const Login = (props) => {
       
           <a href="#" className="social-login__icon fab fa-instagram"></a>
           <a href="#" className="social-login__icon fab fa-facebook-f"></a>
-          <a href="#" className="social-login__icon fab fa-google"  ></a>
+          <a href="#" className="social-login__icon fab fa-google"  onClick={loginwg} ></a>
 
         </div>
 
