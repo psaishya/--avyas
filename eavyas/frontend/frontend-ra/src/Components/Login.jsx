@@ -8,6 +8,10 @@ import './Login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import GoogleLogin from 'react-google-login';
+import googleLogin from './/GoogleLogin';
+import Home from './Home';
+
 
 
 const Login = (props) => {
@@ -27,6 +31,9 @@ const Login = (props) => {
             let authUser=localStorage.setItem('user',username)
             props.setUser(authUser);
             props.setMessage(`Logged in as ${username}`);
+            // <Home user={username}/>
+            window.location.href = '/home';
+
 
         }).catch(err=>{
             console.log(err);
@@ -68,7 +75,14 @@ const Login = (props) => {
     console.error(error);
   });
 
+ 
     }
+    const responseGoogle = async(response) => {
+      let googleResponse  = await googleLogin(response.accessToken)
+      console.log(googleResponse);
+      console.log(response);
+    }
+   
   return (
     <div>
       <div className="container" >
@@ -107,6 +121,15 @@ const Login = (props) => {
           <a href="#" className="social-login__icon fab fa-google"  onClick={loginwg} ></a>
 
         </div>
+
+        <h1>LOGIN WITH GOOGLE</h1>
+      
+      <GoogleLogin
+        clientId="1050321826751-0eh5heri6umccqffjceagt85e61hi98g.apps.googleusercontent.com"
+        buttonText="LOGIN WITH GOOGLE"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+      />
 
       </div>
     </div>
