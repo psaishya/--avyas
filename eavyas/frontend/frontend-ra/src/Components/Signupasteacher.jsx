@@ -4,7 +4,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPhoneSquare, faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
 
-const SignUp = () => { 
+const SignUpasteacher = () => { 
   
   const [formData, setFormData] = useState({
     username: "",
@@ -12,14 +12,28 @@ const SignUp = () => {
     password1: "",
     password2: "",
   });
-
+  const[teacherData,setteacherData]=useState(
+    {
+    'firstname':'',
+    'lastname':'',
+    'gender':'',
+    'phoneno':'',
+    'email':'', 
+    'username':'',
+    }
+  );
   const { username,email, password1, password2 } = formData;
 
-  const onChange = (e) =>
+  const onChange = (e) =>{
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setteacherData({
+        ...teacherData,
+        [e.target.name]:e.target.value
+      }); }
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    
     if (password1 !== password2) {
       console.log("Passwords do not match");
     } else {
@@ -41,9 +55,30 @@ const SignUp = () => {
           body,
           config
         );
-        console.log(res.data);
+        // console.log(res.data);
+  
       } catch (err) {
         console.log(err.response.data);
+      }
+      const userFormData=new FormData();
+    userFormData.append("firstName",teacherData.firstname)
+    userFormData.append("lastName",teacherData.lastname)
+    userFormData.append("gender",teacherData.gender)
+    userFormData.append("phoneNo",teacherData.phoneno)
+    userFormData.append("email",teacherData.email)
+    userFormData.append("userName",teacherData.username)
+
+      
+      try{
+        axios.post('http://localhost:8000/teacher/',userFormData).then((response)=>{
+        console.log(response.data );
+        console.log("backend wala successful wohooo")
+
+      })
+      }
+      catch(error){
+        console.log(error);
+        console.log("backend wala bhayena")
       }
     }
   }
@@ -51,25 +86,29 @@ const SignUp = () => {
     <>
     <div className="container">
       <div className="signup">
-        <h2>SignUp</h2>
+        <h2>SignUp as a Teacher</h2>
         <form onSubmit={(e) => onSubmit(e)}>
-          {/* <div className="box">
-            <label htmlFor="firstName" className="fl fontLabel"> First Name: </label>
+          <div className="box">
+            <label htmlFor="firstname" className="fl fontLabel"> First Name: </label>
             <div className="new iconBox">
               <FontAwesomeIcon icon={faUser} />
             </div>
             <div className="fr">
-              <input type="text" name="firstName" placeholder="First Name" className="textBox" autoFocus={true} required={true} />
+              <input type="text" name="firstname" placeholder="First Name" className="textBox" autoFocus={true}
+              onChange={(e) => onChange(e)}
+               required={true} />
             </div>
             <div className="clr"></div>
           </div>
           <div className="box">
-            <label htmlFor="secondName" className="fl fontLabel"> Last Name: </label>
+            <label htmlFor="lastname" className="fl fontLabel"> Last Name: </label>
             <div className="fl iconBox">
               <FontAwesomeIcon icon={faUser} />
             </div>
             <div className="fr">
-              <input type="text" name="secondName" placeholder="Last Name" className="textBox" required={true} />
+              <input type="text" name="lastname" placeholder="Last Name" className="textBox" 
+              onChange={(e) => onChange(e)}
+              required={true} />
             </div>
             <div className="clr"></div>
           </div>
@@ -79,10 +118,12 @@ const SignUp = () => {
               <FontAwesomeIcon icon={faPhoneSquare} />
             </div>
             <div className="fr">
-              <input type="text" name="phoneNo" maxLength={10} placeholder="Phone No." className="textBox" required={true} />
+              <input type="text" name="phoneno" maxLength={10} placeholder="Phone No." className="textBox"
+              onChange={(e) => onChange(e)}
+                 required={true} />
             </div>
             <div className="clr"></div>
-          </div> */}
+          </div>
           <div className="box">
             <label htmlFor="email" className="fl fontLabel"> Email ID: </label>
             <div className="fl iconBox">
@@ -134,8 +175,8 @@ const SignUp = () => {
           </div>
           <div className="box radio">
             <label htmlFor="gender" className="fl fontLabel"> Gender: </label>
-            <input type="radio" name="Gender" value="Male" required={true} /> Male &nbsp; &nbsp; &nbsp; &nbsp;
-            <input type="radio" name="Gender" value="Female" required={true} /> Female
+            <input type="radio" name="gender" value="Male"  onChange={(e) => onChange(e)} required={true} /> Male &nbsp; &nbsp; &nbsp; &nbsp;
+            <input type="radio" name="gender" value="Female"  onChange={(e) => onChange(e)} required={true} /> Female
           </div>
           <div className="box terms">
             <input type="checkbox" name="Terms" required={true} /> &nbsp; I accept the terms and conditions
@@ -143,7 +184,7 @@ const SignUp = () => {
           <button type="submit" className="submit-btn" >SignUp</button>
           <div className="line"></div>
           <div className="form-link-sgn">
-            Already have an account?  <a href="/login" >Login Here</a>
+            Already have an account?  <a href="/loginasteacher" >Login Here</a>
           </div>
         </form>
       </div>
@@ -151,4 +192,4 @@ const SignUp = () => {
     </>
   );
   }
-  export default SignUp;
+  export default SignUpasteacher;

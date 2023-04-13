@@ -1,9 +1,14 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Components/Login';
-import Signup from './Components/Signup';
-import Home from './Components/Home';
+
 import { useEffect, useState } from 'react';
+import Loginasstudent from './Components/Loginasstudent';
+import SignUpasstudent from './Components/Signupasstudent';
+import Loginasteacher from './Components/Loginasteacher';
+import SignUpasteacher from './Components/Signupasteacher';
+import Home_teacher from './Components/Home_teacher';
+import Home_student from './Components/Home_student';
+import Main from './Components/Main';
 
 // import { useNavigate } from 'react-router-dom';
 // import {Route,Routes,useNavigate} from "react-router-dom";
@@ -11,6 +16,7 @@ import { useEffect, useState } from 'react';
 function App() {
   const [token,setToken]=useState(null);
   const [user,setUser]=useState('');
+  
   const [message,setMessage]=useState('');
   // const navigate=useNavigate();
 
@@ -50,10 +56,16 @@ function App() {
       {message}
      <Router>
      <Routes>
+ 
+        <Route path="/" element={<Main/>}/>
 
-        <Route path="/home" element={<Home user={user}/>}/>
-        <Route path="/login" element={<Login setToken={setToken} setUser={setUser} setMessage={setMessage}/>}/>
-        <Route path="/signup" element={<Signup/>}/>
+        <Route path="/home_teacher" element={<Home_teacher user={user}/>}/>
+        <Route path="/home_student" element={<Home_student user={user}/>}/>
+
+        <Route path="/loginasstudent" element={<Loginasstudent setToken={setToken} setUser={setUser} setMessage={setMessage}/>}/>
+        <Route path="/signupasstudent" element={<SignUpasstudent/>}/>
+        <Route path="/loginasteacher" element={<Loginasteacher setToken={setToken} setUser={setUser} setMessage={setMessage}/>}/>
+        <Route path="/signupasteacher" element={<SignUpasteacher/>}/>
     </Routes> 
     </Router>
     
