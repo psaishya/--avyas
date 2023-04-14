@@ -2,6 +2,14 @@ from django.shortcuts import render
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
+from rest_framework import generics
+from .serializers import teacherSerializer,studentSerializer
+from . import models
+import requests
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+
 
 class GoogleLogin(SocialLoginView): # if you want to use Authorization Code Grant, use this
     adapter_class = GoogleOAuth2Adapter
@@ -11,9 +19,6 @@ class GoogleLogin(SocialLoginView): # if you want to use Authorization Code Gran
 # class GoogleLogin(SocialLoginView): # if you want to use Implicit Grant, use this
 #     adapter_class = GoogleOAuth2Adapter
 
-# Create your views here.
-import requests
-from django.http import JsonResponse
 
 def google_auth(request):
     # get the query parameters from the request
@@ -31,3 +36,28 @@ def google_auth(request):
     # return the response as a JSON object
     return JsonResponse(response.json())
 
+class TeacherList(generics.ListCreateAPIView):
+    queryset=models.User_teacher.objects.all() 
+    serializer_class=teacherSerializer
+
+class StudentList(generics.ListCreateAPIView):
+    queryset=models.User_student.objects.all() 
+    serializer_class=studentSerializer
+
+@csrf_exempt     
+def Loggedteacher(request):
+    queryset=models.User_teacher.objects.all() 
+    userName=request.POST["userName"]
+    userdata=queryset.filter(userName=userName)
+    if userdata:
+        # return JsonResponse(userdata,safe=false)
+        return JsonResponse({'id':userdata[0].teacherId})
+
+@csrf_exempt     
+def Loggedstudent(request):
+    queryset=models.User_student.objects.all() 
+    userName=request.POST["userName"]
+    userdata=queryset.filter(userName=userName)
+    if userdata:
+        # return JsonResponse(userdata,safe=false)
+        return JsonResponse({'id':userdata[0].studentId})

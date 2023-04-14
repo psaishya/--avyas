@@ -26,6 +26,11 @@ urlpatterns = [
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
     path('google-auth/', views.google_auth, name='google_auth'),
+    path('teacher/',views.TeacherList.as_view()),
+    path('student/',views.StudentList.as_view()),
+    path('loggedteacher/',views.Loggedteacher),
+    path('loggedstudent/',views.Loggedstudent),
+
 
 
 ]

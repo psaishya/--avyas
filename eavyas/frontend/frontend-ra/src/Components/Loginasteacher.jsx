@@ -8,9 +8,12 @@ import './Login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import GoogleLogin from 'react-google-login';
+import googleLogin from './/GoogleLogin';
 
 
-const Login = (props) => {
+
+const Loginasteacher = (props) => {
     const [username,setUsername]=useState('');
     const [password,setPassword]=useState('');
 
@@ -27,13 +30,26 @@ const Login = (props) => {
             let authUser=localStorage.setItem('user',username)
             props.setUser(authUser);
             props.setMessage(`Logged in as ${username}`);
+            // <Home user={username}/>
+
+            const loggedFormData=new FormData;
+            loggedFormData.append('userName',loginData.username)
+            axios.post('http://localhost:8000/loggedteacher/',loggedFormData).then((response)=>{
+              const id=response.data.id;
+              localStorage.setItem('loggedteacher',id);
+              console.log(localStorage.getItem('loggedteacher'));
+
+          } );  
+
+            window.location.href = '/home_teacher';
+
 
         }).catch(err=>{
             console.log(err);
             props.setMessage(`You have entered invalid email or password`);
             // console.log(props.message);
-        })
-        ;
+        });
+        
         
     }
 
@@ -68,12 +84,19 @@ const Login = (props) => {
     console.error(error);
   });
 
+ 
     }
+    const responseGoogle = async(response) => {
+      let googleResponse  = await googleLogin(response.accessToken)
+      console.log(googleResponse);
+      console.log(response);
+    }
+   
   return (
     <div>
       <div className="container" >
       <div className="login">
-        <h2>Login</h2>
+        <h2>Login as a Teacher</h2>
         <form>
           <div className="login__field">
             <FontAwesomeIcon icon={faUser} className="login__icon" />
@@ -94,7 +117,7 @@ const Login = (props) => {
           </div>
           <button type="submit" className="submit-btn" onClick={handleSubmit} >LogIn</button>
           <div className="form-link-sgn">
-            Don't have an account? <a href="/signup" className="link signup-link">Signup</a>
+            Don't have an account? <a href="/signupasteacher" className="link signup-link">Signup</a>
           </div>
 
         </form>
@@ -108,10 +131,13 @@ const Login = (props) => {
 
         </div>
 
+    
+    
+
       </div>
     </div>
     </div>
   )
-}
+};
 
-export default Login
+export default Loginasteacher
