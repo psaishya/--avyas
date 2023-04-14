@@ -52,10 +52,9 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'rest_framework',
     'rest_framework.authtoken',
-
-
-    
+  
     ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
