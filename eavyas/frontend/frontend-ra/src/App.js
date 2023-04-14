@@ -57,7 +57,7 @@ function App() {
      <Router>
      <Routes>
  
-        <Route path="/" element={<Main/>}/>
+        <Route path="*" element={<Main/>}/>
 
         <Route path="/home_teacher" element={<Home_teacher user={user}/>}/>
         <Route path="/home_student" element={<Home_student user={user}/>}/>

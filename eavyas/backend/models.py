@@ -11,8 +11,24 @@ class User_teacher(models.Model):
     phoneNo=models.CharField(max_length=10,default="")
     email=models.EmailField(max_length=50,default="")
     userName=models.CharField( max_length=50,default="",unique=TRUE)
-    # class Meta:
-    #     verbose_name_plural="1. Users"
+    class Meta:
+        verbose_name_plural="1. Teachers"
+
+class CourseCategory(models.Model):
+    title = models.CharField(max_length=150)
+    description = models.TextField()
+
+    class Meta:
+        verbose_name_plural = "2. Course Categories"
+
+class Course(models.Model):
+    category = models.ForeignKey(CourseCategory, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(User_teacher, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150)
+    description = models.TextField()
+
+    class Meta:
+        verbose_name_plural = "3. Course"
         
 class User_student(models.Model):
     studentId=models.AutoField(primary_key=True)
@@ -22,3 +38,7 @@ class User_student(models.Model):
     phoneNo=models.CharField(max_length=10,default="")
     email=models.EmailField(max_length=50,default="")
     userName=models.CharField( max_length=50,default="",unique=TRUE)
+    interested_categories= models.TextField(default="")
+
+    class Meta:
+        verbose_name_plural = "4. Student"

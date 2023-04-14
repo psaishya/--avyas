@@ -192,8 +192,4 @@ const SignUpasteacher = () => {
     </>
   );
   }
-<<<<<<< HEAD:eavyas/frontend/frontend-ra/src/Components/Signup.jsx
-  export default SignUp;
-=======
   export default SignUpasteacher;
->>>>>>> fad3f44cd31e615b4fcd26f23166a683a122a72b:eavyas/frontend/frontend-ra/src/Components/Signupasteacher.jsx

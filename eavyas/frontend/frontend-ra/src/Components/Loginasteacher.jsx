@@ -94,7 +94,7 @@ const Loginasteacher = (props) => {
    
   return (
     <div>
-      <div className="container" >
+      <div className="containera" >
       <div className="login">
         <h2>Login as a Teacher</h2>
         <form>

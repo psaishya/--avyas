@@ -8,6 +8,10 @@ from . import models
 import requests
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import permissions
+
 
 
 
@@ -39,6 +43,12 @@ def google_auth(request):
 class TeacherList(generics.ListCreateAPIView):
     queryset=models.User_teacher.objects.all() 
     serializer_class=teacherSerializer
+    permission_classes=[permissions.IsAuthenticated]
+
+class TeacherDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset=models.User_teacher.objects.all()
+    serializer_class = teacherSerializer
+    permission_classes=[permissions.IsAuthenticated]
 
 class StudentList(generics.ListCreateAPIView):
     queryset=models.User_student.objects.all() 
