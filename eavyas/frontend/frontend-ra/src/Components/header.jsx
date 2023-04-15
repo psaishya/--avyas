@@ -6,7 +6,8 @@ function Header () {
 
   const logoutclick=()=>{
             localStorage.removeItem('userLoginStatus')
-            localStorage.removeItem('loggeduser')
+            localStorage.removeItem('loggedstudent')
+            localStorage.removeItem('loggedteacher')
             localStorage.removeItem('token');
             localStorage.removeItem('user');
 
@@ -35,12 +36,12 @@ function Header () {
             Login
           </a>
           <ul class="dropdown-menu">
-          {userLoginStatus!='true' &&
+          {userLoginStatus!=='true' &&
           <>
             <li><Link className="dropdown-item" to="/loginasstudent">Student</Link></li>
             <li><Link className="dropdown-item" to="/loginasteacher">Teacher</Link></li></>
           }   
-          {userLoginStatus=='true' &&
+          {userLoginStatus==='true' &&
           <>
             <li><a className="dropdown-item" href="/student-dashboard">Dashboard</a></li>
             <li><hr className="dropdown-divider"/></li>

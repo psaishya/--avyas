@@ -44,7 +44,7 @@ const Loginasteacher = (props) => {
 
           } );  
 
-            window.location.href = '/home_teacher';
+            window.location.href = '/teacher-dashboard';
 
 
         }).catch(err=>{

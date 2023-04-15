@@ -54,6 +54,11 @@ class StudentList(generics.ListCreateAPIView):
     queryset=models.User_student.objects.all() 
     serializer_class=studentSerializer
 
+class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset=models.User_student.objects.all()
+    serializer_class = studentSerializer
+    # permission_classes=[permissions.IsAuthenticated]
+
 @csrf_exempt     
 def Loggedteacher(request):
     queryset=models.User_teacher.objects.all() 

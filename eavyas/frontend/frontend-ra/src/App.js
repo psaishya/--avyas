@@ -6,8 +6,7 @@ import Loginasstudent from './Components/Loginasstudent';
 import SignUpasstudent from './Components/Signupasstudent';
 import Loginasteacher from './Components/Loginasteacher';
 import SignUpasteacher from './Components/Signupasteacher';
-import Home_teacher from './Components/Home_teacher';
-import Home_student from './Components/Home_student';
+
 import Main from './Components/Main';
 import Header from './Components/header';
 
@@ -59,15 +58,8 @@ function App() {
 
      <Router>
      <Routes>
-<<<<<<< HEAD
- 
         <Route path="*" element={<Main/>}/>
-
-=======
-        <Route path="*" element={<Main/>}/>
->>>>>>> 885f6bf968a1d7e4f32e3fc1e5a00e15fc0f7c71
-        <Route path="/home_teacher" element={<Home_teacher user={user}/>}/>
-        <Route path="/home_student" element={<Home_student user={user}/>}/>
+       
         <Route path="/loginasstudent" element={<Loginasstudent setToken={setToken} setUser={setUser} setMessage={setMessage}/>}/>
         <Route path="/signupasstudent" element={<SignUpasstudent/>}/>
         <Route path="/loginasteacher" element={<Loginasteacher setToken={setToken} setUser={setUser} setMessage={setMessage}/>}/>

@@ -44,7 +44,7 @@ const Loginasstudent = (props) => {
 
           } );  
 
-            window.location.href = '/home_student';
+            window.location.href = '/student-dashboard';
 
 
         }).catch(err=>{
