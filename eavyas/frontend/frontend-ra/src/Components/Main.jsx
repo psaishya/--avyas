@@ -1,13 +1,22 @@
 import React from 'react'
+import Header from './header'
+import Home from './Home'
+import Footer from './footer'
+import CourseDetail from "./CourseDetail";
+import {Routes as Switch,Route, Routes,Router} from 'react-router-dom'
+import Dashboard from './Dashboard';
 
 const Main = () => {
   return (
     <div>
-<h1>Hello</h1>
-
-        <a href='/loginasstudent'>Continue as a student</a>
-        <a href='/loginasteacher'>Continue as a teacher</a>
-
+      <Header />
+         
+            <Switch>
+              <Route path = "/" element ={<Home/>} />
+               <Route path = "/detail/:course_id" element ={<CourseDetail/>} /> 
+               <Route path = "/student-dashboard" element ={<Dashboard/>}/>
+            </Switch>
+      <Footer/>
     </div>
   )
 }

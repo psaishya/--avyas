@@ -9,6 +9,7 @@ import SignUpasteacher from './Components/Signupasteacher';
 import Home_teacher from './Components/Home_teacher';
 import Home_student from './Components/Home_student';
 import Main from './Components/Main';
+import Header from './Components/header';
 
 // import { useNavigate } from 'react-router-dom';
 // import {Route,Routes,useNavigate} from "react-router-dom";
@@ -54,10 +55,12 @@ function App() {
   return (
     <>
       {message}
+      {/* <Header /> */}
+
      <Router>
      <Routes>
  
-        <Route path="/" element={<Main/>}/>
+        <Route path="*" element={<Main/>}/>
 
         <Route path="/home_teacher" element={<Home_teacher user={user}/>}/>
         <Route path="/home_student" element={<Home_student user={user}/>}/>

@@ -3,6 +3,7 @@ import './Signup.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPhoneSquare, faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
+import Header from './header';
 
 const SignUpasteacher = () => { 
   
@@ -84,6 +85,8 @@ const SignUpasteacher = () => {
   }
   return (
     <>
+                <Header />
+
     <div className="container">
       <div className="signup">
         <h2>SignUp as a Teacher</h2>

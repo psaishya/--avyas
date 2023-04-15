@@ -1,0 +1,122 @@
+import {Link} from 'react-router-dom'
+function Home() {
+    return(
+        <div className="container mt-4">
+            {/* {latest courses} */}
+            <div className="row">
+                <h3 className="pb-1 mb-4">Latest Courses <a href = "#" className= "float-end">See All</a></h3>
+                <div className="col-md-3">
+                <div className="card">
+                <Link to  ="/detail/1"> <img src="logo512.png" className="card-img-top" alt="course"/> </Link>
+                    <div className="card-body">
+                        <h5 className="card-title"><Link to  ="/detail/2">Course title</Link></h5>   
+                    </div>
+                    </div>
+                </div>
+                <div className="col-md-3">
+                <div className="card">
+                    <img src="logo512.png" className="card-img-top" alt="course"/>
+                    <div className="card-body">
+                        <h5 className="card-title"><a href ="#">Course title</a></h5>   
+                    </div>
+                    </div>
+                </div>
+                <div className="col-md-3">
+                <div className="card">
+                    <img src="logo512.png" className="card-img-top" alt="course"/>
+                    <div className="card-body">
+                        <h5 className="card-title"><a href ="#">Course title</a></h5>   
+                    </div>
+                    </div>
+                </div>
+                <div className="col-md-3">
+                <div className="card">
+                    <img src="logo512.png" className="card-img-top" alt="course"/>
+                    <div className="card-body">
+                        <h5 className="card-title"><a href ="#">Course title</a></h5>   
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {/* {end latestCourse} */}
+
+             {/* {popular courses} */}
+             <div className="row">
+                <h3 className="pb-1 my-4">Popular Courses <a href = "#" className= "float-end">See All</a></h3>
+                <div className="col-md-3">
+                <div className="card">
+                    <img src="logo512.png" className="card-img-top" alt="course"/>
+                    <div className="card-body">
+                        <h5 className="card-title"><a href ="#">Course title</a></h5>   
+                    </div>
+                    </div>
+                </div>
+                <div className="col-md-3">
+                <div className="card">
+                    <img src="logo512.png" className="card-img-top" alt="course"/>
+                    <div className="card-body">
+                        <h5 className="card-title"><a href ="#">Course title</a></h5>   
+                    </div>
+                    </div>
+                </div>
+                <div className="col-md-3">
+                <div className="card">
+                    <img src="logo512.png" className="card-img-top" alt="course"/>
+                    <div className="card-body">
+                        <h5 className="card-title"><a href ="#">Course title</a></h5>   
+                    </div>
+                    </div>
+                </div>
+                <div className="col-md-3">
+                <div className="card">
+                    <img src="logo512.png" className="card-img-top" alt="course"/>
+                    <div className="card-body">
+                        <h5 className="card-title"><a href ="#">Course title</a></h5>   
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {/* {end popularCourse} */}
+
+              {/* {popular teacher} */}
+              <div className="row">
+                <h3 className="pb-1 my-4">Popular Teachers <a href = "#" className= "float-end">See All</a> </h3>
+                <div className="col-md-3">
+                <div className="card">
+                    <img src="logo512.png" className="card-img-top" alt="course"/>
+                    <div className="card-body">
+                        <h5 className="card-title"><a href ="#">Teacher name</a></h5>   
+                    </div>
+                    </div>
+                </div>
+                <div className="col-md-3">
+                <div className="card">
+                    <img src="logo512.png" className="card-img-top" alt="course"/>
+                    <div className="card-body">
+                        <h5 className="card-title"><a href ="#">Teacher name</a></h5>   
+                    </div>
+                    </div>
+                </div>
+                <div className="col-md-3">
+                <div className="card">
+                    <img src="logo512.png" className="card-img-top" alt="course"/>
+                    <div className="card-body">
+                        <h5 className="card-title"><a href ="#">Teacher name</a></h5>   
+                    </div>
+                    </div>
+                </div>
+                <div className="col-md-3">
+                <div className="card">
+                    <img src="logo512.png" className="card-img-top" alt="course"/>
+                    <div className="card-body">
+                        <h5 className="card-title"><a href ="#">Teacher name</a></h5>   
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {/* {end popular teacher} */}
+        </div>
+    );
+    
+}
+export default Home
