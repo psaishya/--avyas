@@ -33,6 +33,8 @@ urlpatterns = [
     path('loggedteacher/',views.Loggedteacher),
     path('loggedstudent/',views.Loggedstudent),
 
+    # category
+    path('category/',views.CategoryList.as_view()),
 
 
 ]

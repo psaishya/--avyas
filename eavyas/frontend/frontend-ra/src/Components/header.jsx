@@ -42,10 +42,11 @@ function Header () {
           }   
           {userLoginStatus=='true' &&
           <>
-            <li><a className="dropdown-item" href="#">Dashboard</a></li>
+            <li><a className="dropdown-item" href="/student-dashboard">Dashboard</a></li>
             <li><hr className="dropdown-divider"/></li>
             <li><a className="dropdown-item" onClick={logoutclick}>Logout</a></li>
             </>}
+          
           </ul>
         </li>
       </ul>

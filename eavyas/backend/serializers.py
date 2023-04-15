@@ -10,3 +10,8 @@ class studentSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.User_student
         fields=['studentId','firstName','lastName','gender','phoneNo','email','userName']
+
+class categorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.CourseCategory
+        fields=['id','title','description']

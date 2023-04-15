@@ -3,7 +3,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import generics
-from .serializers import teacherSerializer,studentSerializer
+from .serializers import teacherSerializer,studentSerializer,categorySerializer
 from . import models
 import requests
 from django.http import JsonResponse
@@ -43,12 +43,12 @@ def google_auth(request):
 class TeacherList(generics.ListCreateAPIView):
     queryset=models.User_teacher.objects.all() 
     serializer_class=teacherSerializer
-    permission_classes=[permissions.IsAuthenticated]
+    # permission_classes=[permissions.IsAuthenticated]
 
 class TeacherDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.User_teacher.objects.all()
     serializer_class = teacherSerializer
-    permission_classes=[permissions.IsAuthenticated]
+    # permission_classes=[permissions.IsAuthenticated]
 
 class StudentList(generics.ListCreateAPIView):
     queryset=models.User_student.objects.all() 
@@ -71,3 +71,8 @@ def Loggedstudent(request):
     if userdata:
         # return JsonResponse(userdata,safe=false)
         return JsonResponse({'id':userdata[0].studentId})
+    
+# course categories
+class CategoryList(generics.ListCreateAPIView):
+    queryset = models.CourseCategory.objects.all()
+    serializer_class = categorySerializer
