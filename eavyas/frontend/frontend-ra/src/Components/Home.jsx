@@ -1,10 +1,11 @@
 import {Link} from 'react-router-dom'
+import AllCourses from './AllCourses';
 function Home() {
     return(
         <div className="container mt-4">
             {/* {latest courses} */}
             <div className="row">
-                <h3 className="pb-1 mb-4">Latest Courses <a href = "#" className= "float-end">See All</a></h3>
+                <h3 className="pb-1 mb-4">Latest Courses <Link to = "/all-courses" className= "float-end">See All</Link></h3>
                 <div className="col-md-3">
                 <div className="card">
                 <Link to  ="/detail/1"> <img src="logo512.png" className="card-img-top" alt="course"/> </Link>

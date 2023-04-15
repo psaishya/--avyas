@@ -21,11 +21,11 @@ function Header () {
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Login
           </a>
-          <ul class="dropdown-menu">
+          <ul className="dropdown-menu">
             <li><Link className="dropdown-item" to="/loginasstudent">Student</Link></li>
             <li><Link className="dropdown-item" to="/loginasteacher">Teacher</Link></li>
             <li><hr className="dropdown-divider"/></li>
-            <li><a className="dropdown-item" href="#">Dashboard</a></li>
+            <li><Link className="dropdown-item" to="/student-dashboard">Dashboard</Link></li>
             <li><a className="dropdown-item" href="#">Logout</a></li>
           </ul>
         </li>

@@ -56,12 +56,9 @@ function App() {
       {message}
      <Router>
      <Routes>
- 
         <Route path="*" element={<Main/>}/>
-
         <Route path="/home_teacher" element={<Home_teacher user={user}/>}/>
         <Route path="/home_student" element={<Home_student user={user}/>}/>
-
         <Route path="/loginasstudent" element={<Loginasstudent setToken={setToken} setUser={setUser} setMessage={setMessage}/>}/>
         <Route path="/signupasstudent" element={<SignUpasstudent/>}/>
         <Route path="/loginasteacher" element={<Loginasteacher setToken={setToken} setUser={setUser} setMessage={setMessage}/>}/>
