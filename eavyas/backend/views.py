@@ -3,7 +3,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import generics
-from .serializers import teacherSerializer,studentSerializer,categorySerializer
+from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer
 from . import models
 import requests
 from django.http import JsonResponse
@@ -81,3 +81,17 @@ def Loggedstudent(request):
 class CategoryList(generics.ListCreateAPIView):
     queryset = models.CourseCategory.objects.all()
     serializer_class = categorySerializer
+
+#course
+class CourseList(generics.ListCreateAPIView):
+    queryset = models.Course.objects.all()
+    serializer_class = CourseSerializer
+
+#Specific Teacher Course
+class TeacherCourseList(generics.ListAPIView):
+    serializer_class = CourseSerializer
+
+    def get_queryset(self):
+        teacher_id = self.kwargs['teacher_id']
+        teacher=models.User_teacher.objects.get(pk=teacher_id)
+        return models.Course.objects.filter(teacher=teacher)

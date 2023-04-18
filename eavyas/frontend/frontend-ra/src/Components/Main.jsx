@@ -17,6 +17,7 @@ import AllCourses from './AllCourses';
 
 //Teachers
 import TeacherDash from './TeacherDash';
+import TeacherCourses from './Teachercourses'
 
 //Course Management
 import AddCourse from './AddCourse'
@@ -36,7 +37,8 @@ const Main = () => {
                <Route path = "/detail/:course_id" element ={<CourseDetail/>} /> 
                <Route path = "/student-dashboard" element ={<Dashboard/>}/>
                <Route path = "/my-courses" element ={<MyCourses/>}/>
-               <Route path = "/teacher -dashboard" element ={<TeacherDash/>}/>
+               <Route path= "/teacher-courses" element ={<TeacherCourses/>}/>
+               <Route path = "/teacher-dashboard" element ={<TeacherDash/>}/>
                <Route path = "/teacher-detail/:teacher_id" element ={<TeacherDetail/>} /> 
                <Route path = "/all-courses" element ={<AllCourses/>} /> 
                <Route path = "/add-courses" element ={<AddCourse/>} /> 
