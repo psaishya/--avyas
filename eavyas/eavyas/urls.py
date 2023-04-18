@@ -18,6 +18,8 @@ from django.urls import path,include
 from django.views.generic import TemplateView
 from backend.views import GoogleLogin,google_auth
 from backend import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,5 +39,11 @@ urlpatterns = [
     # category
     path('category/',views.CategoryList.as_view()),
 
+    #course
+    path('course/',views.CourseList.as_view()),
 
-]
+    #Teacher courses
+    path('teacher-courses/<int:teacher_id>/',views.TeacherCourseList.as_view()),
+
+
+]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

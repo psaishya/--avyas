@@ -22,11 +22,13 @@ function MyCourses(){
                                 </tr>
                             </thead>
                             <tbody>
-                                <td>Java</td>
-                                <td><Link to= "">Austin Justice</Link></td>
-                                <td>
-                                    <button className="btn btn-danger btn-sm active">Remove</button>
-                                </td>
+                                <tr>
+                                    <td>Java</td>
+                                    <td><Link to= "">Austin Justice</Link></td>
+                                    <td>
+                                        <button className="btn btn-danger btn-sm active">Remove</button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
