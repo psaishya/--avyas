@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import TeacherSide from "./Teacherside";
 import {useState,useEffect} from 'react'
 import axios from "axios";
+import {useParams} from 'react-router-dom'
 const baseUrl = 'http://localhost:8000';
 
 
@@ -31,9 +32,12 @@ function AddChapter(){
         });
     }
 
+    const {course_id}=useParams();
+
     const formSubmit = ()=>{
         const _formData=new FormData();
-        _formData.append('course',11);
+       
+        _formData.append('course',course_id);
         _formData.append('title', chapterData.title);
         _formData.append('description', chapterData.description);
          _formData.append('video', chapterData.video,chapterData.video.name);
