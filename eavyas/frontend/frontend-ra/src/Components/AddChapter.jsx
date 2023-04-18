@@ -1,7 +1,55 @@
 import { Link } from "react-router-dom";
 import TeacherSide from "./Teacherside";
+import {useState,useEffect} from 'react'
+import axios from "axios";
+const baseUrl = 'http://localhost:8000';
+
 
 function AddChapter(){
+    const loggeduser=localStorage.getItem('loggedteacher');
+
+    const [chapterData,setchapterData] = useState({
+        'title':'',
+        'description':'',
+        'video':'',
+    });
+
+
+
+    const handleChange=(event)=>{
+        setchapterData({
+            ...chapterData,
+            [event.target.name] : event.target.value
+        });
+        
+    }
+
+    const handleFileChange=(event)=>{
+        setchapterData({
+            ...chapterData,
+            [event.target.name] : event.target.files[0]
+        });
+    }
+
+    const formSubmit = ()=>{
+        const _formData=new FormData();
+        _formData.append('course',11);
+        _formData.append('title', chapterData.title);
+        _formData.append('description', chapterData.description);
+         _formData.append('video', chapterData.video,chapterData.video.name);
+        try{
+            axios.post('http://127.0.0.1:8000/chapter/',_formData,{
+                'content-type': 'multipart/form-data'
+            })
+            .then((res)=>{
+                //console.log(res.data);
+                window.location.href='add-chapter/11';
+        });
+        }catch(error){
+            console.log(error);
+        }
+          
+    };
     return(
         <div className="container mt-4">
             <div className="row">
@@ -14,18 +62,18 @@ function AddChapter(){
                         <div className="card-body">
                             <form>
                                 <div className="mb-3">
-                                    <label htmlFor="title" className="from-label">Course Title</label>
-                                    <input type="text" id="title" className="form-control" placeholder="Course Title"/>
+                                    <label htmlFor="title" className="from-label">Chapter Title</label>
+                                    <input type="text" onChange={handleChange} value={chapterData.title} name = 'title' id="title" className="form-control" placeholder=" Title"/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="description" className="form-label">Description</label>
-                                    <textarea className="form-control" id="description"></textarea>
+                                    <textarea className="form-control" onChange={handleChange} value={chapterData.description} name = 'description' id="description"></textarea>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="video" className="from-label">Video</label>
-                                    <input type="file" id="video" className="form-control"/>
+                                    <input type="file" onChange={handleFileChange} name= "video" id="video" className="form-control"/>
                                 </div>
-                                <button type="submit" className="btn btn-primary">Submit</button>
+                                <button type="submit" onClick={formSubmit} className="btn btn-primary">Submit</button>
                             </form>
                     </div>
                 </div>
