@@ -9,3 +9,5 @@ admin.site.register(models.Course)
 admin.site.register(models.Quiz)
 admin.site.register(models.QuizQuestions)
 admin.site.register(models.courseQuiz)
+admin.site.register(models.Chapter)
+

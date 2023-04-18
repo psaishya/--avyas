@@ -24,7 +24,7 @@ class CourseCategory(models.Model):
     def __str__(self):
         return self.title
 
-
+#course model
 class Course(models.Model):
     category = models.ForeignKey(CourseCategory, on_delete=models.CASCADE)
     teacher = models.ForeignKey(User_teacher, on_delete=models.CASCADE)
@@ -34,7 +34,17 @@ class Course(models.Model):
 
     class Meta:
         verbose_name_plural = "3. Course"
-        
+
+#chapter model
+class Chapter(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150)
+    description = models.TextField()
+    video=models.FileField(upload_to='chapter_videos/', null='True')
+
+    class Meta:
+        verbose_name_plural = "4. Chapter"
+
 class User_student(models.Model):
     studentId=models.AutoField(primary_key=True)
     firstName=models.CharField( max_length=50,default="")
@@ -46,10 +56,7 @@ class User_student(models.Model):
     interested_categories= models.TextField(default="")
 
     class Meta:
-        verbose_name_plural = "4. Student"
-
-# for quiz
-
+        verbose_name_plural = "5. Student"
 class Quiz(models.Model):
     teacher=models.ForeignKey(User_teacher,on_delete=models.CASCADE,null=True)
     title=models.CharField(max_length=200)
