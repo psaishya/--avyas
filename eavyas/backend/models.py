@@ -47,3 +47,37 @@ class User_student(models.Model):
 
     class Meta:
         verbose_name_plural = "4. Student"
+
+# for quiz
+
+class Quiz(models.Model):
+    quiz=models.ForeignKey(User_teacher,on_delete=models.CASCADE,null=True)
+    title=models.CharField(max_length=200)
+    details=models.TextField()
+    add_time=models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural ="11. Quiz"
+    
+class QuizQuestions(models.Model):
+    quiz=models.ForeignKey(Quiz,on_delete=models.CASCADE,null=True)
+    questions=models.CharField(max_length=200)
+    ans1=models.CharField(max_length=200)
+    ans2=models.CharField(max_length=200)
+    ans3=models.CharField(max_length=200)
+    ans4=models.CharField(max_length=200)
+    right_ans=models.CharField(max_length=200)
+
+    add_time=models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural ="12. Quiz Questions"
+        
+#for quiz in course
+class courseQuiz(models.Model):
+    course=models.ForeignKey(Course,on_delete=models.CASCADE,null=True)
+    quiz=models.ForeignKey(Quiz,on_delete=models.CASCADE,null=True)
+    add_time=models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural ="13. Course Quiz"
