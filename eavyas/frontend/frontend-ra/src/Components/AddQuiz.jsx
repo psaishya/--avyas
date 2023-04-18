@@ -27,7 +27,8 @@ function AddQuiz(){
 
         try{
             axios.post(baseUrl+'/quiz/', _formData).then((res)=>{
-                window.location.href='/add-quiz';
+                // window.location.href='/add-quiz';
+                console.log(res);
             });
         }catch(error){
             console.log(error);

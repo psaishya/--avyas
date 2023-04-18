@@ -27,6 +27,7 @@ import ProfileTeacher from './ProfileTeacher'
 import TeacherProfileUpdate from './TeacherProfileUpdate'
 import StudentProfileUpdate from './StudentProfileUpdate'
 import AddQuiz from './AddQuiz'
+import AllQuiz from './AllQuiz'
 const Main = () => {
   return (
     <div>
@@ -47,6 +48,7 @@ const Main = () => {
                <Route path= "/teacher-profile" element ={<ProfileTeacher/>} /> 
                <Route path= "/update-teacher-profile" element ={<TeacherProfileUpdate/>}/>
                <Route path= "/update-student-profile" element ={<StudentProfileUpdate/>}/>
+               <Route path = "/quiz" element ={<AllQuiz/>} /> 
                <Route path = "/add-quiz" element ={<AddQuiz/>} /> 
 
 

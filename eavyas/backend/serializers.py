@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.response import Response
 from . import models
 
 class teacherSerializer(serializers.ModelSerializer):
@@ -20,3 +21,15 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Course
         fields=['category','teacher','title','description','thumbnail']
+        
+class QuizSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.Quiz
+        fields=['id','teacher','title','detail','add_time']
+        
+    def __init__(self, *args, **kwargs):
+        super(QuizSerializer, self).__init__(*args, **kwargs)
+        request = self.context.get('request')
+        self.Meta.depth=0
+        if request and request.method=='GET':
+            self.Meta.depth=2

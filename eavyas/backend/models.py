@@ -51,9 +51,9 @@ class User_student(models.Model):
 # for quiz
 
 class Quiz(models.Model):
-    quiz=models.ForeignKey(User_teacher,on_delete=models.CASCADE,null=True)
+    teacher=models.ForeignKey(User_teacher,on_delete=models.CASCADE,null=True)
     title=models.CharField(max_length=200)
-    details=models.TextField()
+    detail=models.TextField()
     add_time=models.DateTimeField(auto_now_add=True)
     
     class Meta:
@@ -61,7 +61,7 @@ class Quiz(models.Model):
     
 class QuizQuestions(models.Model):
     quiz=models.ForeignKey(Quiz,on_delete=models.CASCADE,null=True)
-    questions=models.CharField(max_length=200)
+    question=models.CharField(max_length=200)
     ans1=models.CharField(max_length=200)
     ans2=models.CharField(max_length=200)
     ans3=models.CharField(max_length=200)
