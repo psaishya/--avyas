@@ -3,7 +3,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import generics
-from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,QuizSerializer,ChapterSerializer
+from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer
 from . import models
 import requests
 from django.http import JsonResponse
@@ -95,7 +95,13 @@ class TeacherCourseList(generics.ListAPIView):
         teacher_id = self.kwargs['teacher_id']
         teacher=models.User_teacher.objects.get(pk=teacher_id)
         return models.Course.objects.filter(teacher=teacher)
-    
+
+#chapter
+class ChapterList(generics.ListCreateAPIView):
+    queryset = models.Chapter.objects.all()
+    serializer_class=ChapterSerializer
+
+#for quiz
 class QuizList(generics.ListCreateAPIView):
     queryset=models.Quiz.objects.all()
     serializer_class=QuizSerializer
@@ -108,7 +114,18 @@ class TeacherQuizList(generics.ListAPIView):
         teacher=models.User_teacher.objects.get(pk=teacher_id)
         return models.Quiz.objects.filter(teacher=teacher)
 
-#chapter
-class ChapterList(generics.ListCreateAPIView):
-    queryset = models.Chapter.objects.all()
-    serializer_class=ChapterSerializer
+class TeacherQuizDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset=models.Quiz.objects.all()
+    serializer_class=QuizSerializer
+    
+class QuizDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset=models.Quiz.objects.all()
+    serializer_class=QuizSerializer
+    
+class QuizQuestionList(generics.ListCreateAPIView):
+    serializer_class=QuestionSerializer
+    
+    def get_queryset(self):
+        quiz_id = self.kwargs['quiz_id']
+        quiz=models.Quiz.objects.get(pk=quiz_id)
+        return models.QuizQuestions.objects.filter(quiz=quiz)
