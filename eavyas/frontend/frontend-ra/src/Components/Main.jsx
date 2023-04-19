@@ -22,6 +22,7 @@ import TeacherCourses from './Teachercourses'
 //Course Management
 import AddCourse from './AddCourse'
 import AddChapter from './AddChapter'
+import CourseChapters from './CourseChapters'
 import ProfileStudent from './ProfileStudent'
 import ProfileTeacher from './ProfileTeacher'
 import TeacherProfileUpdate from './TeacherProfileUpdate'
@@ -42,6 +43,7 @@ const Main = () => {
                <Route path = "/teacher-dashboard" element ={<TeacherDash/>}/>
                <Route path = "/teacher-detail/:teacher_id" element ={<TeacherDetail/>} /> 
                <Route path = "/all-courses" element ={<AllCourses/>} /> 
+               <Route path = "/all-chapters/:course_id" element ={<CourseChapters/>} /> 
                <Route path = "/add-courses" element ={<AddCourse/>} /> 
                <Route path = "/add-chapter/:course_id" element ={<AddChapter/>} /> 
                <Route path= "/student-profile" element ={<ProfileStudent/>} /> 
