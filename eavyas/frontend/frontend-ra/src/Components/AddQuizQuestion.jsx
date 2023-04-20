@@ -53,34 +53,35 @@ function AddQuizQuestion(){
                 </aside>
                 <div className="col-9">
                     <div className="card">
-                        <h5 className="card-header">Add Quiz</h5>
+                        <h5 className="card-header">Add Question</h5>
                         <div className="card-body">
                             <form>
                                 <div className="mb-3">
-                                    <label htmlFor="title" className="from-label">Title</label>
-                                    <input type="text" id="title" name='title' onChange={handleChange} className="form-control" placeholder="Course Title"/>
+                                    <label htmlFor="title" className="from-label">Question</label>
+                                    <input type="text" id="question" name='question' onChange={handleChange} className="form-control" placeholder="Question"/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="ans1" className="from-label">Ans 1</label>
-                                    <input type="text" id="ans1" name='ans1' onChange={handleChange} className="form-control" placeholder="Course Title"/>
+                                    <input type="text" id="ans1" name='ans1' onChange={handleChange} className="form-control" placeholder="Ans 1"/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="ans2" className="from-label">Ans 2</label>
-                                    <input type="text" id="ans2" name='ans2' onChange={handleChange} className="form-control" placeholder="Course Title"/>
+                                    <input type="text" id="ans2" name='ans2' onChange={handleChange} className="form-control" placeholder="Ans 2"/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="ans3" className="from-label">Ans 3</label>
-                                    <input type="text" id="ans3" name='ans3' onChange={handleChange} className="form-control" placeholder="Course Title"/>
+                                    <input type="text" id="ans3" name='ans3' onChange={handleChange} className="form-control" placeholder="Ans 3"/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="ans4" className="from-label">Ans 4</label>
-                                    <input type="text" id="ans4" name='ans4' onChange={handleChange} className="form-control" placeholder="Course Title"/>
+                                    <input type="text" id="ans4" name='ans4' onChange={handleChange} className="form-control" placeholder="Ans 4"/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="right_ans" className="from-label">Right answer</label>
-                                    <input type="text" id="right_ans" name='right_ans' onChange={handleChange} className="form-control" placeholder="Course Title"/>
+                                    <input type="text" id="right_ans" name='right_ans' onChange={handleChange} className="form-control" placeholder="Right ans"/>
                                 </div>
                                 <button type="submit" onClick={formSubmit} className="btn btn-primary">Submit</button>
+                                <Link className="btn btn-info btn-sm ms-2" to ='/quiz'>Back</Link>
 
                             </form>
                     </div>

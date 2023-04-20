@@ -57,6 +57,7 @@ urlpatterns = [
     path('quiz-questions/<int:quiz_id>/',views.QuizQuestionList.as_view()),
     path('teacher-quiz-detail/<int:pk>/',views.TeacherQuizDetail.as_view()),
     path('quiz/<int:pk>/',views.QuizDetailView.as_view()),
+    path('question/<int:pk>/',views.QuestionDetailView.as_view()),
 
 
 

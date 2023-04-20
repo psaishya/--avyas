@@ -100,8 +100,18 @@ class TeacherCourseList(generics.ListAPIView):
 class ChapterList(generics.ListCreateAPIView):
     queryset = models.Chapter.objects.all()
     serializer_class=ChapterSerializer
+    
+#course-chapter
+class CourseChapterList(generics.ListAPIView):
+    serializer_class=ChapterSerializer
+
+    def get_queryset(self):
+        course_id = self.kwargs['course_id']
+        course=models.Course.objects.get(pk=course_id)
+        return models.Chapter.objects.filter(course=course)
 
 #for quiz
+#
 class QuizList(generics.ListCreateAPIView):
     queryset=models.Quiz.objects.all()
     serializer_class=QuizSerializer
@@ -129,11 +139,7 @@ class QuizQuestionList(generics.ListCreateAPIView):
         quiz_id = self.kwargs['quiz_id']
         quiz=models.Quiz.objects.get(pk=quiz_id)
         return models.QuizQuestions.objects.filter(quiz=quiz)
-#course-chapter
-class CourseChapterList(generics.ListAPIView):
-    serializer_class=ChapterSerializer
 
-    def get_queryset(self):
-        course_id = self.kwargs['course_id']
-        course=models.Course.objects.get(pk=course_id)
-        return models.Chapter.objects.filter(course=course)
+class QuestionDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset=models.Quiz.objects.all()
+    serializer_class=QuestionSerializer

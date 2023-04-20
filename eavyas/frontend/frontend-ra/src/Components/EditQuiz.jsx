@@ -1,18 +1,34 @@
+import { Link } from "react-router-dom"
 import TeacherSide from "./Teacherside";
-import {useState,useEffect} from 'react'
+import {useState,useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 import axios from "axios";
-import { Link } from "react-router-dom";
 const baseUrl = 'http://localhost:8000';
 
+const EditQuiz = () => {
+    const[quizData,setquizData] =useState({
+        title:'',
+        detail:'',
+    });
+    const {quiz_id}=useParams();
 
-function AddQuiz(){
-    const [quizData,setquizData]=useState(
-        {
-            title:"",
-            detail:"",
+    const loggeduser=localStorage.getItem('loggedteacher');
+
+    useEffect(()=>{
+        try{ 
+            axios.get(baseUrl+'/teacher-quiz-detail/'+ quiz_id +'/')
+        .then((res)=>{
+                //console.log(res.data);
+                setquizData({
+                    title: res.data.title,
+                    detail: res.data.detail
+                })
+                
+        });
+        }catch(error){
+            console.log(error);
         }
-    );
-    
+    },[]);
     const handleChange=(event)=>{
         setquizData({
             ...quizData,
@@ -27,47 +43,48 @@ function AddQuiz(){
         _formData.append('detail',quizData.detail);
 
         try{
-            axios.post(baseUrl+'/quiz/', _formData).then((res)=>{
+            axios.put(baseUrl+'/teacher-quiz-detail/'+quiz_id+'/', _formData).then((res)=>{
                 // window.location.href='/add-quiz';
                 console.log(res);
+
             });
         }catch(error){
             console.log(error);
         }
-    };
 
-    //console.log(cats);
-    return(
-        <div className="container mt-4">
+    };
+  return (
+    <div className="container mt-4">
             <div className="row">
                 <aside className="col-md-3">
                     <TeacherSide/>
                 </aside>
                 <div className="col-9">
                     <div className="card">
-                        <h5 className="card-header">Add Quiz</h5>
+                        <h5 className="card-header">Edit Quiz</h5>
                         <div className="card-body">
                             <form>
                             
                                 <div className="mb-3">
                                     <label htmlFor="title" className="from-label">Title</label>
-                                    <input type="text" onChange={handleChange} name='title' id="title" className="form-control" placeholder="Title"/>
+                                    <input type="text" value={quizData.title} onChange={handleChange} name='title' id="title" className="form-control" placeholder="Title"/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="detail" className="form-label">Detail</label>
-                                    <textarea  onChange={handleChange} name='detail'className="form-control" id="detail"></textarea>
+                                    <textarea value={quizData.detail} onChange={handleChange} name='detail'className="form-control" id="detail"></textarea>
                                 </div>
                                  
                                 <button type="submit" onClick={formSubmit} className="btn btn-primary">Submit</button>
                                 <Link className="btn btn-info btn-sm ms-2" to ='/quiz'>Back</Link>
 
-                            </form>
+                            </form>                        
+
                     </div>
                 </div>
             </div>
         </div>
         </div>
-    )
+  )
 }
 
-export default AddQuiz
+export default EditQuiz
