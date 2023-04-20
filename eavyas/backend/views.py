@@ -3,7 +3,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import generics
-from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,ChapterSerializer
+from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer
 from . import models
 import requests
 from django.http import JsonResponse
@@ -82,7 +82,7 @@ class CategoryList(generics.ListCreateAPIView):
     queryset = models.CourseCategory.objects.all()
     serializer_class = categorySerializer
 
-#course
+#course  
 class CourseList(generics.ListCreateAPIView):
     queryset = models.Course.objects.all()
     serializer_class = CourseSerializer
@@ -112,7 +112,7 @@ class TeacherCourseList(generics.ListAPIView):
 class ChapterList(generics.ListCreateAPIView):
     queryset = models.Chapter.objects.all()
     serializer_class=ChapterSerializer
-
+    
 #course-chapter
 class CourseChapterList(generics.ListAPIView):
     serializer_class=ChapterSerializer
@@ -121,3 +121,37 @@ class CourseChapterList(generics.ListAPIView):
         course_id = self.kwargs['course_id']
         course=models.Course.objects.get(pk=course_id)
         return models.Chapter.objects.filter(course=course)
+
+#for quiz
+#
+class QuizList(generics.ListCreateAPIView):
+    queryset=models.Quiz.objects.all()
+    serializer_class=QuizSerializer
+
+class TeacherQuizList(generics.ListAPIView):
+    serializer_class = QuizSerializer
+
+    def get_queryset(self):
+        teacher_id = self.kwargs['teacher_id']
+        teacher=models.User_teacher.objects.get(pk=teacher_id)
+        return models.Quiz.objects.filter(teacher=teacher)
+
+class TeacherQuizDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset=models.Quiz.objects.all()
+    serializer_class=QuizSerializer
+    
+class QuizDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset=models.Quiz.objects.all()
+    serializer_class=QuizSerializer
+    
+class QuizQuestionList(generics.ListCreateAPIView):
+    serializer_class=QuestionSerializer
+    
+    def get_queryset(self):
+        quiz_id = self.kwargs['quiz_id']
+        quiz=models.Quiz.objects.get(pk=quiz_id)
+        return models.QuizQuestions.objects.filter(quiz=quiz)
+
+class QuestionDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset=models.Quiz.objects.all()
+    serializer_class=QuestionSerializer

@@ -53,6 +53,16 @@ urlpatterns = [
 
     #Teacher courses
     path('teacher-courses/<int:teacher_id>/',views.TeacherCourseList.as_view()),
+    
+    #for quiz
+    path('quiz/',views.QuizList.as_view()),
+    path('teacher-quiz/<int:teacher_id>/',views.TeacherQuizList.as_view()),
+    path('quiz-questions/<int:quiz_id>/',views.QuizQuestionList.as_view()),
+    path('teacher-quiz-detail/<int:pk>/',views.TeacherQuizDetail.as_view()),
+    path('quiz/<int:pk>/',views.QuizDetailView.as_view()),
+    path('question/<int:pk>/',views.QuestionDetailView.as_view()),
+
+
 
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

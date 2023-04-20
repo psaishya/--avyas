@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState,useEffect } from 'react';
 
 import Sidebar from './sidebar';
-
+import Teacherside from './Teacherside'
 
 const ProfileTeacher = () => {
     const loggeduser=localStorage.getItem('loggedteacher');
@@ -39,7 +39,7 @@ const ProfileTeacher = () => {
         <div className='container mt-4'>
             <div className='row'>
                 <aside className='col-md-3'>
-                    <Sidebar/>
+                    <Teacherside/>
                 </aside>
                 <section className='col-md-9'>
                     <div className='card' >
