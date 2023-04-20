@@ -1,5 +1,6 @@
 from django.db import models
-from pickle import TRUE
+from pickle import TRUE 
+from django.core import serializers
 
 # Create your models here.
 
@@ -34,6 +35,10 @@ class Course(models.Model):
 
     class Meta:
         verbose_name_plural = "3. Course"
+
+    def related_videos(self):
+        related_videos =Course.objects.filter(category=self.category)
+        return serializers.serialize('json',related_videos)
 
 #chapter model
 class Chapter(models.Model):

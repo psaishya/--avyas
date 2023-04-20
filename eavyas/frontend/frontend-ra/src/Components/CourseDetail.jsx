@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 const baseUrl = 'http://localhost:8000';
+const siteUrl='http://127.0.0.1:8000/'
 
 
 function CourseDetail(){
     const[chapterData,setChapterData] =useState([]);
     const[courseData,setCourseData] =useState([]);
     const[teacherData,setteacherData] =useState([]);
+     const[relatedCourseData,setrelatedCourseData] =useState([]);
     let{course_id}=useParams();
     
     const loggeduser=localStorage.getItem('loggedteacher');
@@ -22,6 +24,7 @@ function CourseDetail(){
                 setCourseData(res.data)
                 setteacherData(res.data.teacher)
                 setChapterData(res.data.course_chapters)
+                setrelatedCourseData(JSON.parse(res.data.related_videos)) 
         });
         }catch(error){
             console.log(error);
@@ -93,22 +96,16 @@ const [isOpen, setIsOpen] = useState(false);
         </div>
         <h3 className="pb-1 mb-4 mt-5">Related Courses</h3>
         <div className='row mb-4'>
-            <div className="col-md-3">
+            {relatedCourseData.map((rcourse,index)=>
+            <div key ={index} className="col-md-3">
                 <div className="card">
-                    <Link to  ="/detail/1"> <img src="/logo512.png" className="card-img-top" alt="course"/> </Link>
+                    <Link target= "__blank"to  ={`/detail/${rcourse.pk}`}> <img src={`${siteUrl}media/${rcourse.fields.thumbnail}`} className="card-img-top" alt={rcourse.fields.title}/> </Link>
                         <div className="card-body">
-                            <h5 className="card-title"><Link to  ="/detail/1">Course title</Link></h5>   
+                            <h5 className="card-title"><Link to  ={`/detail/${rcourse.pk}`}>{rcourse.fields.title}</Link></h5>   
                 </div>
             </div>
                     </div>
-            <div className="col-md-3">
-                <div className="card">
-                        <img src="/logo512.png" className="card-img-top" alt="course"/>
-                        <div className="card-body">
-                            <h5 className="card-title"><a href ="#">Course title</a></h5>   
-                    </div>
-                 </div>
-            </div>
+            )}
             </div>
     </div>
 
