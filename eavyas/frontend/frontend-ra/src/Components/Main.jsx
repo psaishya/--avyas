@@ -32,6 +32,7 @@ import AllQuiz from './AllQuiz'
 import QuizQuestions from './QuizQuestions'
 import AddQuizQuestion from './AddQuizQuestion'
 import EditQuiz from './EditQuiz'
+import AssignQuiz from './AssignQuiz'
 const Main = () => {
   return (
     <div>
@@ -57,7 +58,7 @@ const Main = () => {
                <Route path = "/add-quiz" element ={<AddQuiz/>} /> 
                <Route path = "/add-quiz-question/:quiz_id" element ={<AddQuizQuestion/>} /> 
                <Route path = "/edit-quiz/:quiz_id" element ={<EditQuiz/>} /> 
-
+               <Route path = "/assign-quiz/:course_id" element ={<AssignQuiz/>} /> 
                <Route path = "/all-questions/:quiz_id" element ={<QuizQuestions/>} /> 
 
                

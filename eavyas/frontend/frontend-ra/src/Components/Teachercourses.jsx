@@ -50,6 +50,8 @@ function TeacherCourses(){
                                     <td>
                                         <button className="btn btn-danger btn-sm">Remove</button>
                                         <Link class="btn btn-success btn-sm ms-2" to ={'/add-chapter/'+course.id}>Add Chapter </Link>
+                                        <Link class="btn btn-warning btn-sm ms-2" to ={'/assign-quiz/'+course.id}>Assign Quiz </Link>
+
                                     </td>
                                 </tr>
                                 )}

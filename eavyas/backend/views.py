@@ -3,7 +3,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import generics
-from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer
+from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer
 from . import models
 import requests
 from django.http import JsonResponse
@@ -155,3 +155,18 @@ class QuizQuestionList(generics.ListCreateAPIView):
 class QuestionDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.Quiz.objects.all()
     serializer_class=QuestionSerializer
+
+# class courseQuizList(generics.ListCreateAPIView):
+#     queryset=models.courseQuiz.objects.all()
+#     serializer_class=courseQuizSerializer
+
+def FetchQuizAssignStatus(request, quiz_id,course_id):
+    quiz=models.Quiz.objects.filter(id=quiz_id).first()
+    course=models.Course.objects.filter(id=course_id).first()
+    assignStatus=models.courseQuiz.objects.filter(course=course,quiz=quiz).count()
+    if assignStatus :
+        return JsonResponse({'bool':True})
+    else:
+        return JsonResponse({'bool':False})
+
+
