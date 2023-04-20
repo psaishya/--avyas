@@ -1,11 +1,35 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import axios from 'axios';
+const baseUrl = 'http://localhost:8000';
+
 
 function CourseDetail(){
-    let {course_id} = useParams();
-    const [isOpen, setIsOpen] = useState(false);
+    const[chapterData,setChapterData] =useState([]);
+    const[courseData,setCourseData] =useState([]);
+    const[teacherData,setteacherData] =useState([]);
+    let{course_id}=useParams();
+    
+    const loggeduser=localStorage.getItem('loggedteacher');
+
+    useEffect(()=>{
+        try{ 
+            axios.get('http://127.0.0.1:8000/course/' + course_id + '/')
+        .then((res)=>{
+                console.log(res.data);
+                setCourseData(res.data)
+                setteacherData(res.data.teacher)
+                setChapterData(res.data.course_chapters)
+        });
+        }catch(error){
+            console.log(error);
+        }
+    },[]);
+
+// for video
+const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => {
     setIsOpen(false);
@@ -19,12 +43,12 @@ function CourseDetail(){
         <div className="container mt-3" >
             <div className="row">
                 <div className="col-4">
-                <img src="/logo512.png" className="img-thumbnail" alt="course"/>
+                <img src={courseData.thumbnail} className="img-thumbnail" alt={courseData.title}/>
                 </div>
                 <div className="col-8">
-                    <h3>Course Title</h3>
-                    <p> Course description</p>
-                    <p className='fw-bold'>Course By: <Link to="/teacher-detail/1"> Teacher 1</Link></p>
+                    <h2 className = 'fw-bold'>{courseData.title}</h2>
+                    <p> {courseData.description}</p>
+                    <p className='fw-bold'>Course By: <Link to="/teacher-detail/1">{teacherData.firstName} {teacherData.lastName}</Link></p>
                     <p className='fw-bold'>Course Duration: 3 Hours 30 minutes</p>
                     <p className='fw-bold'>Students Enrolled 400 students</p>
                     <p className='fw-bold'>Ratings: 4/5</p>
@@ -36,10 +60,11 @@ function CourseDetail(){
         <h5 className="card-header">
                Course Videos
             </h5>
-        <ul className="list-group list-group-flush">
-            <li className="list-group-item">Introduction<button className='btn btn-sm btn-danger float-end' data-bs-toggle="modal" data-bs-target="#videoModal1"><i className="bi bi-play" onClick={handleShow}></i></button > </li>
-            {/* <!-- Modal --> */}
-
+        { chapterData.map((chapter,index)=>
+        <ul key={index} className="list-group list-group-flush">
+       
+            
+            <li className="list-group-item">{chapter.title}<button className='btn btn-sm btn-danger float-end' data-bs-toggle="modal" data-bs-target="#videoModal1"><i className="bi bi-play" onClick={handleShow}></i></button > </li>
             {isOpen && (
                 <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-modal="true">
                 <div className="modal-dialog modal-xl">
@@ -50,20 +75,20 @@ function CourseDetail(){
                     </div>
                     <div className="modal-body">
                         <div className="ratio ratio-16x9">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" allowFullScreen></iframe>
+                        <iframe src={chapter.video} title={chapter.title} allowFullScreen></iframe>
                         </div>
                     </div>
                     </div>
                 </div>
                 </div>
+            
             )}
+       
     
                 {/* end modal video */}
-            <li className="list-group-item">Introduction<button className='btn btn-sm btn-danger float-end'><i className="bi bi-play"></i></button> </li>
-            <li className="list-group-item">Introduction<button className='btn btn-sm btn-danger float-end'><i className="bi bi-play"></i></button> </li>
-            <li className="list-group-item">Introduction<button className='btn btn-sm btn-danger float-end'><i className="bi bi-play"></i></button> </li>
-            <li className="list-group-item">Introduction<button className='btn btn-sm btn-danger float-end'><i className="bi bi-play"></i></button> </li>
+        
         </ul>
+            )}
 
         </div>
         <h3 className="pb-1 mb-4 mt-5">Related Courses</h3>
