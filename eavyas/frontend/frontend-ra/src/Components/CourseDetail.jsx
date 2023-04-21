@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-const baseUrl = 'http://localhost:8000';
+// const baseUrl = 'http://localhost:8000';
 const siteUrl='http://127.0.0.1:8000/'
 
 
@@ -14,7 +14,7 @@ function CourseDetail(){
      const[relatedCourseData,setrelatedCourseData] =useState([]);
     let{course_id}=useParams();
     
-    const loggeduser=localStorage.getItem('loggedteacher');
+    // const loggeduser=localStorage.getItem('loggedteacher');
   const loggedstudentId=localStorage.getItem('loggedstudentId');
   const [userLoginStatus,setuserLoginStatus]=useState("");
   const [enrollStatus,setenrollStatus]=useState("");
@@ -38,7 +38,7 @@ function CourseDetail(){
     try{
         axios.get('http://127.0.0.1:8000/fetch-enroll-status/'+loggedstudentId+'/'+course_id)
         .then((res)=>{
-            if(res.data.bool== true){
+            if(res.data.bool === true){
                 setenrollStatus('success');
             }
             // console.log(res);
@@ -52,11 +52,11 @@ function CourseDetail(){
 
     const userLoginStatus = localStorage.getItem('userLoginStatus');
     
-    if(userLoginStatus=='true'){
+    if(userLoginStatus==='true'){
         setuserLoginStatus('success');
      }
    
-    },[]);
+    },[ course_id, loggedstudentId]);
 
     const enrollCourse = () => {
         const loggedstudent_id=localStorage.getItem('loggedstudent_id');
@@ -104,10 +104,11 @@ const [isOpen, setIsOpen] = useState(false);
                     <p> {courseData.description}</p>
                     <p className='fw-bold'>Course By: <Link to="/teacher-detail/1">{teacherData.firstName} {teacherData.lastName}</Link></p>
                     <p className='fw-bold'>Course Duration: 3 Hours 30 minutes</p>
-                    <p className='fw-bold'>Students Enrolled 400 students</p>
+                    <p className='fw-bold'>Students Enrolled 400 students</p> 
+                    {/* {courseData.total_enrolled_students}  */}
                     <p className='fw-bold'>Ratings: 4/5</p>
-                    { enrollStatus =="success" && userLoginStatus =="success" && <p><span>You are aleady enrolled in this course</span></p>}
-                    { userLoginStatus=="success" && enrollStatus !=="success" && <p><button onClick= {enrollCourse} type="button" className='btn btn-success'>Enroll in this course</button> </p> }
+                    { enrollStatus ==="success" && userLoginStatus ==="success" && <p><span>You are aleady enrolled in this course</span></p>}
+                    { userLoginStatus==="success" && enrollStatus !=="success" && <p><button onClick= {enrollCourse} type="button" className='btn btn-success'>Enroll in this course</button> </p> }
                     { userLoginStatus !=="success" && <p><Link to='/loginasstudent'>Please login to enroll in this course</Link></p>}
                     
 
@@ -115,7 +116,7 @@ const [isOpen, setIsOpen] = useState(false);
                                
         </div>
      {/*Course_videos*/}
-     { enrollStatus =="success" && userLoginStatus =="success" &&
+     { enrollStatus ==="success" && userLoginStatus ==="success" &&
         <div className='card mt-4'>
         <h5 className="card-header">
                Course Videos

@@ -38,6 +38,11 @@ class Course(models.Model):
     
     def _str_(self):
         return self.title
+    
+    def total_enrolled_students(self):
+        total_enrolled_students = StudentCourseEnrollment.objects.filter(course=self).count()
+        return total_enrolled_students
+    
 
 
     def related_videos(self):
