@@ -29,6 +29,12 @@ class ChapterSerializer(serializers.ModelSerializer):
         model=models.Chapter
         fields=['id','course','title','description','video']
 
+class StudentCourseEnrollSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= models.StudentCourseEnrollment
+        fields=['id','course','student','enrolled_time']
+
+
 class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Quiz

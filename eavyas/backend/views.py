@@ -3,7 +3,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import generics
-from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer
+from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,StudentCourseEnrollSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer
 from . import models
 import requests
 from django.http import JsonResponse
@@ -121,6 +121,34 @@ class CourseChapterList(generics.ListAPIView):
         course_id = self.kwargs['course_id']
         course=models.Course.objects.get(pk=course_id)
         return models.Chapter.objects.filter(course=course)
+    
+
+# for student enrolling in class
+class StudentEnrollCourseList(generics.ListCreateAPIView):
+    queryset=models.StudentCourseEnrollment.objects.all() 
+    serializer_class=StudentCourseEnrollSerializer
+
+# def fetch_enroll_status(request,student_id,course_id):
+#     email=request.POST['email']
+#     password=request.POST['password']
+#     try:
+#         studentData=models.Student.objects.get(email=email,password=password)
+#     except models.Student.DoesNotExist:
+#         studentData=None
+#     if studentData:
+#         return JsonResponse ({'bool': True, 'student_id':studentData.id})
+#     else:
+#         return JsonResponse({'bool':False})
+def fetch_enroll_status(request,student_id,course_id):
+    student=models.Student.objects.filter(id=student_id).first()
+    course=models.Course.objects.filter(id=course_id).first()
+    enrollStatus=models.StudentCourseEnrollment.objects.filter(course.course,student=student).count()
+    if studentData:
+        return JsonResponse ({'bool': True }) 
+        # 'enrollStatus':enrollStatus.id
+    else:
+        return JsonResponse({'bool':False})
+
 
 #for quiz
 #
