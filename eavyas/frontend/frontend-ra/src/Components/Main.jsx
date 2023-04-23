@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './header'
 import Home from './Home'
 import Footer from './footer'
-import {Routes as Switch,Route, Routes,Router} from 'react-router-dom'
+import {Routes as Switch,Route,Routes,Router} from 'react-router-dom'
 
 import CourseDetail from "./CourseDetail";
 import TeacherDetail from './TeacherDetail'
@@ -18,6 +18,7 @@ import AllCourses from './AllCourses';
 //Teachers
 import TeacherDash from './TeacherDash';
 import TeacherCourses from './Teachercourses'
+import EnrolledStudents from './EnrolledStudents'
 
 //Course Management
 import AddCourse from './AddCourse'
@@ -33,6 +34,7 @@ import QuizQuestions from './QuizQuestions'
 import AddQuizQuestion from './AddQuizQuestion'
 import EditQuiz from './EditQuiz'
 import AssignQuiz from './AssignQuiz'
+
 const Main = () => {
   return (
     <div>
@@ -44,6 +46,7 @@ const Main = () => {
                <Route path = "/student-dashboard" element ={<Dashboard/>}/>
                <Route path = "/my-courses" element ={<MyCourses/>}/>
                <Route path= "/teacher-courses" element ={<TeacherCourses/>}/>
+               <Route path= "/enrolled-students/:course_id" element ={<EnrolledStudents/>}/>
                <Route path = "/teacher-dashboard" element ={<TeacherDash/>}/>
                <Route path = "/teacher-detail/:teacher_id" element ={<TeacherDetail/>} /> 
                <Route path = "/all-courses" element ={<AllCourses/>} /> 

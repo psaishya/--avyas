@@ -15,14 +15,14 @@ function CourseDetail(){
     let{course_id}=useParams();
     
     // const loggeduser=localStorage.getItem('loggedteacher');
-  const loggedstudentId=localStorage.getItem('loggedstudentId');
+  const loggedstudentId=localStorage.getItem('loggedstudent');
   const [userLoginStatus,setuserLoginStatus]=useState("");
   const [enrollStatus,setenrollStatus]=useState("");
 
 
     useEffect(()=>{
         try{ 
-            axios.get('http://127.0.0.1:8000/course/' + course_id + '/')
+            axios.get('http://localhost:8000/course/' + course_id + '/')
         .then((res)=>{
                 console.log(res.data);
                 setCourseData(res.data)
@@ -36,11 +36,13 @@ function CourseDetail(){
 
         // fetch enroll status
     try{
-        axios.get('http://127.0.0.1:8000/fetch-enroll-status/'+loggedstudentId+'/'+course_id)
+        axios.get('http://localhost:8000/fetch-enroll-status/'+loggedstudentId+'/'+course_id+'/')
         .then((res)=>{
             if(res.data.bool === true){
                 setenrollStatus('success');
             }
+            else{ setenrollStatus('failure');}
+            // setenrollStatus(res.data.bool)
             // console.log(res);
             // setenrollStatus('success');
         });
@@ -59,14 +61,14 @@ function CourseDetail(){
     },[ course_id, loggedstudentId]);
 
     const enrollCourse = () => {
-        const loggedstudent_id=localStorage.getItem('loggedstudent_id');
+        const loggedstudent_id=localStorage.getItem('loggedstudent');
         const _formData=new FormData();
         _formData.append('course', course_id);
         _formData.append('student',loggedstudent_id);
         
     
         try{
-            axios.post('http://127.0.0.1:8000/student-enroll-course/',_formData,{
+            axios.post('http://localhost:8000/student-enroll-course/',_formData,{
                 headers:{
                 'content-type': 'multipart/form-data'
                 }
@@ -95,6 +97,7 @@ const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div className="container mt-3" >
+          
             <div className="row">
                 <div className="col-4">
                 <img src={courseData.thumbnail} className="img-thumbnail" alt={courseData.title}/>
@@ -104,8 +107,8 @@ const [isOpen, setIsOpen] = useState(false);
                     <p> {courseData.description}</p>
                     <p className='fw-bold'>Course By: <Link to="/teacher-detail/1">{teacherData.firstName} {teacherData.lastName}</Link></p>
                     <p className='fw-bold'>Course Duration: 3 Hours 30 minutes</p>
-                    <p className='fw-bold'>Students Enrolled 400 students</p> 
-                    {/* {courseData.total_enrolled_students}  */}
+                    <p className='fw-bold'>Students Enrolled  {courseData.total_enrolled_students}  students</p> 
+                   
                     <p className='fw-bold'>Ratings: 4/5</p>
                     { enrollStatus ==="success" && userLoginStatus ==="success" && <p><span>You are aleady enrolled in this course</span></p>}
                     { userLoginStatus==="success" && enrollStatus !=="success" && <p><button onClick= {enrollCourse} type="button" className='btn btn-success'>Enroll in this course</button> </p> }

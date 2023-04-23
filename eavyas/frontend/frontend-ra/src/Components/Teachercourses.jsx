@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import Sidebar from "./sidebar";
+// import Sidebar from "./sidebar";
 import TeacherSide from "./Teacherside";
 import axios from "axios";
 import {useState,useEffect} from 'react'
@@ -20,7 +20,7 @@ function TeacherCourses(){
         }catch(error){
             console.log(error);
         }
-    },[]);
+    },[loggeduser]);
 
     return(
         <div className="container mt-4">
@@ -46,7 +46,7 @@ function TeacherCourses(){
                                 <tr key={index}>
                                     <td><Link to ={"/all-chapters/"+course.id}>{course.title}</Link></td>
                                     <td><img src={course.thumbnail} width="80" className="rounded" alt={course.title}/></td>
-                                    <td><Link to= "">123</Link></td>
+                                    <td><Link to= {'/enrolled-students/'+course.id}> {course.total_enrolled_students}</Link></td>
                                     <td>
                                         <button className="btn btn-danger btn-sm">Remove</button>
                                         <Link class="btn btn-success btn-sm ms-2" to ={'/add-chapter/'+course.id}>Add Chapter </Link>

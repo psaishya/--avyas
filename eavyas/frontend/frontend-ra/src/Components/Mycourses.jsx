@@ -1,8 +1,23 @@
 import { Link } from "react-router-dom"
 import Sidebar from "./sidebar";
+import { useState,useEffect } from 'react';
+import axios from 'axios';
 
 
 function MyCourses(){
+    // const[courseData,setcourseData] =useState([]);
+    // const loggedstudentId=localStorage.getItem('loggedstudent');
+    // useEffect(()=>{
+    //     try{ 
+    //         axios.get('http://localhost:8000/fetch-all-enrolled-students/'+teacher_id+'/')
+    //     .then((res)=>{
+    //             //console.log(res.data);
+    //             setstudentData(res.data)
+    //     });
+    //     }catch(error){
+    //         console.log(error);
+    //     }
+    // },[course_id]);
     return(
         <div className="container mt-4">
             <div className="row">
