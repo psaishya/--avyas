@@ -11,7 +11,7 @@ function CourseDetail(){
     const[chapterData,setChapterData] =useState([]);
     const[courseData,setCourseData] =useState([]);
     const[teacherData,setteacherData] =useState([]);
-     const[relatedCourseData,setrelatedCourseData] =useState([]);
+    const[relatedCourseData,setrelatedCourseData] =useState([]);
     let{course_id}=useParams();
     
     // const loggeduser=localStorage.getItem('loggedteacher');
@@ -24,6 +24,7 @@ function CourseDetail(){
         try{ 
             axios.get('http://localhost:8000/course/' + course_id + '/')
         .then((res)=>{
+                
                 console.log(res.data);
                 setCourseData(res.data)
                 setteacherData(res.data.teacher)
@@ -97,7 +98,7 @@ const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div className="container mt-3" >
-          
+    
             <div className="row">
                 <div className="col-4">
                 <img src={courseData.thumbnail} className="img-thumbnail" alt={courseData.title}/>
