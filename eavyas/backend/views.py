@@ -3,7 +3,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import generics
-from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,StudentCourseEnrollSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer
+from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,StudentCourseEnrollSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer,attemptQuizSerializer
 from . import models
 import requests
 from django.http import JsonResponse
@@ -171,6 +171,7 @@ class EnrolledStudentList(generics.ListAPIView):
   
 
 
+        
 
 #for quiz
 #
@@ -202,6 +203,9 @@ class QuizQuestionList(generics.ListCreateAPIView):
         quiz=models.Quiz.objects.get(pk=quiz_id)
         if 'limit' in self.kwargs:
             return models.QuizQuestions.objects.filter(quiz=quiz).order_by('id')[:1]
+        elif 'question_id' in self.kwargs:
+            current_question=self.kwargs['question_id']
+            return models.QuizQuestions.objects.filter(quiz=quiz,id__gt=current_question).order_by('id')[:1]
         else:
             return models.QuizQuestions.objects.filter(quiz=quiz)
 
@@ -228,4 +232,21 @@ def FetchQuizAssignStatus(request, quiz_id,course_id):
     else:
         return JsonResponse({'bool':False})
 
-
+class attemptQuizList(generics.ListCreateAPIView):
+    queryset=models.attemptQuiz.objects.all()
+    serializer_class=attemptQuizSerializer
+    def get_queryset(self):
+        if 'quiz_id' in self.kwargs:
+            quiz_id = self.kwargs['quiz_id']
+            quiz=models.Quiz.objects.get(pk=quiz_id)
+            return models.attemptQuiz.objects.filter(quiz=quiz).values('student')
+        # .order_by('quiz_id')[:1]
+  
+def FetchQuizAttemptStatus(request, quiz_id,student_id):
+    quiz=models.Quiz.objects.filter(id=quiz_id).first()
+    student=models.User_student.objects.filter(studentId=student_id).first()
+    attemptStatus=models.attemptQuiz.objects.filter(student=student,question__quiz=quiz).count()
+    if attemptStatus :
+        return JsonResponse({'bool':True})
+    else:
+        return JsonResponse({'bool':False})  

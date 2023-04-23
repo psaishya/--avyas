@@ -1,4 +1,5 @@
 import { useEffect,useState } from "react"
+import {Link} from 'react-router-dom'
 import axios from "axios"
 const baseUrl = 'http://localhost:8000';
 
@@ -52,7 +53,13 @@ const CheckQuizInCourse = (props) => {
     }
     
     {assignStatus.bool===true &&
-    <span className="text-success">Assigned</span>
+    <>
+    <span className="btn btn-sm btn-secondary">Assigned </span>
+    &nbsp; 
+    <Link className="btn btn-sm btn-info" to= {`/attempted-students/`+props.quiz}>Attempted Students</Link>
+
+   
+    </>
     }
 </td>
 
