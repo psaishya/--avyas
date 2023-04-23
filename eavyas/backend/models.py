@@ -35,6 +35,15 @@ class Course(models.Model):
 
     class Meta:
         verbose_name_plural = "3. Course"
+    
+    def _str_(self):
+        return self.title
+    
+    def total_enrolled_students(self):
+        total_enrolled_students = StudentCourseEnrollment.objects.filter(course=self).count()
+        return total_enrolled_students
+    
+
 
     def related_videos(self):
         related_videos =Course.objects.filter(category=self.category)
@@ -62,6 +71,24 @@ class User_student(models.Model):
 
     class Meta:
         verbose_name_plural = "5. Student"
+
+    def _str_(self):
+        return self.full_name
+
+# Student Course Enrollment
+class StudentCourseEnrollment(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE,related_name='enrolled_courses')
+    student = models.ForeignKey(User_student, on_delete=models.CASCADE,related_name='enrolled_student')
+    enrolled_time=models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "6. Enrolled Courses"
+
+    def _str_(self): 
+        return f"{self.course}-{self.student}"
+
+
+
 class Quiz(models.Model):
     teacher=models.ForeignKey(User_teacher,on_delete=models.CASCADE,null=True)
     title=models.CharField(max_length=200)

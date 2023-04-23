@@ -53,7 +53,12 @@ urlpatterns = [
 
     #Teacher courses
     path('teacher-courses/<int:teacher_id>/',views.TeacherCourseList.as_view()),
-    
+    #student enroll
+    path('student-enroll-course/',views.StudentEnrollCourseList.as_view()),
+    path('fetch-enroll-status/<int:student_id>/<int:course_id>/',views.fetch_enroll_status),
+    path('fetch-enrolled-students/<int:course_id>/',views.EnrolledStudentList.as_view()),
+    path('fetch-enrolled-courses/<int:student_id>/',views.EnrolledStudentList.as_view()),
+    path('fetch-all-enrolled-students/<int:teacher_id>/',views.EnrolledStudentList.as_view()),
     #for quiz
     path('quiz/',views.QuizList.as_view()),
     path('teacher-quiz/<int:teacher_id>/',views.TeacherQuizList.as_view()),

@@ -20,7 +20,7 @@ class categorySerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Course
-        fields=['id','category','teacher','title','description','thumbnail','course_chapters','related_videos']
+        fields=['id','category','teacher','title','description','thumbnail','course_chapters','related_videos','total_enrolled_students']
         depth =1
 
 
@@ -28,6 +28,19 @@ class ChapterSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Chapter
         fields=['id','course','title','description','video']
+
+class StudentCourseEnrollSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= models.StudentCourseEnrollment
+        fields=['id','course','student','enrolled_time']
+        depth =1
+    # def__init__(self, *args, **kwargs):
+    #     super(StudentCourseEnrollSerializer,self).__init__(*args, **kwargs)
+    #     request = self.context.get('request')
+    #     self.Meta.depth = 0
+    #     if request and request.method == 'GET':
+    #         self.Meta.depth = 1
+
 
 class QuizSerializer(serializers.ModelSerializer):
     class Meta:
