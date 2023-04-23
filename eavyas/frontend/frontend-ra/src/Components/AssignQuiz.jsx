@@ -65,15 +65,7 @@ function AssignQuiz(){
                                     
                                     <td>     
                                         <CheckQuizInCourse quiz={quiz.id} course={course_id}/>                        
-                                        {/* {quiz.assign_status===0 &&
-
-                                        <button type="submit"
-                                        onClick={() => assignQuiz(quiz.id)}
-                                         className="btn btn-success btn-sm ms-2">Assign Quiz</button>
-                                        }
-                                        {quiz.assign_status!==0 &&
-                                        <span className="text-success">Assigned</span>
-                                        } */}
+                                        
                                     </td>
                                 </tr>
                                 )}

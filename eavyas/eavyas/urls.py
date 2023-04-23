@@ -69,8 +69,12 @@ urlpatterns = [
     path('quiz/<int:pk>/',views.QuizDetailView.as_view()),
     path('question/<int:pk>/',views.QuestionDetailView.as_view()),
     path('fetch-quiz-assign-status/<int:quiz_id>/<int:course_id>/',views.FetchQuizAssignStatus),
-    # path('quiz-assign-course/',views.courseQuizList.as_view()),
+    path('quiz-assign-course/',views.courseQuizList.as_view()),
     path('fetch-assigned-quiz/<int:course_id>/',views.courseQuizList.as_view()),
+    path('attempt-quiz/',views.attemptQuizList.as_view()),
+    path('quiz-questions/<int:quiz_id>/next-question/<int:question_id>/',views.QuizQuestionList.as_view()),
+    path('fetch-quiz-attempt-status/<int:quiz_id>/<int:student_id>/',views.FetchQuizAttemptStatus),
+    path('attempted-quiz/<int:quiz_id>/',views.attemptQuizList.as_view()),
 
 
 
