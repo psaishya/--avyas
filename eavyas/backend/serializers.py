@@ -32,8 +32,9 @@ class ChapterSerializer(serializers.ModelSerializer):
 class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Quiz
-        fields=['id','teacher','title','detail','assign_status','add_time']
-        
+        # fields=['id','teacher','title','detail','assign_status','add_time']
+        fields=['id','teacher','title','detail','add_time']
+
     def __init__(self, *args, **kwargs):
         super(QuizSerializer, self).__init__(*args, **kwargs)
         request = self.context.get('request')

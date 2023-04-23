@@ -3,7 +3,7 @@ import axios from "axios"
 const baseUrl = 'http://localhost:8000';
 
 const CheckQuizInCourse = (props) => {
-    const[quizData,setquizData] =useState([]);
+    const[assignStatus,setassignStatus] =useState([]);
     const loggeduser=localStorage.getItem('loggedteacher');
 
     useEffect(()=>{
@@ -11,7 +11,7 @@ const CheckQuizInCourse = (props) => {
             axios.get(baseUrl+'/fetch-quiz-assign-status/'+ props.quiz +'/'+props.course+'/')
         .then((res)=>{
                 console.log(res.data);
-                setquizData(res.data)
+                setassignStatus(res.data)
 
         });
         }catch(error){
@@ -44,14 +44,14 @@ const CheckQuizInCourse = (props) => {
   return (
    
     <td>     
-    {quizData.bool===false &&
+    {assignStatus.bool===false &&
 
     <button type="submit"
     onClick={() => assignQuiz(props.quiz)}
      className="btn btn-success btn-sm ms-2">Assign Quiz</button>
     }
     
-    {quizData.bool===true &&
+    {assignStatus.bool===true &&
     <span className="text-success">Assigned</span>
     }
 </td>

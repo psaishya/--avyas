@@ -68,8 +68,8 @@ class Quiz(models.Model):
     detail=models.TextField()
     add_time=models.DateTimeField(auto_now_add=True)
     
-    def assign_status(self):
-        return courseQuiz.objects.filter(quiz=self).count()
+    # def assign_status(self):
+    #     return courseQuiz.objects.filter(quiz=self).count()
     
     class Meta:
         verbose_name_plural ="11. Quiz"

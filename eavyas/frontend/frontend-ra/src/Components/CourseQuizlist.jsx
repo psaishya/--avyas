@@ -4,13 +4,13 @@ import axios from "axios";
 import {useState,useEffect} from 'react'
 const baseUrl = 'http://localhost:8000';
 
-function MyCourses(){
+function CourseQuizlist(){
     const[courseData,setCourseData] =useState([]);
     const loggeduser=localStorage.getItem('loggedstudent');
 
     useEffect(()=>{
         try{ 
-            axios.get(baseUrl+'/fetch-enrolled-courses/'+ loggeduser +'/')
+            axios.get(baseUrl+'/fetch-assigned-quiz/'+ loggeduser +'/')
         .then((res)=>{
                 //console.log(res.data);
                 setCourseData(res.data)
@@ -27,19 +27,17 @@ function MyCourses(){
                 </aside>
                 <section className="col-md-9">
                                 <div className="card">
-                        <h5 className='card-header'>My Courses</h5>
+                        <h5 className='card-header'>Quiz List</h5>
                     <div className="card-body">
                         <table className="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Instructor</th>
                                     <th>Quiz</th>
-
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {courseData.map((row,index)=>
+                                {/* {courseData.map((row,index)=>
                                 <tr key={index}>
                                 
                                     <td><Link to= {`/detail/`+row.course.id}>{row.course.title}</Link></td>
@@ -47,7 +45,10 @@ function MyCourses(){
                                     <td><Link className="btn btn-sm btn-warning" to= {`/course-quiz/`+row.course.id}>Quiz List</Link></td>
 
                                 </tr>
-                                )}
+                                )} */}
+                                <td>Django Quiz</td>
+                                <td><Link className="btn btn-sm btn-warning" to= {`/take-quiz/1`}>Take Quiz</Link></td>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -58,4 +59,4 @@ function MyCourses(){
     )
 }
 
-export default MyCourses;
+export default CourseQuizlist;
