@@ -8,10 +8,12 @@ const TeacherProfileUpdate = () => {
         {
         'firstName':'',
         'lastName':'',
+        'bio':'',
         'gender':'',
         'phoneNo':'',
         'email':'', 
         'userName':'',
+        'profile':'',
         }
       );
       const handleChange=(event)=>{
@@ -20,15 +22,24 @@ const TeacherProfileUpdate = () => {
           [event.target.name]:event.target.value
         }); 
       };
+      const handleFileChange=(event)=>{
+        setuserData({
+            ...userData,
+            [event.target.name] : event.target.files[0]
+        });
+    }
+
       const updatedata=(event)=>{
         console.log(userData);
         const userFormData=new FormData();
         userFormData.append("firstName",userData.firstName)
         userFormData.append("lastName",userData.lastName)
+        userFormData.append("bio",userData.bio)
         userFormData.append("gender",userData.gender)
         userFormData.append("phoneNo",userData.phoneNo)
         userFormData.append("email",userData.email)
         userFormData.append("userName",userData.userName)
+        userFormData.append("profile",userData.profile)
         
         // event.preventDefault();
         try{
@@ -37,11 +48,13 @@ const TeacherProfileUpdate = () => {
           setuserData({
             'firstname':'',
           'lastname':'',
+          'bio':'',
           'gender':'',
           'phoneNo':'',
           'email':'', 
           'username':'',
           'password':'',
+          'profile':'',
           })
         })
         }
@@ -71,11 +84,18 @@ const TeacherProfileUpdate = () => {
                     </div>
                 </div>
                 <div className="mb-3 row">
+                    <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Add Bio</label>
+                    <div className="col-sm-10">
+                        <textarea onChange={handleChange} className="form-control" value={userData.bio||""} name="bio" ></textarea>
+                    </div>
+                    </div>
+                <div className="mb-3 row">
                     <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Gender</label>
                     <div className="col-sm-10">
                         <input type="text" className='form-control' onChange={handleChange} name="gender" value={userData.gender||""}  />
                     </div>
                 </div>
+
                 <div className="mb-3 row">
                     <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Phone No.</label>
                     <div className="col-sm-10">
@@ -92,6 +112,12 @@ const TeacherProfileUpdate = () => {
                     <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Username</label>
                     <div className="col-sm-10">
                         <input type="text" className='form-control' onChange={handleChange} name="userName" value={userData.userName||""}  />
+                    </div>
+                </div>
+                <div className="mb-3" row>
+                    <label htmlFor="staticEmail" className="from-control">Profile Pic</label>
+                    <div className="col-sm-10">
+                     <input type="file" onChange={handleFileChange} name= "profile" id="video" className="form-control"/>
                     </div>
                 </div>
 

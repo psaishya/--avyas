@@ -5,7 +5,8 @@ from . import models
 class teacherSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.User_teacher
-        fields=['teacherId','firstName','lastName','gender','phoneNo','email','userName']
+        fields=['teacherId','firstName','lastName','bio','gender','phoneNo','email','userName','teacher_courses','profile']
+        depth=1
         
 class studentSerializer(serializers.ModelSerializer):
     class Meta:

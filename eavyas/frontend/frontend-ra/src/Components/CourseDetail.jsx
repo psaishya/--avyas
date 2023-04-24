@@ -18,7 +18,7 @@ function CourseDetail(){
 
     useEffect(()=>{
         try{ 
-            axios.get('http://127.0.0.1:8000/course/' + course_id + '/')
+            axios.get('http://127.0.0.1:8000/course/' +course_id+ '/')
         .then((res)=>{
                 console.log(res.data);
                 setCourseData(res.data)
@@ -51,7 +51,7 @@ const [isOpen, setIsOpen] = useState(false);
                 <div className="col-8">
                     <h2 className = 'fw-bold'>{courseData.title}</h2>
                     <p> {courseData.description}</p>
-                    <p className='fw-bold'>Course By: <Link to="/teacher-detail/1">{teacherData.firstName} {teacherData.lastName}</Link></p>
+                    <p className='fw-bold'>Course By: <Link to={`/teacher-detail/${teacherData.teacherId}`}>{teacherData.firstName} {teacherData.lastName}</Link></p>
                     <p className='fw-bold'>Course Duration: 3 Hours 30 minutes</p>
                     <p className='fw-bold'>Students Enrolled 400 students</p>
                     <p className='fw-bold'>Ratings: 4/5</p>

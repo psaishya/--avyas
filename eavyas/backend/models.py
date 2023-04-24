@@ -8,10 +8,12 @@ class User_teacher(models.Model):
     teacherId=models.AutoField(primary_key=True)
     firstName=models.CharField( max_length=50,default="")
     lastName=models.CharField(max_length=50,default="")
+    bio=models.TextField(default="null")
     gender=models.CharField(max_length=10,default="")
     phoneNo=models.CharField(max_length=10,default="")
     email=models.EmailField(max_length=50,default="")
     userName=models.CharField( max_length=50,default="",unique=TRUE)
+    profile=models.ImageField(upload_to='teacher_imgs/', null='True')
     class Meta:
         verbose_name_plural="1. Teachers"
 
@@ -28,7 +30,7 @@ class CourseCategory(models.Model):
 #course model
 class Course(models.Model):
     category = models.ForeignKey(CourseCategory, on_delete=models.CASCADE)
-    teacher = models.ForeignKey(User_teacher, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(User_teacher, on_delete=models.CASCADE,related_name='teacher_courses')
     title = models.CharField(max_length=150)
     description = models.TextField()
     thumbnail=models.ImageField(upload_to='course_imgs/', null='True')
