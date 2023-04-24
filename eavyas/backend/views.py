@@ -3,7 +3,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import generics
-from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,StudentCourseEnrollSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer,attemptQuizSerializer
+from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,StudentCourseEnrollSerializer,CourseRatingSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer,attemptQuizSerializer
 from . import models
 import requests
 from django.http import JsonResponse
@@ -128,17 +128,6 @@ class StudentEnrollCourseList(generics.ListCreateAPIView):
     queryset=models.StudentCourseEnrollment.objects.all() 
     serializer_class=StudentCourseEnrollSerializer
 
-# def fetch_enroll_status(request,student_id,course_id):
-#     email=request.POST['email']
-#     password=request.POST['password']
-#     try:
-#         studentData=models.Student.objects.get(email=email,password=password)
-#     except models.Student.DoesNotExist:
-#         studentData=None
-#     if studentData:
-#         return JsonResponse ({'bool': True, 'student_id':studentData.id})
-#     else:
-#         return JsonResponse({'bool':False})
 def fetch_enroll_status(request,student_id,course_id):
     student=models.User_student.objects.filter(studentId=student_id).first()
     course=models.Course.objects.filter(id=course_id).first()
@@ -169,6 +158,22 @@ class EnrolledStudentList(generics.ListAPIView):
             return models.StudentCourseEnrollment.objects.filter(student=student).distinct()
     
   
+# for courseRating
+class CourseRatingList(generics.ListCreateAPIView):
+    queryset=models.CourseRating.objects.all() 
+    serializer_class=CourseRatingSerializer
+    
+def fetch_rating_status(request,student_id,course_id):
+    student=models.User_student.objects.filter(studentId=student_id).first()
+    course=models.Course.objects.filter(id=course_id).first()
+    ratingStatus=models.CourseRating.objects.filter(course=course,student=student).count()
+    if ratingStatus:
+        return JsonResponse ({'bool': True }) 
+    else:
+        return JsonResponse({'bool':False})
+
+
+    
 
 
         

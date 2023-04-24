@@ -43,6 +43,10 @@ class Course(models.Model):
         total_enrolled_students = StudentCourseEnrollment.objects.filter(course=self).count()
         return total_enrolled_students
     
+    def course_rating(self):
+        course_rating = CourseRating.objects.filter(course=self).aggregate(avg_rating = models.Avg('rating'))
+        return course_rating['avg_rating']
+    
 
 
     def related_videos(self):
@@ -86,6 +90,20 @@ class StudentCourseEnrollment(models.Model):
 
     def _str_(self): 
         return f"{self.course}-{self.student}"
+
+#Course Rating
+class CourseRating(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    student = models.ForeignKey(User_student, on_delete=models.CASCADE)
+    rating = models.PositiveBigIntegerField(default=0)
+    reviews = models.TextField(null=True)
+    review_time=models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "7. Course Rating"
+
+    def _str_(self): 
+        return f"{self.course}-{self.student}-{self.rating}"
 
 
 
@@ -134,3 +152,4 @@ class attemptQuiz(models.Model):
     
     class Meta:
         verbose_name_plural ="14. Attempted Question"
+

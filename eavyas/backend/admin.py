@@ -12,4 +12,4 @@ admin.site.register(models.attemptQuiz)
 admin.site.register(models.courseQuiz)
 admin.site.register(models.Chapter)
 admin.site.register(models.StudentCourseEnrollment)
-
+admin.site.register(models.CourseRating)
