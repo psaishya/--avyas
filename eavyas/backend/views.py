@@ -3,7 +3,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import generics
-from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,StudentCourseEnrollSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer,attemptQuizSerializer
+from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,StudentCourseEnrollSerializer,CourseRatingSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer,attemptQuizSerializer
 from . import models
 import requests
 from django.http import JsonResponse
@@ -130,17 +130,6 @@ class StudentEnrollCourseList(generics.ListCreateAPIView):
     queryset=models.StudentCourseEnrollment.objects.all() 
     serializer_class=StudentCourseEnrollSerializer
 
-# def fetch_enroll_status(request,student_id,course_id):
-#     email=request.POST['email']
-#     password=request.POST['password']
-#     try:
-#         studentData=models.Student.objects.get(email=email,password=password)
-#     except models.Student.DoesNotExist:
-#         studentData=None
-#     if studentData:
-#         return JsonResponse ({'bool': True, 'student_id':studentData.id})
-#     else:
-#         return JsonResponse({'bool':False})
 def fetch_enroll_status(request,student_id,course_id):
     student=models.User_student.objects.filter(studentId=student_id).first()
     course=models.Course.objects.filter(id=course_id).first()
@@ -169,6 +158,26 @@ class EnrolledStudentList(generics.ListAPIView):
             student_id = self.kwargs['student_id']
             student=models.User_student.objects.get(pk=student_id)
             return models.StudentCourseEnrollment.objects.filter(student=student).distinct()
+    
+  
+# for courseRating
+class CourseRatingList(generics.ListCreateAPIView):
+    queryset=models.CourseRating.objects.all() 
+    serializer_class=CourseRatingSerializer
+    
+def fetch_rating_status(request,student_id,course_id):
+    student=models.User_student.objects.filter(studentId=student_id).first()
+    course=models.Course.objects.filter(id=course_id).first()
+    ratingStatus=models.CourseRating.objects.filter(course=course,student=student).count()
+    if ratingStatus:
+        return JsonResponse ({'bool': True }) 
+    else:
+        return JsonResponse({'bool':False})
+
+
+    
+
+
         
 
 #for quiz
@@ -239,23 +248,30 @@ class attemptQuizList(generics.ListCreateAPIView):
             quiz_id = self.kwargs['quiz_id']
             quiz=models.Quiz.objects.get(pk=quiz_id)
             return models.attemptQuiz.objects.filter(quiz=quiz)
-            # return models.attemptQuiz.objects.raw(f'SELECT * FROM attemptQuiz WHERE quiz_id={int(quiz_id)} GROUP BY studentId')
-         
+            # return models.attemptQuiz.objects.raw(f"SELECT * FROM models.attemptQuiz WHERE quiz={int(quiz_id)} GROUP BY student_id")
+    
+
        
        
 def fetch_quiz_result (request, quiz_id,student_id):
     quiz=models.Quiz.objects.filter(id=quiz_id).first()
     student=models.User_student.objects.filter(studentId=student_id).first()
     total_questions=models.QuizQuestions.objects.filter(quiz=quiz).count(),
-    total_attempted_questions=models.attemptQuiz.objects.filter(quiz=quiz,student=student).count()
+    total_attempted_questions=models.attemptQuiz.objects.filter(quiz=quiz,student=student).values("student").count()/2
+    # total_attempted_questions=models.attemptQuiz.objects.filter(quiz=quiz,student=student).count()
+
+    attempted_questions=models.attemptQuiz.objects.filter(quiz=quiz,student=student)
    
-   
+    total_correct_answers=0
+    for attempt in attempted_questions:
+        if attempt.right_ans==attempt.question.right_ans:
+            total_correct_answers += 1
     # total_attempted_questions = models.attemptQuiz.objects.filter(quiz=quiz, student=student)\
     # .values('student_id')\
     # .annotate(count=Count('id'))\
     # .count()
 
-    return JsonResponse({'total_questions':total_questions, 'total_attempted_questions':total_attempted_questions})
+    return JsonResponse({'total_questions':total_questions, 'total_attempted_questions':total_attempted_questions,'total_correct_answers':total_correct_answers})
     
 def FetchQuizAttemptStatus(request, quiz_id,student_id):
     quiz=models.Quiz.objects.filter(id=quiz_id).first()

@@ -39,12 +39,15 @@ const Loginasteacher = (props) => {
               const id=response.data.id;
               localStorage.setItem('loggedteacher',id);
               console.log(localStorage.getItem('loggedteacher'));
+              console.log(localStorage.getItem('loggedteacher'));
+
               localStorage.setItem('userLoginStatus',true)
+            window.location.href = '/teacher-dashboard';
 
 
           } );  
 
-            window.location.href = '/teacher-dashboard';
+            // window.location.href = '/teacher-dashboard';
 
 
         }).catch(err=>{

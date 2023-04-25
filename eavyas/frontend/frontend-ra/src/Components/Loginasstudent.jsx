@@ -31,6 +31,7 @@ const Loginasstudent = (props) => {
             let authUser=localStorage.setItem('user',username)
             props.setUser(authUser);
             props.setMessage(`Logged in as ${username}`);
+            
             // <Home user={username}/>
 
             const loggedFormData=new FormData;
@@ -39,12 +40,15 @@ const Loginasstudent = (props) => {
               const id=response.data.id;
               localStorage.setItem('loggedstudent',id);
               console.log(localStorage.getItem('loggedstudent'));
+
+              console.log(localStorage.getItem('loggedstudent'));
               localStorage.setItem('userLoginStatus',true)
+              console.log(localStorage.getItem('userLoginStatus'));
+              window.location.href = '/student-dashboard';
 
 
           } );  
 
-            window.location.href = '/student-dashboard';
 
 
         }).catch(err=>{

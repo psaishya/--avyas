@@ -8,10 +8,12 @@ class User_teacher(models.Model):
     teacherId=models.AutoField(primary_key=True)
     firstName=models.CharField( max_length=50,default="")
     lastName=models.CharField(max_length=50,default="")
+    bio=models.TextField(default="null")
     gender=models.CharField(max_length=10,default="")
     phoneNo=models.CharField(max_length=10,default="")
     email=models.EmailField(max_length=50,default="")
     userName=models.CharField( max_length=50,default="",unique=TRUE)
+    profile=models.ImageField(upload_to='teacher_imgs/', null='True')
     class Meta:
         verbose_name_plural="1. Teachers"
 
@@ -28,7 +30,7 @@ class CourseCategory(models.Model):
 #course model
 class Course(models.Model):
     category = models.ForeignKey(CourseCategory, on_delete=models.CASCADE)
-    teacher = models.ForeignKey(User_teacher, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(User_teacher, on_delete=models.CASCADE,related_name='teacher_courses')
     title = models.CharField(max_length=150)
     description = models.TextField()
     thumbnail=models.ImageField(upload_to='course_imgs/', null='True')
@@ -43,8 +45,10 @@ class Course(models.Model):
         total_enrolled_students = StudentCourseEnrollment.objects.filter(course=self).count()
         return total_enrolled_students
     
-
-
+    def course_rating(self):
+        course_rating = CourseRating.objects.filter(course=self).aggregate(avg_rating = models.Avg('rating'))
+        return course_rating['avg_rating']
+    
     def related_videos(self):
         related_videos =Course.objects.filter(category=self.category)
         return serializers.serialize('json',related_videos)
@@ -86,6 +90,20 @@ class StudentCourseEnrollment(models.Model):
 
     def _str_(self): 
         return f"{self.course}-{self.student}"
+
+#Course Rating
+class CourseRating(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    student = models.ForeignKey(User_student, on_delete=models.CASCADE)
+    rating = models.PositiveBigIntegerField(default=0)
+    reviews = models.TextField(null=True)
+    review_time=models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "7. Course Rating"
+
+    def _str_(self): 
+        return f"{self.course}-{self.student}-{self.rating}"
 
 
 
@@ -134,3 +152,4 @@ class attemptQuiz(models.Model):
     
     class Meta:
         verbose_name_plural ="14. Attempted Question"
+

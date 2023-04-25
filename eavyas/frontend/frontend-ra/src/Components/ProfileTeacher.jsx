@@ -12,10 +12,12 @@ const ProfileTeacher = () => {
         {
         'firstName':'',
         'lastName':'',
+        'bio':'',
         'gender':'',
         'phoneNo':'',
         'email':'', 
         'userName':'',
+        'profile':"",
         }
       );
        
@@ -55,6 +57,12 @@ const ProfileTeacher = () => {
                         <label htmlFor="lastName" className="col-sm-2 col-form-label">LastName</label>
                         <div className="col-sm-10">
                         <input type="text"  readOnly className="form-control-plaintext" id="lastName"  defaultValue={userData.lastName}/>
+                        </div>
+                    </div>
+                    <div className="mb-3 row">
+                        <label htmlFor="bio" className="col-sm-2 col-form-label">Bio</label>
+                        <div className="col-sm-10">
+                        <input type="text"  readOnly className="form-control-plaintext" id="bio"  defaultValue={userData.bio}/>
                         </div>
                     </div>
                     <div className="mb-3 row">

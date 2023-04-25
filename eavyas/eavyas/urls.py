@@ -59,6 +59,10 @@ urlpatterns = [
     path('fetch-enrolled-students/<int:course_id>/',views.EnrolledStudentList.as_view()),
     path('fetch-enrolled-courses/<int:student_id>/',views.EnrolledStudentList.as_view()),
     path('fetch-all-enrolled-students/<int:teacher_id>/',views.EnrolledStudentList.as_view()),
+
+    #courseRating
+    path('course-rating/',views.CourseRatingList.as_view()), 
+    path('fetch-rating-status/<int:student_id>/<int:course_id>/',views.fetch_rating_status), 
     #for quiz
     path('quiz/',views.QuizList.as_view()),
     path('teacher-quiz/<int:teacher_id>/',views.TeacherQuizList.as_view()),

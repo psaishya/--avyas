@@ -40,7 +40,12 @@ const QuizResult = (props) => {
                     <td>Attempted Questions  </td>
                     <td>{resultData.total_attempted_questions}</td>
                 </tr>
+                <tr>
+                    <td>Correct Answers  </td>
+                    <td>{resultData.total_correct_answers}</td>
+                </tr>
             </table>
+            
         </div>
         </div>
     </div>
