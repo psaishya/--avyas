@@ -1,8 +1,24 @@
 import { Link } from "react-router-dom"
 import Sidebar from "./sidebar";
-
+import axios from "axios";
+import {useState,useEffect} from 'react'
+const baseUrl = 'http://localhost:8000';
 
 function MyCourses(){
+    const[courseData,setCourseData] =useState([]);
+    const loggeduser=localStorage.getItem('loggedstudent');
+
+    useEffect(()=>{
+        try{ 
+            axios.get(baseUrl+'/fetch-enrolled-courses/'+ loggeduser +'/')
+        .then((res)=>{
+                //console.log(res.data);
+                setCourseData(res.data)
+        });
+        }catch(error){
+            console.log(error);
+        }
+    },[]);
     return(
         <div className="container mt-4">
             <div className="row">
@@ -18,17 +34,20 @@ function MyCourses(){
                                 <tr>
                                     <th>Name</th>
                                     <th>Instructor</th>
-                                    <th>Action</th>
+                                    <th>Quiz</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Java</td>
-                                    <td><Link to= "">Austin Justice</Link></td>
-                                    <td>
-                                        <button className="btn btn-danger btn-sm active">Remove</button>
-                                    </td>
+                                {courseData.map((row,index)=>
+                                <tr key={index}>
+                                
+                                    <td><Link to= {`/detail/`+row.course.id}>{row.course.title}</Link></td>
+                                    <td><Link to= {`/teacher-detail/`+row.course.teacher.id}>{row.course.teacher.firstName} {row.course.teacher.lastName}</Link></td>
+                                    <td><Link className="btn btn-sm btn-warning" to= {`/course-quiz/`+row.course.id}>Quiz List</Link></td>
+
                                 </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>

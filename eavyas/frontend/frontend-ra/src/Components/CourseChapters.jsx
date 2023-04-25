@@ -49,9 +49,9 @@ function CourseChapters(){
                                 <td><Link to ="#">{chapter.title}</Link></td>
                                 <td>
                                         <video controls width="250">
-                                            <source src={chapter.video.url} type="video/webm" />
+                                            <source src={chapter.video} type="video/webm" />
 
-                                            <source src={chapter.video.url} type="video/mp4" />
+                                            <source src={chapter.video} type="video/mp4" />
 
 
                                         </video>

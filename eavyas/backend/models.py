@@ -37,6 +37,19 @@ class Course(models.Model):
 
     class Meta:
         verbose_name_plural = "3. Course"
+    
+    def _str_(self):
+        return self.title
+    
+    def total_enrolled_students(self):
+        total_enrolled_students = StudentCourseEnrollment.objects.filter(course=self).count()
+        return total_enrolled_students
+    
+    def course_rating(self):
+        course_rating = CourseRating.objects.filter(course=self).aggregate(avg_rating = models.Avg('rating'))
+        return course_rating['avg_rating']
+    
+
 
     def related_videos(self):
         related_videos =Course.objects.filter(category=self.category)
@@ -64,11 +77,46 @@ class User_student(models.Model):
 
     class Meta:
         verbose_name_plural = "5. Student"
+
+    def _str_(self):
+        return self.full_name
+
+# Student Course Enrollment
+class StudentCourseEnrollment(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE,related_name='enrolled_courses')
+    student = models.ForeignKey(User_student, on_delete=models.CASCADE,related_name='enrolled_student')
+    enrolled_time=models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "6. Enrolled Courses"
+
+    def _str_(self): 
+        return f"{self.course}-{self.student}"
+
+#Course Rating
+class CourseRating(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    student = models.ForeignKey(User_student, on_delete=models.CASCADE)
+    rating = models.PositiveBigIntegerField(default=0)
+    reviews = models.TextField(null=True)
+    review_time=models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "7. Course Rating"
+
+    def _str_(self): 
+        return f"{self.course}-{self.student}-{self.rating}"
+
+
+
 class Quiz(models.Model):
     teacher=models.ForeignKey(User_teacher,on_delete=models.CASCADE,null=True)
     title=models.CharField(max_length=200)
     detail=models.TextField()
     add_time=models.DateTimeField(auto_now_add=True)
+    
+    # def assign_status(self):
+    #     return courseQuiz.objects.filter(quiz=self).count()
     
     class Meta:
         verbose_name_plural ="11. Quiz"
@@ -89,9 +137,21 @@ class QuizQuestions(models.Model):
         
 #for quiz in course
 class courseQuiz(models.Model):
+    teacher=models.ForeignKey(User_teacher,on_delete=models.CASCADE,null=True)
     course=models.ForeignKey(Course,on_delete=models.CASCADE,null=True)
     quiz=models.ForeignKey(Quiz,on_delete=models.CASCADE,null=True)
     add_time=models.DateTimeField(auto_now_add=True)
     
     class Meta:
         verbose_name_plural ="13. Course Quiz"
+
+class attemptQuiz(models.Model):
+    student=models.ForeignKey(User_student,on_delete=models.CASCADE,null=True)
+    question=models.ForeignKey(QuizQuestions,on_delete=models.CASCADE,null=True)
+    quiz=models.ForeignKey(Quiz,on_delete=models.CASCADE,null=True)
+    right_ans=models.CharField(max_length=200,null=True)
+    add_time=models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural ="14. Attempted Question"
+

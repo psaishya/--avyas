@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './header'
 import Home from './Home'
 import Footer from './footer'
-import {Routes as Switch,Route, Routes,Router} from 'react-router-dom'
+import {Routes as Switch,Route,Routes,Router} from 'react-router-dom'
 
 import CourseDetail from "./CourseDetail";
 import TeacherDetail from './TeacherDetail'
@@ -18,6 +18,7 @@ import AllCourses from './AllCourses';
 //Teachers
 import TeacherDash from './TeacherDash';
 import TeacherCourses from './Teachercourses'
+import EnrolledStudents from './EnrolledStudents'
 
 //Course Management
 import AddCourse from './AddCourse'
@@ -27,11 +28,18 @@ import ProfileStudent from './ProfileStudent'
 import ProfileTeacher from './ProfileTeacher'
 import TeacherProfileUpdate from './TeacherProfileUpdate'
 import StudentProfileUpdate from './StudentProfileUpdate'
+// teacher quiz
 import AddQuiz from './AddQuiz'
 import AllQuiz from './AllQuiz'
 import QuizQuestions from './QuizQuestions'
 import AddQuizQuestion from './AddQuizQuestion'
 import EditQuiz from './EditQuiz'
+import AssignQuiz from './AssignQuiz'
+import CourseQuizlist from './CourseQuizlist'
+import TakeQuiz from './TakeQuiz'
+import AttemptedStudent from './AttemptedStudent'
+// student quiz
+
 const Main = () => {
   return (
     <div>
@@ -43,6 +51,7 @@ const Main = () => {
                <Route path = "/student-dashboard" element ={<Dashboard/>}/>
                <Route path = "/my-courses" element ={<MyCourses/>}/>
                <Route path= "/teacher-courses" element ={<TeacherCourses/>}/>
+               <Route path= "/enrolled-students/:course_id" element ={<EnrolledStudents/>}/>
                <Route path = "/teacher-dashboard" element ={<TeacherDash/>}/>
                <Route path = "/teacher-detail/:teacher_id" element ={<TeacherDetail/>} /> 
                <Route path = "/all-courses" element ={<AllCourses/>} /> 
@@ -57,8 +66,11 @@ const Main = () => {
                <Route path = "/add-quiz" element ={<AddQuiz/>} /> 
                <Route path = "/add-quiz-question/:quiz_id" element ={<AddQuizQuestion/>} /> 
                <Route path = "/edit-quiz/:quiz_id" element ={<EditQuiz/>} /> 
-
+               <Route path = "/assign-quiz/:course_id" element ={<AssignQuiz/>} /> 
                <Route path = "/all-questions/:quiz_id" element ={<QuizQuestions/>} /> 
+               <Route path = "/course-quiz/:course_id" element ={<CourseQuizlist/>} /> 
+               <Route path = "/take-quiz/:quiz_id" element ={<TakeQuiz/>} /> 
+               <Route path = "/attempted-students/:quiz_id" element ={<AttemptedStudent/>} /> 
 
                
 

@@ -53,14 +53,32 @@ urlpatterns = [
 
     #Teacher courses
     path('teacher-courses/<int:teacher_id>/',views.TeacherCourseList.as_view()),
-    
+    #student enroll
+    path('student-enroll-course/',views.StudentEnrollCourseList.as_view()),
+    path('fetch-enroll-status/<int:student_id>/<int:course_id>/',views.fetch_enroll_status),
+    path('fetch-enrolled-students/<int:course_id>/',views.EnrolledStudentList.as_view()),
+    path('fetch-enrolled-courses/<int:student_id>/',views.EnrolledStudentList.as_view()),
+    path('fetch-all-enrolled-students/<int:teacher_id>/',views.EnrolledStudentList.as_view()),
+
+    #courseRating
+    path('course-rating/',views.CourseRatingList.as_view()), 
+    path('fetch-rating-status/<int:student_id>/<int:course_id>/',views.fetch_rating_status), 
     #for quiz
     path('quiz/',views.QuizList.as_view()),
     path('teacher-quiz/<int:teacher_id>/',views.TeacherQuizList.as_view()),
     path('quiz-questions/<int:quiz_id>/',views.QuizQuestionList.as_view()),
+    path('quiz-questions/<int:quiz_id>/<int:limit>',views.QuizQuestionList.as_view()),
+
     path('teacher-quiz-detail/<int:pk>/',views.TeacherQuizDetail.as_view()),
     path('quiz/<int:pk>/',views.QuizDetailView.as_view()),
     path('question/<int:pk>/',views.QuestionDetailView.as_view()),
+    path('fetch-quiz-assign-status/<int:quiz_id>/<int:course_id>/',views.FetchQuizAssignStatus),
+    path('quiz-assign-course/',views.courseQuizList.as_view()),
+    path('fetch-assigned-quiz/<int:course_id>/',views.courseQuizList.as_view()),
+    path('attempt-quiz/',views.attemptQuizList.as_view()),
+    path('quiz-questions/<int:quiz_id>/next-question/<int:question_id>/',views.QuizQuestionList.as_view()),
+    path('fetch-quiz-attempt-status/<int:quiz_id>/<int:student_id>/',views.FetchQuizAttemptStatus),
+    path('attempted-quiz/<int:quiz_id>/',views.attemptQuizList.as_view()),
 
 
 

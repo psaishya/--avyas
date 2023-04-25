@@ -3,7 +3,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import generics
-from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer
+from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,StudentCourseEnrollSerializer,CourseRatingSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer,attemptQuizSerializer
 from . import models
 import requests
 from django.http import JsonResponse
@@ -121,6 +121,62 @@ class CourseChapterList(generics.ListAPIView):
         course_id = self.kwargs['course_id']
         course=models.Course.objects.get(pk=course_id)
         return models.Chapter.objects.filter(course=course)
+    
+
+# for student enrolling in class
+class StudentEnrollCourseList(generics.ListCreateAPIView):
+    queryset=models.StudentCourseEnrollment.objects.all() 
+    serializer_class=StudentCourseEnrollSerializer
+
+def fetch_enroll_status(request,student_id,course_id):
+    student=models.User_student.objects.filter(studentId=student_id).first()
+    course=models.Course.objects.filter(id=course_id).first()
+    enrollStatus=models.StudentCourseEnrollment.objects.filter(course=course,student=student).count()
+    if enrollStatus:
+        return JsonResponse ({'bool': True }) 
+        # 'enrollStatus':enrollStatus.id
+    else:
+        return JsonResponse({'bool':False})
+    
+
+class EnrolledStudentList(generics.ListAPIView):
+    queryset=models.StudentCourseEnrollment.objects.all() 
+    serializer_class=StudentCourseEnrollSerializer
+    
+    def get_queryset(self):
+        if 'course_id' in self.kwargs:
+            course_id = self.kwargs['course_id']
+            course=models.Course.objects.get(pk=course_id)
+            return models.StudentCourseEnrollment.objects.filter(course=course)
+        elif 'teacher_id' in self.kwargs:
+            teacher_id = self.kwargs['teacher_id']
+            teacher=models.User_teacher.objects.get(pk=teacher_id)
+            return models.StudentCourseEnrollment.objects.filter(course_teacher=teacher).distinct()
+        elif 'student_id' in self.kwargs:
+            student_id = self.kwargs['student_id']
+            student=models.User_student.objects.get(pk=student_id)
+            return models.StudentCourseEnrollment.objects.filter(student=student).distinct()
+    
+  
+# for courseRating
+class CourseRatingList(generics.ListCreateAPIView):
+    queryset=models.CourseRating.objects.all() 
+    serializer_class=CourseRatingSerializer
+    
+def fetch_rating_status(request,student_id,course_id):
+    student=models.User_student.objects.filter(studentId=student_id).first()
+    course=models.Course.objects.filter(id=course_id).first()
+    ratingStatus=models.CourseRating.objects.filter(course=course,student=student).count()
+    if ratingStatus:
+        return JsonResponse ({'bool': True }) 
+    else:
+        return JsonResponse({'bool':False})
+
+
+    
+
+
+        
 
 #for quiz
 #
@@ -147,11 +203,55 @@ class QuizDetailView(generics.RetrieveUpdateDestroyAPIView):
 class QuizQuestionList(generics.ListCreateAPIView):
     serializer_class=QuestionSerializer
     
-    def get_queryset(self):
+    def get_queryset(self):            
         quiz_id = self.kwargs['quiz_id']
         quiz=models.Quiz.objects.get(pk=quiz_id)
-        return models.QuizQuestions.objects.filter(quiz=quiz)
+        if 'limit' in self.kwargs:
+            return models.QuizQuestions.objects.filter(quiz=quiz).order_by('id')[:1]
+        elif 'question_id' in self.kwargs:
+            current_question=self.kwargs['question_id']
+            return models.QuizQuestions.objects.filter(quiz=quiz,id__gt=current_question).order_by('id')[:1]
+        else:
+            return models.QuizQuestions.objects.filter(quiz=quiz)
 
 class QuestionDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.Quiz.objects.all()
     serializer_class=QuestionSerializer
+
+class courseQuizList(generics.ListCreateAPIView):
+    queryset=models.courseQuiz.objects.all()
+    serializer_class=courseQuizSerializer
+    def get_queryset(self):
+        if 'course_id' in self.kwargs:
+            course_id = self.kwargs['course_id']
+            course=models.Course.objects.get(pk=course_id)
+            return models.courseQuiz.objects.filter(course=course)
+
+
+def FetchQuizAssignStatus(request, quiz_id,course_id):
+    quiz=models.Quiz.objects.filter(id=quiz_id).first()
+    course=models.Course.objects.filter(id=course_id).first()
+    assignStatus=models.courseQuiz.objects.filter(course=course,quiz=quiz).count()
+    if assignStatus :
+        return JsonResponse({'bool':True})
+    else:
+        return JsonResponse({'bool':False})
+
+class attemptQuizList(generics.ListCreateAPIView):
+    queryset=models.attemptQuiz.objects.all()
+    serializer_class=attemptQuizSerializer
+    def get_queryset(self):
+        if 'quiz_id' in self.kwargs:
+            quiz_id = self.kwargs['quiz_id']
+            quiz=models.Quiz.objects.get(pk=quiz_id)
+            return models.attemptQuiz.objects.filter(quiz=quiz).values('student')
+        # .order_by('quiz_id')[:1]
+  
+def FetchQuizAttemptStatus(request, quiz_id,student_id):
+    quiz=models.Quiz.objects.filter(id=quiz_id).first()
+    student=models.User_student.objects.filter(studentId=student_id).first()
+    attemptStatus=models.attemptQuiz.objects.filter(student=student,question__quiz=quiz).count()
+    if attemptStatus :
+        return JsonResponse({'bool':True})
+    else:
+        return JsonResponse({'bool':False})  
