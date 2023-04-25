@@ -72,6 +72,7 @@ const TeacherProfileUpdate = () => {
                 <h1 className='card-header'>Update your Profile </h1>
                 <div className='card-body'>
                 <div className="mb-3 row">
+                    
                     <label htmlFor="staticEmail" className="col-sm-2 col-form-label">FirstName</label>
                     <div className="col-sm-10">
                         <input type="text" className='form-control' onChange={handleChange} name="firstName" value={userData.firstName||""}  />

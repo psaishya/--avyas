@@ -162,7 +162,7 @@ function CourseDetail() {
                     <p> {courseData.description}</p>
                     <p className='fw-bold'>Course By: <Link to={`/teacher-detail/${teacherData.teacherId}`}>{teacherData.firstName} {teacherData.lastName}</Link></p>
                     <p className='fw-bold'>Course Duration: 3 Hours 30 minutes</p>
-                    <p className='fw-bold'>Students Enrolled  {courseData.total_enrolled_students}  students</p>
+                    <p className='fw-bold'>Students Enrolled:  {courseData.total_enrolled_students}  students</p>
 
                     <p className='fw-bold'>Ratings: {AvgRating}/5
                         {enrollStatus === "success" && userLoginStatus === "success" &&
