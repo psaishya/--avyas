@@ -75,6 +75,7 @@ urlpatterns = [
     path('quiz-questions/<int:quiz_id>/next-question/<int:question_id>/',views.QuizQuestionList.as_view()),
     path('fetch-quiz-attempt-status/<int:quiz_id>/<int:student_id>/',views.FetchQuizAttemptStatus),
     path('attempted-quiz/<int:quiz_id>/',views.attemptQuizList.as_view()),
+    path('fetch-quiz-result/<int:quiz_id>/<int:student_id>/',views.fetch_quiz_result),
 
 
 

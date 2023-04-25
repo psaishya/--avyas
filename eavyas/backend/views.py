@@ -11,6 +11,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
+from django.db.models import Count
+
 
 
 
@@ -231,13 +233,30 @@ def FetchQuizAssignStatus(request, quiz_id,course_id):
 class attemptQuizList(generics.ListCreateAPIView):
     queryset=models.attemptQuiz.objects.all()
     serializer_class=attemptQuizSerializer
+    
     def get_queryset(self):
         if 'quiz_id' in self.kwargs:
             quiz_id = self.kwargs['quiz_id']
             quiz=models.Quiz.objects.get(pk=quiz_id)
-            return models.attemptQuiz.objects.filter(quiz=quiz).values('student')
-        # .order_by('quiz_id')[:1]
-  
+            return models.attemptQuiz.objects.filter(quiz=quiz)
+            # return models.attemptQuiz.objects.raw(f'SELECT * FROM attemptQuiz WHERE quiz_id={int(quiz_id)} GROUP BY studentId')
+         
+       
+       
+def fetch_quiz_result (request, quiz_id,student_id):
+    quiz=models.Quiz.objects.filter(id=quiz_id).first()
+    student=models.User_student.objects.filter(studentId=student_id).first()
+    total_questions=models.QuizQuestions.objects.filter(quiz=quiz).count(),
+    total_attempted_questions=models.attemptQuiz.objects.filter(quiz=quiz,student=student).count()
+   
+   
+    # total_attempted_questions = models.attemptQuiz.objects.filter(quiz=quiz, student=student)\
+    # .values('student_id')\
+    # .annotate(count=Count('id'))\
+    # .count()
+
+    return JsonResponse({'total_questions':total_questions, 'total_attempted_questions':total_attempted_questions})
+    
 def FetchQuizAttemptStatus(request, quiz_id,student_id):
     quiz=models.Quiz.objects.filter(id=quiz_id).first()
     student=models.User_student.objects.filter(studentId=student_id).first()
