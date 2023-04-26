@@ -61,10 +61,11 @@ function AttemptedStudent(){
                       <td>{row.student.email}</td>
                       <td>{row.student.userName}</td>
                       <td>                  
-                        <button type="button" className="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target={`#resultModal${row.id}`}>
-                        Quiz Result</button>
-                        <div className="modal fade" id={`resultModal${row.id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">                     
-                        <QuizResult quiz={row.quiz.id} student={row.student.studentId}/></div>
+                        {/* <button type="button" className="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target={`#resultModal${row.id}`}>
+                        Quiz Result</button> */}
+                        {/* <div className="modal fade" id={`resultModal${row.id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">                      */}
+                        <QuizResult quiz={row.quiz.id} student={row.student.studentId}/>
+                        {/* </div> */}
    
                           {/* <QuizResult quiz={row.quiz.id} student={row.student.studentId}/> */}
 

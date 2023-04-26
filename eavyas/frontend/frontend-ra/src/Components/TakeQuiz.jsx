@@ -7,15 +7,16 @@ const baseUrl = 'http://localhost:8000';
 function TakeQuiz(){
     const loggeduser=localStorage.getItem('loggedstudent');
     const [questionData,setquestionData]=useState([]);
-    const [totalResult,settotalResult]=useState(0);
     const {quiz_id}=useParams();
 
     useEffect(()=>{
         try{
             axios.get(baseUrl+'/quiz-questions/'+quiz_id+'/1')
             .then(response=>{
-                settotalResult(response.data.length);
+                // settotalResult(response.data.length);
                 setquestionData(response.data);
+                console.log(questionData);
+
             });
         }
         catch(error){
@@ -42,7 +43,7 @@ function TakeQuiz(){
                     try{
                         axios.get(baseUrl+'/quiz-questions/'+quiz_id+'/next-question/'+question_id+'/')
                         .then(response=>{
-                            settotalResult(response.data.length);
+                            // settotalResult(response.data.length);
                             setquestionData(response.data);
                         });
                     }
@@ -65,11 +66,13 @@ function TakeQuiz(){
                    <Sidebar />
                 </aside>
                 <section className="col-md-9">
-                    <h4 className="mb-3 border-bottom pb-1">Quiz Title</h4>
-                    {questionData.map((row,index)=>
+                {questionData.map((row,index)=>
+                    <>
+                    <h4 className="mb-3 border-bottom pb-1">Quiz title : {row.quiz.title}</h4>
+                    {/* {questionData.map((row,index)=> */}
                         <div className="card">
                              
-                        <h5 className='card-header'>{row.question}</h5>
+                        <h5 className='card-header'>Q.  {row.question}</h5>
                     <div className="card-body">
                         <table className="table table-bordered">
                             
@@ -92,12 +95,14 @@ function TakeQuiz(){
                       
                             </tbody>
                         </table>
-                        <button className="btn btn-dark btn-sm">Skip</button>
-                        <button className="btn btn-primary btn-sm ms-2">Submit</button>
+                        {/* <button className="btn btn-dark btn-sm">Skip</button>
+                        <button className="btn btn-primary btn-sm ms-2">Submit</button> */}
 
                     </div>
                     </div>
+                    </>
                           )}
+                          
                 </section>    
             </div>
         </div>

@@ -5,6 +5,7 @@ const baseUrl = 'http://localhost:8000';
 
 const QuizResult = (props) => {
     const[resultData,setresultData] =useState([]);
+    const[resultData1,setresultData1] =useState([]);
 
     useEffect(()=>{
         try{ 
@@ -17,19 +18,25 @@ const QuizResult = (props) => {
         }catch(error){
             console.log(error);
         }
-        
+        try{ 
+            axios.get(baseUrl+'/each-attempted-quiz/'+ props.quiz +'/'+props.student+'/')
+        .then((res)=>{
+                console.log(res.data);
+                setresultData1(res.data)
+
+        });
+        }catch(error){
+            console.log(error);
+        }
+      
         
     },[]);
     
   return (
    
     <td>
-    <div className="modal-dialog ">
         <div className="modal-content">
-        <div className="modal-header">
-            <h1 className="modal-title fs-5" id="exampleModalLabel">Quiz Result</h1>
-            <button type="button"  className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>    
+        
         <div className="modal-body">
             <table>
                 <tr>
@@ -38,7 +45,7 @@ const QuizResult = (props) => {
                 </tr>
                 <tr>
                     <td>Attempted Questions  </td>
-                    <td>{resultData.total_attempted_questions}</td>
+                    <td>{resultData1.length}</td>
                 </tr>
                 <tr>
                     <td>Correct Answers  </td>
@@ -48,7 +55,6 @@ const QuizResult = (props) => {
             
         </div>
         </div>
-    </div>
 </td>
 
   )

@@ -9,6 +9,8 @@ function TeacherDetail(){
     const[teacherData,setTeacherData] =useState([]);
     const[courseData,setCourseData] =useState([]);
     let {teacher_id}=useParams();
+    const loggedstudentId = localStorage.getItem('loggedstudent');
+    const loggedteacherId = localStorage.getItem('loggedteacher');
 
     useEffect(()=>{
         try{ 
@@ -26,8 +28,15 @@ function TeacherDetail(){
         <div className="container mt-3" >
         <div className="row">
             <div className="col-4">
-            <Link to  ='/update-teacher-profile'> <img src={teacherData.profile} style={{maxWidth:'300px'}}className="card-img-top" alt={teacherData.firstname}/> </Link>
+                {loggedteacherId&&
+            <Link to  ='/update-teacher-profile'>
+                 <img src={teacherData.profile} style={{maxWidth:'300px'}}className="card-img-top" alt={teacherData.firstname}/>
+                  </Link>
+} 
+{loggedteacherId===null&&
+                 <img src={teacherData.profile} style={{maxWidth:'300px'}}className="card-img-top" alt={teacherData.firstname}/>
 
+}
             </div>
             <div className="col-8">
                 <h3>{teacherData.firstName} {teacherData.lastName}</h3>

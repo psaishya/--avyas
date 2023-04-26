@@ -55,18 +55,46 @@ const QuizQuestions = () => {
                     <table className="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Question</th>
-                                <th>Action</th>
+                                <th>Questions</th>
+                                <th>Answers</th>
                             </tr>
                         </thead>
                         <tbody>
                             {questionData.map((row,index)=>
                             <tr key={index}>
-                                <td><Link to ={`/edit-question/`+row.id}>{row.question}</Link></td>
-                                <td>
-                                    <button onClick={() => deletequestion(row.id)} className="btn btn-danger btn-sm">Remove</button>
-                                    <button className="btn btn-info btn-sm ms-1">Edit</button>
-                                </td>
+                                {/* <td><Link to ={`/edit-question/`+row.id}>{row.question}</Link></td> */}
+                                {/* /* <td> */}
+                                    {/* <button onClick={() => deletequestion(row.id)} className="btn btn-danger btn-sm">Remove</button> */}
+                                    {/* <button className="btn btn-info btn-sm ms-1">Edit</button>  */}
+                                {/* </td> */} 
+                                {row.question}
+                            <td>
+                            <table>
+                                <tr>
+                                    <td>Option 1 :  </td>
+                                    <td>{row.ans1}</td>
+                                </tr>
+                                <tr>
+                                    <td>Option 2 :  </td>
+                                    <td>{row.ans2}</td>
+                                </tr>
+                                <tr>
+                                    <td>Option 3 :   </td>
+                                    <td>{row.ans3}</td>
+                                </tr>
+                                <tr>
+                                    <td>Option 4 :   </td>
+                                    <td>{row.ans4}</td>
+                                </tr>
+                                <tr>
+                                    <td>Correct Option :   </td>
+                                    <td>{row.right_ans}</td>
+                                </tr>
+                            </table>
+                           
+                            
+
+                            </td>
                             </tr>
                             )}
                         </tbody>

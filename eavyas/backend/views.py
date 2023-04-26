@@ -250,6 +250,15 @@ class attemptQuizList(generics.ListCreateAPIView):
             return models.attemptQuiz.objects.filter(quiz=quiz)
             # return models.attemptQuiz.objects.raw(f"SELECT * FROM models.attemptQuiz WHERE quiz={int(quiz_id)} GROUP BY student_id")
     
+class EachstudentattemptQuizList(generics.ListAPIView):
+    serializer_class = attemptQuizSerializer
+
+    def get_queryset(self):
+        quiz_id = self.kwargs['quiz_id']
+        student_id = self.kwargs['student_id']
+        student=models.User_student.objects.get(studentId=student_id)
+        quiz=models.Quiz.objects.get(pk=quiz_id)
+        return models.attemptQuiz.objects.filter(quiz=quiz,student=student)
 
        
        
@@ -257,7 +266,7 @@ def fetch_quiz_result (request, quiz_id,student_id):
     quiz=models.Quiz.objects.filter(id=quiz_id).first()
     student=models.User_student.objects.filter(studentId=student_id).first()
     total_questions=models.QuizQuestions.objects.filter(quiz=quiz).count(),
-    total_attempted_questions=models.attemptQuiz.objects.filter(quiz=quiz,student=student).values("student").count()/2
+    # total_attempted_questions=models.attemptQuiz.objects.filter(quiz=quiz,student=student).count()/2
     # total_attempted_questions=models.attemptQuiz.objects.filter(quiz=quiz,student=student).count()
 
     attempted_questions=models.attemptQuiz.objects.filter(quiz=quiz,student=student)
@@ -270,8 +279,8 @@ def fetch_quiz_result (request, quiz_id,student_id):
     # .values('student_id')\
     # .annotate(count=Count('id'))\
     # .count()
-
-    return JsonResponse({'total_questions':total_questions, 'total_attempted_questions':total_attempted_questions,'total_correct_answers':total_correct_answers})
+    # return JsonResponse({'total_questions':total_questions, 'total_attempted_questions':total_attempted_questions,'total_correct_answers':total_correct_answers})
+    return JsonResponse({'total_questions':total_questions, 'total_correct_answers':total_correct_answers})
     
 def FetchQuizAttemptStatus(request, quiz_id,student_id):
     quiz=models.Quiz.objects.filter(id=quiz_id).first()
