@@ -1,8 +1,26 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useState,useEffect } from 'react';
 
 function Header () {
+
+  const[searchString,setSearchString]=useState({
+    'search':''
+  })
   const userLoginStatus=localStorage.getItem('userLoginStatus');
+
+  const handleChange=(event)=>{
+    setSearchString({
+      ...searchString,
+      [event.target.name]:event.target.value
+    })
+  }
+// search course
+  const searchCourse=()=>{
+    if (searchString.search !=''){
+      window.location.href='/search/'+ searchString.search
+    }
+  }
 
   const logoutclick=()=>{
             localStorage.removeItem('userLoginStatus')
@@ -23,6 +41,10 @@ function Header () {
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
+    <form class="d-flex">
+      <input name ="search" onChange={handleChange} class="form-control me-2" type="search" placeholder="Search by course title" aria-label="Search"/>
+      <button onClick={searchCourse} class="btn btn-warning" type="button">Search</button>
+    </form>
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav ms-auto">
         <li className="nav-item">
@@ -49,6 +71,7 @@ function Header () {
             </>}
           
           </ul>
+         
         </li>
       </ul>
     </div>

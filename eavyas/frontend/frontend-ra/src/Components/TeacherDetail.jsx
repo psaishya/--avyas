@@ -32,9 +32,9 @@ function TeacherDetail(){
             <div className="col-8">
                 <h3>{teacherData.firstName} {teacherData.lastName}</h3>
                 <p> {teacherData.bio}</p>
-                <p className='fw-bold'>Skills: <Link to="/teacher-detail/1"> Python</Link>,<Link to="/teacher-detail/1"> Java</Link></p>
+                {/* <p className='fw-bold'>Skills: <Link to="/teacher-detail/1"> Python</Link>,<Link to="/teacher-detail/1"> Java</Link></p>
                 <p className='fw-bold'>Recent Courses: <Link to="/teacher-detail/1"> Django</Link></p>
-                <p className='fw-bold'>Ratings: 4/5</p>
+                <p className='fw-bold'>Ratings: 4/5</p> */}
             </div>
                            
     </div>

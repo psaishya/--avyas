@@ -4,7 +4,6 @@ import {useState,useEffect} from 'react'
 import axios from "axios";
 const baseUrl = 'http://localhost:8000';
 
-
 function AddQuizQuestion(){
     const [questionData,setquestionData]=useState({
         quiz:'',

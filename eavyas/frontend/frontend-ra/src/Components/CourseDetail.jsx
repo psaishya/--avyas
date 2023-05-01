@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-// const baseUrl = 'http://localhost:8000';
+ const baseUrl = 'http://localhost:8000';
 const siteUrl = 'http://127.0.0.1:8000/'
 
 
@@ -20,6 +20,7 @@ function CourseDetail() {
     const [enrollStatus, setenrollStatus] = useState("");
     const [ratingStatus, setratingStatus] = useState("");
     const [AvgRating, setAvgRating] = useState(0);
+    const[courseViews,setcourseViews]=useState(0);
 
 
     useEffect(() => {
@@ -38,6 +39,11 @@ function CourseDetail() {
                     }
                     
                 });
+                // //update view
+                // axios.get('http://localhost:8000/update-view/'+course_id+'/')
+                // .then((res)=>{
+                //     setcourseViews(res.data.views)
+                // });
         } catch (error) {
             console.log(error);
         }
@@ -91,7 +97,6 @@ function CourseDetail() {
         const _formData = new FormData();
         _formData.append('course', course_id);
         _formData.append('student', loggedstudent_id);
-
 
         try {
             axios.post('http://localhost:8000/student-enroll-course/', _formData)
@@ -161,7 +166,8 @@ function CourseDetail() {
                     <h2 className='fw-bold'>{courseData.title}</h2>
                     <p> {courseData.description}</p>
                     <p className='fw-bold'>Course By: <Link to={`/teacher-detail/${teacherData.teacherId}`}>{teacherData.firstName} {teacherData.lastName}</Link></p>
-                    <p className='fw-bold'>Course Duration: 3 Hours 30 minutes</p>
+                    {/* //<p className='fw-bold'>Course Duration: 3 Hours 30 minutes</p> */}
+                    {/* <p className='fw-bold'>Views: {courseViews}</p> */}
                     <p className='fw-bold'>Students Enrolled:  {courseData.total_enrolled_students}  students</p>
 
                     <p className='fw-bold'>Ratings: {AvgRating}/5

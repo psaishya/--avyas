@@ -3,7 +3,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import generics
-from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,StudentCourseEnrollSerializer,CourseRatingSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer,attemptQuizSerializer
+from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,StudentCourseEnrollSerializer,CourseRatingSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer,attemptQuizSerializer,TeacherDashSerializer 
 from . import models
 import requests
 from django.http import JsonResponse
@@ -50,6 +50,10 @@ class TeacherDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = teacherSerializer
     # permission_classes=[permissions.IsAuthenticated]
 
+class TeacherDash(generics.RetrieveAPIView):
+    queryset=models.User_teacher.objects.all()
+    serializer_class=TeacherDashSerializer
+
 class StudentList(generics.ListCreateAPIView):
     queryset=models.User_student.objects.all() 
     serializer_class=studentSerializer
@@ -92,7 +96,13 @@ class CourseList(generics.ListCreateAPIView):
         if 'result' in self.request.GET:
             limit=int(self.request.GET['result'])
             qs=models.Course.objects.all().order_by('-id')[:limit]
+        
+        if 'searchstring' in self.kwargs:
+            search=self.kwargs['searchstring']
+            qs = models.Course.objects.filter(title__icontains=search)
+
         return qs
+        
 
 #course detail
 class CourseDetailView(generics.RetrieveAPIView):
@@ -162,6 +172,22 @@ class EnrolledStudentList(generics.ListAPIView):
 class CourseRatingList(generics.ListCreateAPIView):
     queryset=models.CourseRating.objects.all() 
     serializer_class=CourseRatingSerializer
+
+    def get_queryset(self):
+        qs =super().get_queryset()
+        if 'popular' in self.request.GET:
+            limit=int(self.request.GET['popular'])
+            qs=models.CourseRating.objects.all().order_by('-rating')[:limit]
+        return qs
+
+    # def get_queryset(self):
+    #     if 'popular' in self.request.GET:
+    #         sql="SELECT *,AVG (cr.rating) as avg_rating FROM main_courserating as cr INNER JOIN main_course as c ON cr.course_id=c.id GROUP BY c.ID ORDER BY  avg_rating desc LIMIT 4"
+    #         return models.CourseRating.objects.raw(sql)
+    #     if 'all' in self.request.GET:
+    #         sql="SELECT *,AVG (cr.rating) as avg_rating FROM main_courserating as cr INNER JOIN main_course as c ON cr.course_id=c.id GROUP BY c.ID ORDER BY  avg_rating desc"
+    #         return models.CourseRating.objects.raw(sql)
+    
     
 def fetch_rating_status(request,student_id,course_id):
     student=models.User_student.objects.filter(studentId=student_id).first()
@@ -171,9 +197,6 @@ def fetch_rating_status(request,student_id,course_id):
         return JsonResponse ({'bool': True }) 
     else:
         return JsonResponse({'bool':False})
-
-
-    
 
 
         
@@ -255,3 +278,10 @@ def FetchQuizAttemptStatus(request, quiz_id,student_id):
         return JsonResponse({'bool':True})
     else:
         return JsonResponse({'bool':False})  
+
+# # view
+# def update_view(request,course_id):
+#     queryset=models.Course.objects.filter(pk=course_id).first()
+#     queryset.course_views += 1
+#     queryset.save()
+#     return JsonResponse({'views':queryset.course_views})
