@@ -85,7 +85,6 @@ const SignUpasteacher = () => {
   }
   return (
     <>
-                <Header />
 
     <div className="container">
       <div className="signup">

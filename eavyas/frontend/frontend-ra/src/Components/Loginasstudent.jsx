@@ -101,7 +101,6 @@ const Loginasstudent = (props) => {
    
   return (
     <div>
-            <Header />
 
       <div className="containera" >
       <div className="login">
@@ -128,17 +127,10 @@ const Loginasstudent = (props) => {
           <div className="form-link-sgn">
             Don't have an account? <a href="/signupasstudent" className="link signup-link">Signup</a>
           </div>
-
         </form>
         <div className="line"></div>
-        <div className="social-icons">
-        
-      
-          <a href="#" className="social-login__icon fab fa-instagram"></a>
-          <a href="#" className="social-login__icon fab fa-facebook-f"></a>
-          <a href="#" className="social-login__icon fab fa-google"   ></a>
+        <a href="/"><i className="bi bi-house"></i> Go back to home </a>
 
-        </div>
 
     
       

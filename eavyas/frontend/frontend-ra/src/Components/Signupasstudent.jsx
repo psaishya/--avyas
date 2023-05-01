@@ -86,7 +86,6 @@ const SignUpasstudent = () => {
   }
   return (
     <>
-                <Header />
 
     <div className="containerb">
       <div className="signup">

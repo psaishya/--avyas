@@ -21,6 +21,27 @@ function TeacherCourses(){
             console.log(error);
         }
     },[loggeduser]);
+    const  handledelete=(course_id)=>{
+        try{
+            axios.delete(baseUrl+'/course/'+course_id+'/').then((res)=>
+            {
+                try{ 
+                    axios.get(baseUrl+'/teacher-courses/'+ loggeduser +'/')
+                .then((res)=>{
+                        //console.log(res.data);
+                        setCourseData(res.data)
+
+                });
+                }catch(error){
+                    console.log(error);
+                }
+            });
+        }
+        catch(error){
+            console.log(error);
+        }
+console.log("handle delete");
+    }
 
     return(
         <div className="container mt-4">
@@ -48,7 +69,7 @@ function TeacherCourses(){
                                     <td><img src={course.thumbnail} width="80" className="rounded" alt={course.title}/></td>
                                     <td><Link to= {'/enrolled-students/'+course.id}> {course.total_enrolled_students}</Link></td>
                                     <td>
-                                        <button className="btn btn-danger btn-sm">Remove</button>
+                                        <button onClick={() => handledelete(course.id)} className="btn btn-danger btn-sm">Remove</button>
                                         <Link class="btn btn-success btn-sm ms-2" to ={'/add-chapter/'+course.id}>Add Chapter </Link>
                                         <Link class="btn btn-warning btn-sm ms-2" to ={'/assign-quiz/'+course.id}>Assign Quiz </Link>
 
@@ -57,6 +78,7 @@ function TeacherCourses(){
                                 )}
                             </tbody>
                         </table>
+                        
                     </div>
                     </div>
                 </section>    

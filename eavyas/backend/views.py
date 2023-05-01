@@ -107,7 +107,7 @@ class CourseList(generics.ListCreateAPIView):
         
 
 #course detail
-class CourseDetailView(generics.RetrieveAPIView):
+class CourseDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Course.objects.all()
     serializer_class=CourseSerializer
 

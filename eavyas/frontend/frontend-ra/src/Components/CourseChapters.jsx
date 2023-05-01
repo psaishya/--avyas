@@ -63,6 +63,8 @@ function CourseChapters(){
                             )}
                         </tbody>
                     </table>
+                    <Link className="btn btn-info btn-sm ms-2" to ='/teacher-courses'>Back to all courses</Link>
+
                 </div>
                 </div>
             </section>    
