@@ -40,7 +40,7 @@ function CourseChapters(){
                             <tr>
                                 <th>Title</th>
                                 <th>Video</th>
-                                <th>Action</th>
+                                <th>Description</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,8 +56,7 @@ function CourseChapters(){
 
                                 </td>
                                 <td>
-                                    <button className="btn btn-danger btn-sm">Remove</button>
-                                    <button className="btn btn-info btn-sm ms-1">Edit</button>
+                                    {chapter.description}
                                 </td>
                             </tr>
                             )}
