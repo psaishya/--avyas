@@ -17,7 +17,6 @@ function App() {
   const [token,setToken]=useState(null);
   const [user,setUser]=useState('');
   
-  const [message,setMessage]=useState('');
   // const navigate=useNavigate();
 
   const checkToken=()=>{
@@ -36,14 +35,6 @@ function App() {
   //   }
 }
   useEffect(()=>{
-    // if (!localStorage.getItem('token')){
-    //   console.log("not signed in");
-    //   // navigate("/login",{replace:true});
-    //   // window.location.href = '/login';
-
-    // }else{
-    //   setUser(localStorage.getItem('user'));
-    // }
     checkToken();
     checkUser();
     console.log("component refreshed");
@@ -53,16 +44,15 @@ function App() {
 
   return (
     <>
-      {message}
       {/* <Header /> */}
 
      <Router>
      <Routes>
         <Route path="*" element={<Main/>}/>
        
-        <Route path="/loginasstudent" element={<Loginasstudent setToken={setToken} setUser={setUser} setMessage={setMessage}/>}/>
+        <Route path="/loginasstudent" element={<Loginasstudent setToken={setToken} setUser={setUser} />}/>
         <Route path="/signupasstudent" element={<SignUpasstudent/>}/>
-        <Route path="/loginasteacher" element={<Loginasteacher setToken={setToken} setUser={setUser} setMessage={setMessage}/>}/>
+        <Route path="/loginasteacher" element={<Loginasteacher setToken={setToken} setUser={setUser} />}/>
         <Route path="/signupasteacher" element={<SignUpasteacher/>}/>
     </Routes> 
     </Router>

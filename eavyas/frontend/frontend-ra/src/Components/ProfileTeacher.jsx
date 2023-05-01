@@ -7,7 +7,8 @@ import Teacherside from './Teacherside'
 
 const ProfileTeacher = () => {
     const loggeduser=localStorage.getItem('loggedteacher');
-    
+    const[teacherData,setTeacherData]=useState([]);
+
     const[userData,setuserData]=useState(
         {
         'firstName':'',
@@ -32,6 +33,16 @@ const ProfileTeacher = () => {
         }catch(error){
             console.log(error);
         }
+        try{ 
+            axios.get('http://localhost:8000/teacher/' +loggeduser+'/')
+        .then((res)=>{
+                console.log(res.data);
+                setTeacherData(res.data)
+               
+        });
+        }catch(error){
+            console.log(error);
+        }
         
     },[]);
   return (
@@ -40,9 +51,9 @@ const ProfileTeacher = () => {
   
         <div className='container mt-4'>
             <div className='row'>
-                <aside className='col-md-3'>
-                    <Teacherside/>
-                </aside>
+                {/* <aside className='col-md-3'>
+                <img src={teacherData.profile} style={{maxWidth:'300px'}}className="card-img-top" alt={teacherData.firstname}/> 
+                </aside> */}
                 <section className='col-md-9'>
                     <div className='card' >
                     <h1 className='card-header'>Your Profile Info </h1>
@@ -97,6 +108,10 @@ const ProfileTeacher = () => {
                     </div>
                     </div>
                 </section>
+                <aside className='col-md-3'>
+                <img src={teacherData.profile} style={{maxWidth:'300px'}}className="card-img-top" alt={teacherData.firstname}/> 
+                </aside>
+
             </div>
         </div>
        </> 

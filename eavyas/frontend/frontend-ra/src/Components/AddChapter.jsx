@@ -78,8 +78,12 @@ function AddChapter(){
                                     <input type="file" onChange={handleFileChange} name= "video" id="video" className="form-control"/>
                                 </div>
                                 <button type="submit" onClick={formSubmit} className="btn btn-primary">Submit</button>
+                                <Link className="btn btn-info btn-sm ms-2" to ='/teacher-courses'>Back to all course.</Link>
+
                             </form>
+                            
                     </div>
+                    
                 </div>
             </div>
         </div>

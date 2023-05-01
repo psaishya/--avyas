@@ -50,6 +50,7 @@ function MyCourses(){
                                 )}
                             </tbody>
                         </table>
+                        
                     </div>
                     </div>
                 </section>    

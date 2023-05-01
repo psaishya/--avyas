@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 
 function Header () {
 
@@ -8,6 +8,9 @@ function Header () {
     'search':''
   })
   const userLoginStatus=localStorage.getItem('userLoginStatus');
+  const teacherlogged=localStorage.getItem('loggedteacher');
+  const studentlogged=localStorage.getItem('loggedstudent');
+
 
   const handleChange=(event)=>{
     setSearchString({
@@ -17,7 +20,7 @@ function Header () {
   }
 // search course
   const searchCourse=()=>{
-    if (searchString.search !=''){
+    if (searchString.search !==''){
       window.location.href='/search/'+ searchString.search
     }
   }
@@ -55,7 +58,8 @@ function Header () {
         </li>
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Login
+            {/* Login */}
+            <i className="bi bi-person-circle"></i>
           </a>
           <ul class="dropdown-menu">
           {userLoginStatus!=='true' &&
@@ -65,7 +69,15 @@ function Header () {
           }   
           {userLoginStatus==='true' &&
           <>
-            <li><a className="dropdown-item" href="/student-dashboard">Dashboard</a></li>
+          {teacherlogged &&
+            <><li><a className="dropdown-item" href="/teacher-dashboard">Dashboard</a></li>
+            <li><a className="dropdown-item" href="/teacher-profile">Profile</a></li></>}
+
+          {studentlogged &&
+           <> <li><a className="dropdown-item" href="/student-dashboard">Dashboard</a></li>
+            <li><a className="dropdown-item" href="/student-profile">Profile</a></li></>}
+
+
             <li><hr className="dropdown-divider"/></li>
             <li><a className="dropdown-item" onClick={logoutclick}>Logout</a></li>
             </>}

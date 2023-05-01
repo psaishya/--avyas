@@ -43,10 +43,10 @@ function TeacherDash(){
 
                 <section className="col-md-9">
                     <div className="row">
-                    <div className="col-md-4">
+                    {/* <div className="col-md-4">
                          <img src={teacherData.profile} style={{maxWidth:'300px'}}className="card-img-top" alt={teacherData.firstname}/> 
 
-            </div>
+            </div> */}
                         <div className='col-md-4'>
                             <div className="card border-primary">
                                 <h5 className="card-header bg-primary text-white">
@@ -61,7 +61,7 @@ function TeacherDash(){
                         <div className="card border-success">
                             <h5 className="card-header bg-success text-white">Enrolled Students</h5>
                             <div className='card-body'>
-                                    <h3><Link to ="/teacher-users">{dashboardData.total_teacher_students}</Link></h3>
+                                    <h3>{dashboardData.total_teacher_students}</h3>
                                 </div>
                         </div>
                     </div>

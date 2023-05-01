@@ -86,7 +86,6 @@ const SignUpasstudent = () => {
   }
   return (
     <>
-                <Header />
 
     <div className="containerb">
       <div className="signup">
@@ -182,9 +181,7 @@ const SignUpasstudent = () => {
             <input type="radio" name="gender" value="Male" onChange={(e) => onChange(e)} required={true} /> Male &nbsp; &nbsp; &nbsp; &nbsp;
             <input type="radio" name="gender" value="Female" onChange={(e) => onChange(e)} required={true} /> Female
           </div>
-          <div className="box terms">
-            <input type="checkbox" name="Terms" required={true} /> &nbsp; I accept the terms and conditions
-          </div>
+          
           <button type="submit" className="submit-btn" >SignUp</button>
           <div className="line"></div>
           <div className="form-link-sgn">

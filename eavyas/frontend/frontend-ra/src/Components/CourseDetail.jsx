@@ -103,6 +103,8 @@ function CourseDetail() {
                 .then((res) => {
                     console.log(res.data);
                     // window.location.href='add-courses';
+                    window.location.reload();
+
                 });
         } catch (error) {
             console.log(error);
@@ -215,7 +217,7 @@ function CourseDetail() {
                             </>
                         }
                     </p>
-                    {enrollStatus === "success" && userLoginStatus === "success" && <p><span>You are aleady enrolled in this course</span></p>}
+                    {enrollStatus === "success" && userLoginStatus === "success" && <p><span>You are enrolled in this course</span></p>}
                     {userLoginStatus === "success" && enrollStatus !== "success" && <p><button onClick={enrollCourse} type="button" className='btn btn-success'>Enroll in this course</button> </p>}
                     {userLoginStatus !== "success" && <p><Link to='/loginasstudent'>Please login to enroll in this course</Link></p>}
 
@@ -233,24 +235,18 @@ function CourseDetail() {
                         <ul key={index} className="list-group list-group-flush">
 
 
-                            <li className="list-group-item">{chapter.title}<button className='btn btn-sm btn-danger float-end' data-bs-toggle="modal" data-bs-target="#videoModal1"><i className="bi bi-play" onClick={handleShow}></i></button > </li>
+                            <li className="list-group-item">{chapter.title} <button className='btn btn-sm btn-success float-end' data-bs-toggle="modal" data-bs-target="#videoModal1"><i className="bi bi-play" onClick={handleShow}></i></button > <button className='btn btn-sm btn-danger float-end' data-bs-toggle="modal" data-bs-target="#videoModal1"><i className="bi bi-stop" onClick={handleClose}></i></button > </li>
+                            
                             {isOpen && (
-                                <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-modal="true">
-                                    <div className="modal-dialog modal-xl">
-                                        <div className="modal-content">
-                                            <div className="modal-header">
-                                                <h1 className="modal-title fs-5" id="exampleModalLabel">Video 1</h1>
-                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
-                                            </div>
-                                            <div className="modal-body">
-                                                <div className="ratio ratio-16x9">
-                                                    <iframe src={chapter.video} title={chapter.title} allowFullScreen></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <>
+                            description :{chapter.description}
+                                  <video controls width="250">
+                                  <source src={chapter.video} type="video/webm" />
 
+                              <source src={chapter.video} type="video/mp4" />
+
+                              </video>
+                              </>
                             )}
 
 

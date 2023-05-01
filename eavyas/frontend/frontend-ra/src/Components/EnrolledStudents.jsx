@@ -45,7 +45,7 @@ function EnrolledStudents(){
                             <tbody>
                                 {studentData && studentData.map((row,index)=>
                                 <tr key={index}>
-                                    <td><Link to ={"/view-student/"+row.student.id}>{row.student.firstName}</Link></td>
+                                    <td>{row.student.firstName}</td>
                                     <td>{row.student.email}</td>
                                     <td>{row.student.userName}</td>
                                     <td>
@@ -56,6 +56,8 @@ function EnrolledStudents(){
                                 )}
                             </tbody>
                         </table>
+                        <Link className="btn btn-info btn-sm ms-2" to ='/teacher-courses'>Back to all course.</Link>
+
                     </div>
                     </div>
                 </section>    

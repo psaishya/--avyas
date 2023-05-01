@@ -8,15 +8,15 @@ import './Login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import GoogleLogin from 'react-google-login';
-import googleLogin from './/GoogleLogin';
-import Header from './header';
+
 
 
 
 const Loginasteacher = (props) => {
     const [username,setUsername]=useState('');
     const [password,setPassword]=useState('');
+    const [loginmsg,setloginmsg]=useState('');
+
 
     const handleSubmit=(e)=>{
         e.preventDefault();
@@ -30,7 +30,9 @@ const Loginasteacher = (props) => {
             props.setToken(authToken);
             let authUser=localStorage.setItem('user',username)
             props.setUser(authUser);
-            props.setMessage(`Logged in as ${username}`);
+            // setloginmsg("Successfully logged in");
+
+            // props.setMessage(`Logged in as ${username}`);
             // <Home user={username}/>
 
             const loggedFormData=new FormData;
@@ -43,64 +45,22 @@ const Loginasteacher = (props) => {
 
               localStorage.setItem('userLoginStatus',true)
             window.location.href = '/teacher-dashboard';
+            setloginmsg("Successfully logged in");
 
 
-          } );  
-
-            // window.location.href = '/teacher-dashboard';
-
+          } ).catch(err=>{
+            console.log(err);
+            setloginmsg("You have entered invalid email or password");
+        });;  
 
         }).catch(err=>{
             console.log(err);
-            props.setMessage(`You have entered invalid email or password`);
-            // console.log(props.message);
+            // setloginmsg("You have entered invalid email or password");
         });
-        
-        
     }
 
-    
-  //   const loginwg=(e)=>{
-  //     e.preventDefault();
-  //     // https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=<CALLBACK_URL_YOU_SET_ON_GOOGLE>&prompt=consent&response_type=code&client_id=<1050321826751-0eh5heri6umccqffjceagt85e61hi98g.apps.googleusercontent.com>&scope=openid%20email%20profile&access_type=offline
-  // //     axios.get(`https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:8000/accounts/google/login/callback/&prompt=consent&response_type=code&client_id=1050321826751-0eh5heri6umccqffjceagt85e61hi98g.apps.googleusercontent.com&scope=openid%20email%20profile`)
-  // // .then(response => {
-  //   // axios.get(`http://localhost:8000/google-auth/`)
-  //   // .then(response => {
-  //     axios.get(`https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:8000/accounts/google/login/callback/&prompt=consent&response_type=code&client_id=1050321826751-0eh5heri6umccqffjceagt85e61hi98g.apps.googleusercontent.com&scope=openid%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile`)
-  //     .then(response => {  
-   
-  //   const token_or_code = response.data; // assuming the response contains the token or code
-  //   console.log(response);
-  //   // Assuming the request was successful and returned the code or token, you could then construct a POST request to the specified URL to send it to the server:
-  //   const post_data = {
-  //     token_or_code: token_or_code
-  //   };
-
-  //   axios.post('http://localhost:8000/dj-rest-auth/google/', post_data)
-  //     .then(response => {
-  //       console.log(response);
-  //       console.log("successfullll");
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // })
-  // .catch(error => {
-  //   console.error(error);
-  // });
-
- 
-  //   }
-  //   const responseGoogle = async(response) => {
-  //     let googleResponse  = await googleLogin(response.accessToken)
-  //     console.log(googleResponse);
-  //     console.log(response);
-  //   }
-   
   return (
     <div>
-                  <Header />
 
       <div className="containera" >
       <div className="login">
@@ -127,17 +87,16 @@ const Loginasteacher = (props) => {
           <div className="form-link-sgn">
             Don't have an account? <a href="/signupasteacher" className="link signup-link">Signup</a>
           </div>
+          {loginmsg &&
+          <div className="alert alert-warning">
+        <strong>{loginmsg}</strong> 
+      </div>}
 
         </form>
         <div className="line"></div>
-        <div className="social-icons">
-        
-      
-          <a href="#" className="social-login__icon fab fa-instagram"></a>
-          <a href="#" className="social-login__icon fab fa-facebook-f"></a>
-          <a href="#" className="social-login__icon fab fa-google"  ></a>
-
-        </div>
+        <div className="form-link-sgn"><i class="bi bi-house"></i>
+            <a href="/" className="link signup-link"> Go back to home.</a>
+          </div>
 
     
     

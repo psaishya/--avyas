@@ -38,9 +38,9 @@ const ProfileStudent = () => {
   
         <div className='container mt-4'>
             <div className='row'>
-                <aside className='col-md-3'>
+                {/* <aside className='col-md-3'>
                     <Sidebar/>
-                </aside>
+                </aside> */}
                 <section className='col-md-9'>
                     <div className='card' >
                     <h1 className='card-header'>Your Profile Info </h1>
