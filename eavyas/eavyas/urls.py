@@ -30,6 +30,7 @@ urlpatterns = [
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
     path('google-auth/', views.google_auth, name='google_auth'),
+    path('teacher/dashboard/<int:pk>',views.TeacherDash.as_view()),
     path('teacher/',views.TeacherList.as_view()),
     path('teacher/<int:pk>/',views.TeacherDetail.as_view()),
     path('student/',views.StudentList.as_view()),
@@ -42,6 +43,10 @@ urlpatterns = [
 
     #course
     path('course/',views.CourseList.as_view()),
+    path('search-courses/<str:searchstring>',views.CourseList.as_view()),
+    # path('update-view/<int:course_id>',views.update_view),
+    # path('popular-courses/',views.CourseRatingList.as_view()),
+
 
     #course detail
     path('course/<int:pk>/',views.CourseDetailView.as_view()),

@@ -38,6 +38,7 @@ import AssignQuiz from './AssignQuiz'
 import CourseQuizlist from './CourseQuizlist'
 import TakeQuiz from './TakeQuiz'
 import AttemptedStudent from './AttemptedStudent'
+import Search from './search'
 // student quiz
 
 const Main = () => {
@@ -47,7 +48,8 @@ const Main = () => {
          
             <Switch>
               <Route path = "/" element ={<Home/>} />
-               <Route path = "/detail/:course_id" element ={<CourseDetail/>} /> 
+               <Route path = "/detail/:course_id" element ={<CourseDetail/>} />
+               <Route path = "/search/:searchstring" element ={<Search/>} />  
                <Route path = "/student-dashboard" element ={<Dashboard/>}/>
                <Route path = "/my-courses" element ={<MyCourses/>}/>
                <Route path= "/teacher-courses" element ={<TeacherCourses/>}/>

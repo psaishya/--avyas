@@ -16,6 +16,22 @@ class User_teacher(models.Model):
     profile=models.ImageField(upload_to='teacher_imgs/', null='True')
     class Meta:
         verbose_name_plural="1. Teachers"
+    #no of courses
+    def total_teacher_courses(self):
+        total_courses=Course.objects.filter(teacher=self).count()
+        return total_courses
+    
+    #no of chapters
+    def total_teacher_chapters(self):
+        total_chapters=Chapter.objects.filter(course__teacher=self).count()
+        return total_chapters
+    
+    #total teacher students
+    def total_teacher_students(self):
+        total_students=StudentCourseEnrollment.objects.filter(course__teacher=self).count()
+        return total_students
+    
+
 
 class CourseCategory(models.Model):
     title = models.CharField(max_length=150)
@@ -49,6 +65,10 @@ class Course(models.Model):
         course_rating = CourseRating.objects.filter(course=self).aggregate(avg_rating = models.Avg('rating'))
         return course_rating['avg_rating']
     
+<<<<<<< HEAD
+
+=======
+>>>>>>> 4a9e0abb26d36b51dd23a30f0f2136e711679efa
     def related_videos(self):
         related_videos =Course.objects.filter(category=self.category)
         return serializers.serialize('json',related_videos)

@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom"
 import { useEffect,useState } from "react"
+import { useParams } from "react-router-dom";
 import axios from 'axios'; 
 const baseUrl = 'http://localhost:8000';
 
   
-function AllCourses(){
+function Search(){
     const[courseData,setCourseData] =useState([]);
     const loggeduser=localStorage.getItem('loggedteacher');
+    let {searchstring}=useParams();
 
     useEffect(()=>{
         try{ 
-            axios.get(baseUrl+'/course/')
+            axios.get(baseUrl+'/search-courses/'+searchstring)
         .then((res)=>{
                 //console.log(res.data);
                 setCourseData(res.data)
@@ -21,7 +23,7 @@ function AllCourses(){
     },[]);
     return(  
         <div className="container mt-3" >   
-          <h3 className="pb-1 mb-4">All Courses</h3>
+          <h3 className="pb-1 mb-4">Results for <span className="text-primary">{searchstring}</span></h3>
           <div className="row mb-4">
                     {courseData && courseData.map((course,index) =>
                     
@@ -48,4 +50,4 @@ function AllCourses(){
       </div>
     )
  }
- export default AllCourses
+ export default Search

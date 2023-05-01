@@ -7,7 +7,7 @@ function TeacherSide(){
                 <Link  to ="/teacher-courses" className="list-group-item list-group-item-action">My courses</Link>
                 <Link  to ="/add-courses" className="list-group-item list-group-item-action">Add Course</Link>
                 <Link to ="/teacher-profile" className="list-group-item list-group-item-action">Profile Settings</Link>
-                <Link  to ="/" className="list-group-item list-group-item-action">Recommended courses</Link>
+                {/* <Link  to ="/" className="list-group-item list-group-item-action">Recommended courses</Link> */}
                 <Link  to ="/quiz" className="list-group-item list-group-item-action">Quiz</Link>
                 {/* <Link  to ="/add-quiz" className="list-group-item list-group-item-action">Add Quiz</Link> */}
                 

@@ -16,6 +16,11 @@ class teacherSerializer(serializers.ModelSerializer):
         if request and request.method=='GET':
             self.Meta.depth=1
         
+
+class TeacherDashSerializer(serializers.ModelSerializer):
+    class Meta:
+        model =models.User_teacher
+        fields=['total_teacher_courses','total_teacher_students','total_teacher_chapters']
         
 class studentSerializer(serializers.ModelSerializer):
     class Meta:

@@ -33,7 +33,7 @@ function CourseChapters(){
             </aside>
             <section className="col-md-9">
                             <div className="card">
-                    <h5 className='card-header'>My Courses</h5>
+                    <h5 className='card-header'>Chapter List</h5>
                 <div className="card-body">
                     <table className="table table-bordered">
                         <thead>
@@ -51,9 +51,7 @@ function CourseChapters(){
                                         <video controls width="250">
                                             <source src={chapter.video} type="video/webm" />
 
-                                            <source src={chapter.video} type="video/mp4" />
-
-
+                                        <source src={chapter.video} type="video/mp4" />
                                         </video>
 
                                 </td>
