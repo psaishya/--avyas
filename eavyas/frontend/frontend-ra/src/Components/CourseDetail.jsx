@@ -233,17 +233,18 @@ function CourseDetail() {
                         <ul key={index} className="list-group list-group-flush">
 
 
-                            <li className="list-group-item">{chapter.title}<button className='btn btn-sm btn-success float-end' data-bs-toggle="modal" data-bs-target="#videoModal1"><i className="bi bi-play" onClick={handleShow}></i></button > <button className='btn btn-sm btn-danger float-end' data-bs-toggle="modal" data-bs-target="#videoModal1"><i className="bi bi-stop" onClick={handleClose}></i></button > </li>
+                            <li className="list-group-item">{chapter.title} <button className='btn btn-sm btn-success float-end' data-bs-toggle="modal" data-bs-target="#videoModal1"><i className="bi bi-play" onClick={handleShow}></i></button > <button className='btn btn-sm btn-danger float-end' data-bs-toggle="modal" data-bs-target="#videoModal1"><i className="bi bi-stop" onClick={handleClose}></i></button > </li>
                             
                             {isOpen && (
-                                
+                            <>
+                            description :{chapter.description}
                                   <video controls width="250">
                                   <source src={chapter.video} type="video/webm" />
 
                               <source src={chapter.video} type="video/mp4" />
-    
-                              </video>
 
+                              </video>
+                              </>
                             )}
 
 
