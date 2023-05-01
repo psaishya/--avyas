@@ -290,3 +290,4 @@ def FetchQuizAttemptStatus(request, quiz_id,student_id):
         return JsonResponse({'bool':True})
     else:
         return JsonResponse({'bool':False})  
+

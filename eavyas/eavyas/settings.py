@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.instagram',
-
+    'rest_auth',
     'dj_rest_auth', 
     'dj_rest_auth.registration',
     'rest_framework',

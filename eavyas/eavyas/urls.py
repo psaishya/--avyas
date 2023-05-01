@@ -26,6 +26,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('api-auth/',include('rest_framework.urls')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),  
+    
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
     path('google-auth/', views.google_auth, name='google_auth'),
@@ -81,6 +82,7 @@ urlpatterns = [
     path('attempted-quiz/<int:quiz_id>/',views.attemptQuizList.as_view()),
     path('each-attempted-quiz/<int:quiz_id>/<int:student_id>/',views.EachstudentattemptQuizList.as_view()),
     path('fetch-quiz-result/<int:quiz_id>/<int:student_id>/',views.fetch_quiz_result),
+
 
 
 
