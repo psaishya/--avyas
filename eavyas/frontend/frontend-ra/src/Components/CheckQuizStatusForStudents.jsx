@@ -6,6 +6,7 @@ const baseUrl = 'http://localhost:8000';
 const CheckQuizStatusForStudents = (props) => {
     const[assignStatus,setassignStatus] =useState([]);
     const loggeduser=localStorage.getItem('loggedstudent');
+    const[resultData,setresultData] =useState([]);
 
     useEffect(()=>{
         try{ 
@@ -19,7 +20,18 @@ const CheckQuizStatusForStudents = (props) => {
             console.log(error);
         }
         
+        try{ 
+            axios.get(baseUrl+'/fetch-quiz-result/'+ props.quiz +'/'+props.student+'/')
+        .then((res)=>{
+                console.log(res.data);
+                setresultData(res.data)
+
+        });
+        }catch(error){
+            console.log(error);
+        }
         
+    
     },[]);
  
   return (
@@ -29,7 +41,7 @@ const CheckQuizStatusForStudents = (props) => {
         <Link className="btn btn-sm btn-warning" to= {`/take-quiz/`+props.quiz}>Take Quiz</Link>
     }
     {assignStatus.bool===true &&
-        <span className="text-success">Attempted</span>
+        <span className="text-success">Attempted (Obtained Marks: {resultData.total_correct_answers}/{resultData.total_questions})</span>
     }
 </td>
   )

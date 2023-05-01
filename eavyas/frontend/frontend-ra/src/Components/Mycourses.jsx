@@ -43,7 +43,7 @@ function MyCourses(){
                                 <tr key={index}>
                                 
                                     <td><Link to= {`/detail/`+row.course.id}>{row.course.title}</Link></td>
-                                    <td><Link to= {`/teacher-detail/`+row.course.teacher.id}>{row.course.teacher.firstName} {row.course.teacher.lastName}</Link></td>
+                                    <td><Link to= {`/teacher-detail/`+row.course.teacher.teacherId}>{row.course.teacher.firstName} {row.course.teacher.lastName}</Link></td>
                                     <td><Link className="btn btn-sm btn-warning" to= {`/course-quiz/`+row.course.id}>Quiz List</Link></td>
 
                                 </tr>

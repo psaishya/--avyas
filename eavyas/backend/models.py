@@ -65,7 +65,10 @@ class Course(models.Model):
         course_rating = CourseRating.objects.filter(course=self).aggregate(avg_rating = models.Avg('rating'))
         return course_rating['avg_rating']
     
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4a9e0abb26d36b51dd23a30f0f2136e711679efa
     def related_videos(self):
         related_videos =Course.objects.filter(category=self.category)
         return serializers.serialize('json',related_videos)

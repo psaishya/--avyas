@@ -11,6 +11,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
+from django.db.models import Count
+
 
 
 
@@ -263,13 +265,46 @@ def FetchQuizAssignStatus(request, quiz_id,course_id):
 class attemptQuizList(generics.ListCreateAPIView):
     queryset=models.attemptQuiz.objects.all()
     serializer_class=attemptQuizSerializer
+    
     def get_queryset(self):
         if 'quiz_id' in self.kwargs:
             quiz_id = self.kwargs['quiz_id']
             quiz=models.Quiz.objects.get(pk=quiz_id)
-            return models.attemptQuiz.objects.filter(quiz=quiz).values('student')
-        # .order_by('quiz_id')[:1]
-  
+            return models.attemptQuiz.objects.filter(quiz=quiz)
+            # return models.attemptQuiz.objects.raw(f"SELECT * FROM models.attemptQuiz WHERE quiz={int(quiz_id)} GROUP BY student_id")
+    
+class EachstudentattemptQuizList(generics.ListAPIView):
+    serializer_class = attemptQuizSerializer
+
+    def get_queryset(self):
+        quiz_id = self.kwargs['quiz_id']
+        student_id = self.kwargs['student_id']
+        student=models.User_student.objects.get(studentId=student_id)
+        quiz=models.Quiz.objects.get(pk=quiz_id)
+        return models.attemptQuiz.objects.filter(quiz=quiz,student=student)
+
+       
+       
+def fetch_quiz_result (request, quiz_id,student_id):
+    quiz=models.Quiz.objects.filter(id=quiz_id).first()
+    student=models.User_student.objects.filter(studentId=student_id).first()
+    total_questions=models.QuizQuestions.objects.filter(quiz=quiz).count(),
+    # total_attempted_questions=models.attemptQuiz.objects.filter(quiz=quiz,student=student).count()/2
+    # total_attempted_questions=models.attemptQuiz.objects.filter(quiz=quiz,student=student).count()
+
+    attempted_questions=models.attemptQuiz.objects.filter(quiz=quiz,student=student)
+   
+    total_correct_answers=0
+    for attempt in attempted_questions:
+        if attempt.right_ans==attempt.question.right_ans:
+            total_correct_answers += 1
+    # total_attempted_questions = models.attemptQuiz.objects.filter(quiz=quiz, student=student)\
+    # .values('student_id')\
+    # .annotate(count=Count('id'))\
+    # .count()
+    # return JsonResponse({'total_questions':total_questions, 'total_attempted_questions':total_attempted_questions,'total_correct_answers':total_correct_answers})
+    return JsonResponse({'total_questions':total_questions, 'total_correct_answers':total_correct_answers})
+    
 def FetchQuizAttemptStatus(request, quiz_id,student_id):
     quiz=models.Quiz.objects.filter(id=quiz_id).first()
     student=models.User_student.objects.filter(studentId=student_id).first()
