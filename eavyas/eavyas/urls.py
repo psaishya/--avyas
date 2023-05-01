@@ -22,15 +22,15 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('api-auth/',include('rest_framework.urls')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),  
-    # path('rest-auth/google/', include('allauth.urls')),
-
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
     path('google-auth/', views.google_auth, name='google_auth'),
+    
+    path('teacher/dashboard/<int:pk>',views.TeacherDash.as_view()),
     path('teacher/',views.TeacherList.as_view()),
     path('teacher/<int:pk>/',views.TeacherDetail.as_view()),
     path('student/',views.StudentList.as_view()),
@@ -43,6 +43,10 @@ urlpatterns = [
 
     #course
     path('course/',views.CourseList.as_view()),
+    path('search-courses/<str:searchstring>',views.CourseList.as_view()),
+    # path('update-view/<int:course_id>',views.update_view),
+    # path('popular-courses/',views.CourseRatingList.as_view()),
+
 
     #course detail
     path('course/<int:pk>/',views.CourseDetailView.as_view()),
@@ -83,6 +87,8 @@ urlpatterns = [
     path('attempted-quiz/<int:quiz_id>/',views.attemptQuizList.as_view()),
     path('each-attempted-quiz/<int:quiz_id>/<int:student_id>/',views.EachstudentattemptQuizList.as_view()),
     path('fetch-quiz-result/<int:quiz_id>/<int:student_id>/',views.fetch_quiz_result),
+
+
 
 
 
