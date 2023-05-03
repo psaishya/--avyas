@@ -89,6 +89,11 @@ class User_student(models.Model):
     userName=models.CharField( max_length=50,default="",unique=TRUE)
     interested_categories= models.TextField(default="")
 
+      # total favorite courses
+    def favourite_courses(self):
+        favourite_courses= StudentFavouriteCourse.objects.filter(student=self).count()
+        return favourite_courses
+
     class Meta:
         verbose_name_plural = "5. Student"
 
@@ -103,6 +108,18 @@ class StudentCourseEnrollment(models.Model):
 
     class Meta:
         verbose_name_plural = "6. Enrolled Courses"
+
+    def _str_(self): 
+        return f"{self.course}-{self.student}"
+    
+# Student Favourite course
+class StudentFavouriteCourse(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    student = models.ForeignKey(User_student, on_delete=models.CASCADE)
+    status=models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = "6. Favorite Courses"
 
     def _str_(self): 
         return f"{self.course}-{self.student}"
