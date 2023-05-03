@@ -1,16 +1,10 @@
 import React, { useState } from 'react'
 import "./Login.css"
-// import {Button,Flex,HStack,Image} from "@chakra-ui/react";
-// import {FcGoogle} from 'react-icons/fc';
-// import {useNavigate} from "react-router-dom";
 import axios from 'axios';
 import './Login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
-
-
 
 const Loginasteacher = (props) => {
     const [username,setUsername]=useState('');

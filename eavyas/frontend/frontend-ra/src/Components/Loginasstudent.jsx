@@ -84,10 +84,10 @@ const Loginasstudent = (props) => {
           <div className="form-link-sgn">
             Don't have an account? <a href="/signupasstudent" className="link signup-link">Signup</a>
           </div>
-          <div class="alert alert-warning alert-dismissible fade show">
-                  <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Warning!</strong> {loginmsg}
-      </div>
+          {loginmsg &&
+          <div className="alert alert-warning">
+        <strong>{loginmsg}</strong> 
+      </div>}
         </form>
         <div className="line"></div>
         <div className="form-link-sgn"><i class="bi bi-house"></i>

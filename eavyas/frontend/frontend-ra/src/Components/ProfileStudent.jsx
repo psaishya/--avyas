@@ -2,8 +2,6 @@ import axios from 'axios';
 import React from 'react';
 import { useState,useEffect } from 'react';
 
-import Sidebar from './sidebar';
-
 const ProfileStudent = () => {
     const loggeduser=localStorage.getItem('loggedstudent');
     

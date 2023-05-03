@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import Sidebar from "./sidebar";
 import TeacherSide from "./Teacherside";
 import axios from "axios";
 import { useParams } from "react-router-dom";

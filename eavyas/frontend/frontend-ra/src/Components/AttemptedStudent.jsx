@@ -88,7 +88,8 @@ function AttemptedStudent(){
                                 )} */}
                             </tbody>
                         </table>
-                       
+                        <Link className="btn btn-info btn-sm ms-2" to ='/assign-quiz/1'>Back </Link>
+
 
                     </div>
                     </div>
