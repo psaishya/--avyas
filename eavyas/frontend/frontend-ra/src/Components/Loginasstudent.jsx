@@ -90,7 +90,7 @@ const Loginasstudent = (props) => {
       </div>}
         </form>
         <div className="line"></div>
-        <div className="form-link-sgn"><i class="bi bi-house"></i>
+        <div className="form-link-sgn"><i className="bi bi-house"></i>
             <a href="/" className="link signup-link"> Go back to home.</a>
           </div> 
 

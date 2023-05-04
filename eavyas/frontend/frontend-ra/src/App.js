@@ -7,6 +7,7 @@ import SignUpasstudent from './Components/Signupasstudent';
 import Loginasteacher from './Components/Loginasteacher';
 import SignUpasteacher from './Components/Signupasteacher';
 import Main from './Components/Main';
+
 // import Header from './Components/header';
 
 
@@ -33,7 +34,7 @@ function App() {
   return (
     <>
       {/* <Header /> */}
-
+        {/* <div className ="background"> */}
      <Router>
      <Routes>
         <Route path="*" element={<Main/>}/>
@@ -44,6 +45,7 @@ function App() {
         <Route path="/signupasteacher" element={<SignUpasteacher/>}/>
     </Routes> 
     </Router>
+    {/* </div> */}
     
     </>
   );

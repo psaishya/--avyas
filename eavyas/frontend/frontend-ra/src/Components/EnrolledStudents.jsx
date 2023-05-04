@@ -49,7 +49,7 @@ function EnrolledStudents(){
                                     <td>{row.student.email}</td>
                                     <td>{row.student.userName}</td>
                                     <td>
-                                        <Link class="btn btn-success btn-sm " to ={'/view-student/'+row.student.id}>View</Link>
+                                        <Link className="btn btn-success btn-sm " to ={'/view-student/'+row.student.id}>View</Link>
 
                                     </td>
                                 </tr>

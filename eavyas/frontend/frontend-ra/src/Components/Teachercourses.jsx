@@ -70,8 +70,8 @@ console.log("handle delete");
                                     <td><Link to= {'/enrolled-students/'+course.id}> {course.total_enrolled_students}</Link></td>
                                     <td>
                                         <button className="btn btn-danger btn-sm" onClick={() => handledelete(course.id)}>Remove</button>
-                                        <Link class="btn btn-success btn-sm ms-2" to ={'/add-chapter/'+course.id}>Add Chapter </Link>
-                                        <Link class="btn btn-warning btn-sm ms-2" to ={'/assign-quiz/'+course.id}>Assign Quiz </Link>
+                                        <Link className="btn btn-success btn-sm ms-2" to ={'/add-chapter/'+course.id}>Add Chapter </Link>
+                                        <Link className="btn btn-warning btn-sm ms-2" to ={'/assign-quiz/'+course.id}>Assign Quiz </Link>
 
                                     </td>
                                 </tr>
