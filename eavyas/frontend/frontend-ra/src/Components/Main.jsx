@@ -39,13 +39,14 @@ import CourseQuizlist from './CourseQuizlist'
 import TakeQuiz from './TakeQuiz'
 import AttemptedStudent from './AttemptedStudent'
 import Search from './search'
+import Head from './Head'
 // student quiz
 
 const Main = () => {
   return (
     <div>
       <Header />
-         
+      <Head/>  
             <Switch>
               <Route path = "/" element ={<Home/>} />
                <Route path = "/detail/:course_id" element ={<CourseDetail/>} />
