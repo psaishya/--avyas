@@ -50,6 +50,7 @@ const Main = () => {
          
             <Switch>
               <Route path = "/" element ={<Home/>} />
+              <Route path = "/courses" element ={<AllCourses/>} />
                <Route path = "/detail/:course_id" element ={<CourseDetail/>} />
                <Route path = "/search/:searchstring" element ={<Search/>} />  
                <Route path = "/student-dashboard" element ={<StudentDashboard/>}/>
@@ -76,10 +77,6 @@ const Main = () => {
                <Route path = "/course-quiz/:course_id" element ={<CourseQuizlist/>} /> 
                <Route path = "/take-quiz/:quiz_id" element ={<TakeQuiz/>} /> 
                <Route path = "/attempted-students/:quiz_id" element ={<AttemptedStudent/>} /> 
-
-               
-
-
 
             </Switch>
       <Footer/>
