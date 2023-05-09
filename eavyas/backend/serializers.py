@@ -27,6 +27,11 @@ class studentSerializer(serializers.ModelSerializer):
         model=models.User_student
         fields=['studentId','firstName','lastName','gender','phoneNo','email','userName']
 
+class StudentDashboardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.User_student
+        fields=['enrolled_courses','favourite_courses']
+
 class categorySerializer(serializers.ModelSerializer):
     class Meta:
         model=models.CourseCategory
@@ -67,6 +72,18 @@ class StudentCourseEnrollSerializer(serializers.ModelSerializer):
         self.Meta.depth = 0
         if request and request.method == 'GET':
             self.Meta.depth = 2
+
+class StudentFavouriteCourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= models.StudentFavouriteCourse
+        fields=['id','course','student','status']
+        
+    def __init__(self, *args, **kwargs):
+        super(StudentFavouriteCourseSerializer,self).__init__(*args, **kwargs)
+        request = self.context.get('request')
+        self.Meta.depth = 0
+        if request and request.method == 'GET':
+            self.Meta.depth = 1
 
 class CourseRatingSerializer(serializers.ModelSerializer):
     class Meta:

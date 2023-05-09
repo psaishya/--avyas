@@ -20,6 +20,7 @@ function CourseDetail() {
     const [enrollStatus, setenrollStatus] = useState("");
     const [ratingStatus, setratingStatus] = useState("");
     const [AvgRating, setAvgRating] = useState(0);
+    const [favouriteStatus, setfavouriteStatus] = useState("");
     const[courseViews,setcourseViews]=useState(0);
 
 
@@ -111,6 +112,52 @@ function CourseDetail() {
         }
     }
 
+    const markasFavourite = ()=>{
+        const _formData = new FormData();
+        _formData.append('course', course_id);
+        _formData.append('student', loggedstudentId); 
+        _formData.append('status', true); 
+        
+        try {
+            axios.post('http://localhost:8000/student-add-favourite-course/', _formData,{
+            headers:{
+                'content-type':'multipart/form-data'
+               }
+            })
+            .then((res) => {
+                        setfavouriteStatus('succcess');
+                  
+        
+             }); 
+           }
+
+         catch (error) {
+            console.log(error);
+        }
+
+
+     }
+     const removeFavourite = (pk) =>{
+        const _formData = new FormData();
+        _formData.append('course', course_id);
+        _formData.append('student', loggedstudentId); 
+        _formData.append('status', false); 
+        
+        try {
+            axios.get('http://localhost:8000/student-remove-favourite-course/'+course_id+'/'+ loggedstudentId + '/', _formData)
+            .then((res) => {
+                        setfavouriteStatus('failure');
+                  
+        
+             }); 
+           }
+
+         catch (error) {
+            console.log(error);
+        }
+     }
+
+
 
 
     // for video
@@ -192,8 +239,8 @@ function CourseDetail() {
                                             </div>
                                             <div className="modal-body">
                                                 <form>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputEmail1" class="form-label" >Rating</label>
+                                                    <div className="mb-3">
+                                                        <label for="exampleInputEmail1" className="form-label" >Rating</label>
                                                         <select onChange={(event) => handleChange(event)} className="form-control" name="rating">
                                                             <option onChange={(event) => handleChange(event)} value="1" name="rating">1</option>
                                                             <option onChange={(event) => handleChange(event)} value="2" name="rating">2</option>
@@ -203,12 +250,12 @@ function CourseDetail() {
                                                         </select>
 
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputPassword1" class="form-label">Review</label>
+                                                    <div className="mb-3">
+                                                        <label for="exampleInputPassword1" className="form-label">Review</label>
                                                         <textarea onChange={(event) => handleChange(event)} className="form-control" name="review" rows="10"></textarea>
 
                                                     </div>
-                                                    <button onClick={formSubmit} type="button" class="btn btn-primary">Submit</button>
+                                                    <button onClick={formSubmit} type="button" className="btn btn-primary">Submit</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -220,6 +267,8 @@ function CourseDetail() {
                     {enrollStatus === "success" && userLoginStatus === "success" && <p><span>You are enrolled in this course</span></p>}
                     {userLoginStatus === "success" && enrollStatus !== "success" && <p><button onClick={enrollCourse} type="button" className='btn btn-success'>Enroll in this course</button> </p>}
                     {userLoginStatus !== "success" && <p><Link to='/loginasstudent'>Please login to enroll in this course</Link></p>}
+                    {userLoginStatus === "success" && favouriteStatus !== "success" && <p><button onClick={markasFavourite} title= "Add in your favourite course list" type="button" className='btn btn-outline-danger'><i className="bi bi-heart-fill"></i></button> </p>}
+                    {userLoginStatus === "success" && favouriteStatus === "success" && <p><button onClick={removeFavourite} title= "Remove your favourite course list" type="button" className='btn btn-danger'><i className="bi bi-heart-fill"></i></button> </p>}
 
 
                 </div>

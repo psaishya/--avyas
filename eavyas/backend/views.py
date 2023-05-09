@@ -3,7 +3,7 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import generics
-from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,StudentCourseEnrollSerializer,CourseRatingSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer,attemptQuizSerializer,TeacherDashSerializer 
+from .serializers import teacherSerializer,studentSerializer,categorySerializer,CourseSerializer,StudentCourseEnrollSerializer,StudentFavouriteCourseSerializer,CourseRatingSerializer,QuizSerializer,ChapterSerializer,QuestionSerializer,courseQuizSerializer,attemptQuizSerializer,TeacherDashSerializer,StudentDashboardSerializer
 from . import models
 import requests
 from django.http import JsonResponse
@@ -59,6 +59,10 @@ class TeacherDash(generics.RetrieveAPIView):
 class StudentList(generics.ListCreateAPIView):
     queryset=models.User_student.objects.all() 
     serializer_class=studentSerializer
+
+class StudentDashboard(generics.RetrieveAPIView):
+    queryset=models.User_student.objects.all() 
+    serializer_class=StudentDashboardSerializer
 
 class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.User_student.objects.all()
@@ -149,6 +153,36 @@ def fetch_enroll_status(request,student_id,course_id):
         # 'enrollStatus':enrollStatus.id
     else:
         return JsonResponse({'bool':False})
+    
+
+# Student favourite Coourse list
+class StudentFavouriteCourseList(generics.ListCreateAPIView):
+    queryset=models.StudentFavouriteCourse.objects.all() 
+    serializer_class=StudentFavouriteCourseSerializer
+
+    def get_queryset(self):
+     
+        if 'student_id' in self.kwargs:
+            student_id = self.kwargs['student_id']
+            student=models.User_student.objects.get(pk=student_id)
+            return models.StudentFavouriteCourse.objects.filter(student=student).distinct()
+
+def fetch_favourite_status(request,student_id,course_id):
+    student=models.User_student.objects.filter(studentId=student_id).first()
+    course=models.Course.objects.filter(id=course_id).first()
+    favouriteStatus=models.StudentFavouriteCourse.objects.filter(course=course,student=student).first()
+    if favouriteStatus and favouriteStatus.status == True:
+        return JsonResponse ({'bool': True }) 
+    else:
+        return JsonResponse  ({'bool': False }) 
+def remove_favourite_course(request,course_id,student_id,):
+    student=models.User_student.objects.filter(studentId=student_id).first()
+    course=models.Course.objects.filter(id=course_id).first()
+    favouriteStatus=models.StudentFavouriteCourse.objects.filter(course=course,student=student).delete()
+    if favouriteStatus:
+        return JsonResponse ({'bool': True }) 
+    else:
+        return JsonResponse  ({'bool': False }) 
     
 
 class EnrolledStudentList(generics.ListAPIView):

@@ -7,7 +7,6 @@ const baseUrl = 'http://localhost:8000';
 
 function TeacherDash(){
     const[dashboardData,setdashboardData]=useState([]);
-    const[teacherData,setTeacherData]=useState([]);
 
     const loggeduser=localStorage.getItem('loggedteacher');
     
@@ -21,16 +20,7 @@ function TeacherDash(){
         }catch(error){
             console.log(error);
         }
-        try{ 
-            axios.get(baseUrl + '/teacher/' +loggeduser+'/')
-        .then((res)=>{
-                console.log(res.data);
-                setTeacherData(res.data)
-               
-        });
-        }catch(error){
-            console.log(error);
-        }
+        
     
     },[]);
   

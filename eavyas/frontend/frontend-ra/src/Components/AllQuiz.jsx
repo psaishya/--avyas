@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import Sidebar from "./sidebar";
 import TeacherSide from "./Teacherside";
 import axios from "axios";
 import {useState,useEffect} from 'react'
@@ -28,18 +27,7 @@ function AllQuiz(){
         }
         
     },[]);
-    const noofques=(quiz_id)=>{
-    try{
-        axios.get(baseUrl+'/quiz-questions/'+quiz_id+'/')
-        .then(response=>{
-            settotalQuestion(response.data.length);
-        });
-    }
-    catch(error){
-        console.log(error);
-    }
-
-}
+    
     const  handledelete=(quiz_id)=>{
         try{
             axios.delete(baseUrl+'/quiz/'+quiz_id+'/').then((res)=>

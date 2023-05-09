@@ -3,7 +3,6 @@ import './Signup.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPhoneSquare, faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
-import Header from './header';
 
 const SignUpasstudent = () => { 
   
@@ -58,7 +57,7 @@ const SignUpasstudent = () => {
           body,
           config
         );
-        // console.log(res.data);
+        console.log(res.data);
   
       } catch (err) {
         console.log(err.response.data);
