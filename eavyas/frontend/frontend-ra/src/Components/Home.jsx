@@ -1,29 +1,44 @@
-import {Link} from 'react-router-dom'
-import AllCourses from './AllCourses';
-import { useEffect,useState } from "react"
-import axios from 'axios';
-import BackgroundImage from "./background.jpg";
-import  './Home.css';
-const baseUrl = 'http://localhost:8000';
+import { Link } from "react-router-dom";
+import AllCourses from "./AllCourses";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import backimg from "./logopng.png";
 
+import "./hero.css";
+import Heading from "./Heading";
+const baseUrl = "http://localhost:8000";
 
+const handleChange = (event) => {
+  window.location.href = "courses";
+};
 
 function Home() {
-        
-    return(
-        <div className="main">
-           <div className='background-blur'></div>
-        <div className="content">
-        <h1 className='main-header'>Online Learning Platform</h1>
-            
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt neque 
-                 expedita atque eveniet <br/> quis nesciunt. Quos nulla vero consequuntur, fugit nemo ad delectus 
-                <br/> a quae totam ipsa illum minus laudantium?</p>
-
-                <button className="cn"><a href="#">JOIN US</a></button>
-                </div>
+  return (
+    <>
+      <section className="hero">
+        <div className="container">
+          <div className="row">
+            <Heading
+              subtitle="WELCOME TO ई Avyas"
+              title="Best Online Education Expertise"
+            />
+            <p>
+              Join us now and make the most out of the techonology in your palm.
+            </p>
+            <div className="button">
+              <button className="primary-btn">
+                GET STARTED NOW <i className="fa fa-long-arrow-alt-right"></i>
+              </button>
+              <button onClick={handleChange}>
+                VIEW COURSE <i className="fa fa-long-arrow-alt-right"></i>
+              </button>
+            </div>
+          </div>
         </div>
-    )
-    
+      </section>
+
+      <div className="margin"></div>
+    </>
+  );
 }
-export default Home
+export default Home;
