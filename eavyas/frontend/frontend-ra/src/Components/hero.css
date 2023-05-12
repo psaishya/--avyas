@@ -2,7 +2,6 @@
   background-image: url("bgimg.jpg");
   background-size: cover;
   background-attachment: fixed;
-  position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
@@ -34,7 +33,7 @@
   }
 }
 
-button{
+.primary-btn{
   width: 200px;
   padding: 15px 0;
   text-align: center;
@@ -49,7 +48,7 @@ button{
 }
 
 
-button:hover span{
+.primary-btn:hover span{
   width: 100%;
  
 }
@@ -64,7 +63,7 @@ span {
   z-index: -1;
   transition: 0.5s;
 }
-button:hover{
+.primary-btn:hover{
   border: none;
   background-color: #ebce92; 
 }

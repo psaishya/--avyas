@@ -75,7 +75,7 @@ function AllCourses() {
                       fontFamily: "Times New Roman",
                       fontWeight: "bold",
                       color: "#704214",
-                      backgroundColor: "#cabb9a",
+                      backgroundColor: "#decfb6",
                       padding: "0.5rem",
                       marginBottom: "0",
                     }}

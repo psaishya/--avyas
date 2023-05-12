@@ -11,7 +11,9 @@ const baseUrl = "http://localhost:8000";
 const handleChange = (event) => {
   window.location.href = "courses";
 };
-
+const handleChange2 = (event) => {
+  window.location.href = "loginasstudent";
+};
 function Home() {
   return (
     <>
@@ -26,10 +28,10 @@ function Home() {
               Join us now and make the most out of the techonology in your palm.
             </p>
             <div className="button">
-              <button className="primary-btn">
+              <button className="primary-btn" onClick={handleChange2}>
                 GET STARTED NOW <i className="fa fa-long-arrow-alt-right"></i>
               </button>
-              <button onClick={handleChange}>
+              <button className="primary-btn" onClick={handleChange}>
                 VIEW COURSE <i className="fa fa-long-arrow-alt-right"></i>
               </button>
             </div>

@@ -1,36 +1,44 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { IoIosSearch } from "react-icons/io";
 import logo from "./logopng.png";
-
 function Header() {
-  const [searchString, setSearchString] = useState("");
+  const [searchString, setSearchString] = useState({
+    search: "",
+  });
+  const userLoginStatus = localStorage.getItem("userLoginStatus");
+  const teacherlogged = localStorage.getItem("loggedteacher");
+  const studentlogged = localStorage.getItem("loggedstudent");
 
-  const handleSearch = (event) => {
-    setSearchString(event.target.value);
+  const handleChange = (event) => {
+    setSearchString({
+      ...searchString,
+      [event.target.name]: event.target.value,
+    });
   };
-
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    if (searchString !== "") {
-      window.location.href = `/search/${searchString}`;
+  // search course
+  const searchCourse = () => {
+    if (searchString.search !== "") {
+      window.location.href = "/search/" + searchString.search;
     }
   };
 
-  const handleLogout = () => {
+  const logoutclick = () => {
     localStorage.removeItem("userLoginStatus");
     localStorage.removeItem("loggedstudent");
     localStorage.removeItem("loggedteacher");
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+
     window.location.href = "/";
   };
 
-  const userLoginStatus = localStorage.getItem("userLoginStatus");
   return (
-    <nav className="navbar navbar-expand-lg navbar-light  bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         <a className="navbar-brand" href="/">
-          <img src={{ logo }}></img>
+          <img src={logo} style={{ maxHeight: "50px" }}></img>
         </a>
         <button
           className="navbar-toggler"
@@ -43,25 +51,25 @@ function Header() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <form
-          onSubmit={handleSearchSubmit}
-          className="d-flex form-control-sm"
-          style={{ maxWidth: "400px" }}
-        >
+        <form className="d-flex">
           <input
-            className="form-control me-2 form-control-lg"
+            name="search"
+            onChange={handleChange}
+            className="form-control me-2"
             type="search"
             placeholder="Search by course title"
             aria-label="Search"
-            value={searchString}
-            onChange={handleSearch}
           />
-
-          <button className="btn btn-secondary btn-sm" type="submit">
-            Search
+        </form>
+        <form>
+          <button
+            onClick={searchCourse}
+            className="btn btn-secondary btn-sm"
+            type="button"
+          >
+            <IoIosSearch />
           </button>
         </form>
-
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
@@ -94,9 +102,9 @@ function Header() {
             </li>
             <li className="nav-item">
               <a
-                className="nav-link active"
+                className="nav-link"
+                href="/courses"
                 aria-current="page"
-                href="/"
                 style={{
                   fontFamily: "Arial",
                   fontWeight: "bold",
@@ -128,10 +136,11 @@ function Header() {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {userLoginStatus === "true" ? "Dashboard" : "Login"}
+                {/* Login */}
+                <i className="bi bi-person-circle"></i>
               </a>
               <ul className="dropdown-menu">
-                {!userLoginStatus && (
+                {userLoginStatus !== "true" && (
                   <>
                     <li>
                       <Link className="dropdown-item" to="/loginasstudent">
@@ -145,18 +154,50 @@ function Header() {
                     </li>
                   </>
                 )}
-                {userLoginStatus && (
+                {userLoginStatus === "true" && (
                   <>
-                    <li>
-                      <a className="dropdown-item" href="/student-dashboard">
-                        Dashboard
-                      </a>
-                    </li>
+                    {teacherlogged && (
+                      <>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="/teacher-dashboard"
+                          >
+                            Dashboard
+                          </a>
+                        </li>
+                        <li>
+                          <a className="dropdown-item" href="/teacher-profile">
+                            Profile
+                          </a>
+                        </li>
+                      </>
+                    )}
+
+                    {studentlogged && (
+                      <>
+                        {" "}
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="/student-dashboard"
+                          >
+                            Dashboard
+                          </a>
+                        </li>
+                        <li>
+                          <a className="dropdown-item" href="/student-profile">
+                            Profile
+                          </a>
+                        </li>
+                      </>
+                    )}
+
                     <li>
                       <hr className="dropdown-divider" />
                     </li>
                     <li>
-                      <a className="dropdown-item" onClick={handleLogout}>
+                      <a className="dropdown-item" onClick={logoutclick}>
                         Logout
                       </a>
                     </li>

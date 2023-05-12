@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer
       className="text-muted py-5 border-top mt-auto"
-      style={{ backgroundColor: "transparent" }}
+      style={{ backgroundColor: "transparent", position: "block " }}
     >
       <div className="container">
         <p className="float-end mb-1">
@@ -40,19 +40,12 @@ function Footer() {
           <div className="col-md-4">
             <h5>Legal</h5>
             <p>
-              Album example is © Bootstrap, but please download and customize it
-              for yourself!
+              This is the prototype of online learning experience provide by
+              e-Avyas platform
             </p>
             <p>
-              New to Bootstrap?{" "}
-              <a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">
-                Visit the homepage
-              </a>{" "}
-              or read our{" "}
-              <a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">
-                getting started guide
-              </a>
-              .
+              Have any queries? <a href="/courses">Visit the courses </a> or
+              read our <a href="https://ekantipur.com/">Latest News</a>.
             </p>
           </div>
         </div>
