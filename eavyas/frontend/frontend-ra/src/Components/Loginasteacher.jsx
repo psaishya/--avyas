@@ -86,7 +86,7 @@ const Loginasteacher = (props) => {
                 Forgot password?
               </a>
             </div>
-            <button type="submit" className="submit-btn" onClick={handleSubmit}>
+            <button type="button" className="submit-btn" onClick={handleSubmit}>
               Login
             </button>
             <div className="form-link-sgn">

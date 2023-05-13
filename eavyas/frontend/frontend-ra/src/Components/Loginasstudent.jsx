@@ -81,7 +81,7 @@ const Loginasstudent = (props) => {
               </a>
             </div>
             <button
-              type="submit"
+              type="button"
               className="submit-btna"
               onClick={handleSubmit}
             >
