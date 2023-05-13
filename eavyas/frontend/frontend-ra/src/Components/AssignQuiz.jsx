@@ -71,7 +71,8 @@ function AssignQuiz(){
                                 )}
                             </tbody>
                         </table>
-                       
+                        <Link className="btn btn-info btn-sm ms-2" to ='/teacher-courses'>Back to all course.</Link>
+
 
                     </div>
                     </div>

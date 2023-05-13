@@ -21,27 +21,8 @@ const QuizQuestions = () => {
         }
 
     },[]);
-    const deletequestion=(question_id)=>{
-        try{
-            axios.delete(baseUrl+'/question/'+question_id+'/').then((res)=>
-            {
-                try{
-                    axios.get(baseUrl+'/quiz-questions/'+quiz_id+'/')
-                    .then(response=>{
-                        settotalResult(response.data.length);
-                        setquestionData(response.data);
-                    });
-                }
-                catch(error){
-                    console.log(error);
-                }
-            });
-        }
-        catch(error){
-            console.log(error);
-        }
-
-    };
+    
+      
   return (
     <div className="container mt-4">
         <div className="row">

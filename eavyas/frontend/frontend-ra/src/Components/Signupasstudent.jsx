@@ -3,7 +3,6 @@ import './Signup.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPhoneSquare, faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
-import Header from './header';
 
 const SignUpasstudent = () => { 
   
@@ -58,7 +57,7 @@ const SignUpasstudent = () => {
           body,
           config
         );
-        // console.log(res.data);
+        console.log(res.data);
   
       } catch (err) {
         console.log(err.response.data);
@@ -181,9 +180,7 @@ const SignUpasstudent = () => {
             <input type="radio" name="gender" value="Male" onChange={(e) => onChange(e)} required={true} /> Male &nbsp; &nbsp; &nbsp; &nbsp;
             <input type="radio" name="gender" value="Female" onChange={(e) => onChange(e)} required={true} /> Female
           </div>
-          <div className="box terms">
-            <input type="checkbox" name="Terms" required={true} /> &nbsp; I accept the terms and conditions
-          </div>
+          
           <button type="submit" className="submit-btn" >SignUp</button>
           <div className="line"></div>
           <div className="form-link-sgn">

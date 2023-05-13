@@ -9,6 +9,7 @@ import TeacherDetail from './TeacherDetail'
 
 //student
 import Dashboard from './Dashboard';
+import StudentDashboard from './StudentDashboard';
 import MyCourses from './Mycourses';
 
 //List pages
@@ -39,19 +40,22 @@ import CourseQuizlist from './CourseQuizlist'
 import TakeQuiz from './TakeQuiz'
 import AttemptedStudent from './AttemptedStudent'
 import Search from './search'
+import FavouriteCourses from './FavouriteCourses'
 // student quiz
 
 const Main = () => {
+  
   return (
     <div>
       <Header />
-         
             <Switch>
               <Route path = "/" element ={<Home/>} />
+              <Route path = "/courses" element ={<AllCourses/>} />
                <Route path = "/detail/:course_id" element ={<CourseDetail/>} />
                <Route path = "/search/:searchstring" element ={<Search/>} />  
-               <Route path = "/student-dashboard" element ={<Dashboard/>}/>
+               <Route path = "/student-dashboard" element ={<StudentDashboard/>}/>
                <Route path = "/my-courses" element ={<MyCourses/>}/>
+               <Route path = "/favourite-courses" element ={<FavouriteCourses/>}/>
                <Route path= "/teacher-courses" element ={<TeacherCourses/>}/>
                <Route path= "/enrolled-students/:course_id" element ={<EnrolledStudents/>}/>
                <Route path = "/teacher-dashboard" element ={<TeacherDash/>}/>
@@ -73,10 +77,6 @@ const Main = () => {
                <Route path = "/course-quiz/:course_id" element ={<CourseQuizlist/>} /> 
                <Route path = "/take-quiz/:quiz_id" element ={<TakeQuiz/>} /> 
                <Route path = "/attempted-students/:quiz_id" element ={<AttemptedStudent/>} /> 
-
-               
-
-
 
             </Switch>
       <Footer/>

@@ -20,6 +20,7 @@ function CourseDetail() {
     const [enrollStatus, setenrollStatus] = useState("");
     const [ratingStatus, setratingStatus] = useState("");
     const [AvgRating, setAvgRating] = useState(0);
+    const [favouriteStatus, setfavouriteStatus] = useState("");
     const[courseViews,setcourseViews]=useState(0);
 
 
@@ -103,11 +104,59 @@ function CourseDetail() {
                 .then((res) => {
                     console.log(res.data);
                     // window.location.href='add-courses';
+                    window.location.reload();
+
                 });
         } catch (error) {
             console.log(error);
         }
     }
+
+    const markasFavourite = ()=>{
+        const _formData = new FormData();
+        _formData.append('course', course_id);
+        _formData.append('student', loggedstudentId); 
+        _formData.append('status', true); 
+        
+        try {
+            axios.post('http://localhost:8000/student-add-favourite-course/', _formData,{
+            headers:{
+                'content-type':'multipart/form-data'
+               }
+            })
+            .then((res) => {
+                        setfavouriteStatus('success');
+                        console.log("added");
+                        console.log(favouriteStatus)
+             }); 
+           }
+
+         catch (error) {
+            console.log(error);
+        }
+
+
+     }
+     const removeFavourite = (pk) =>{
+        const _formData = new FormData();
+        _formData.append('course', course_id);
+        _formData.append('student', loggedstudentId); 
+        _formData.append('status', false); 
+        
+        try {
+            axios.get('http://localhost:8000/student-remove-favourite-course/'+course_id+'/'+ loggedstudentId + '/', _formData)
+            .then((res) => {
+                        setfavouriteStatus('failure');
+                  
+        
+             }); 
+           }
+
+         catch (error) {
+            console.log(error);
+        }
+     }
+
 
 
 
@@ -190,8 +239,8 @@ function CourseDetail() {
                                             </div>
                                             <div className="modal-body">
                                                 <form>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputEmail1" class="form-label" >Rating</label>
+                                                    <div className="mb-3">
+                                                        <label for="exampleInputEmail1" className="form-label" >Rating</label>
                                                         <select onChange={(event) => handleChange(event)} className="form-control" name="rating">
                                                             <option onChange={(event) => handleChange(event)} value="1" name="rating">1</option>
                                                             <option onChange={(event) => handleChange(event)} value="2" name="rating">2</option>
@@ -201,12 +250,12 @@ function CourseDetail() {
                                                         </select>
 
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputPassword1" class="form-label">Review</label>
+                                                    <div className="mb-3">
+                                                        <label for="exampleInputPassword1" className="form-label">Review</label>
                                                         <textarea onChange={(event) => handleChange(event)} className="form-control" name="review" rows="10"></textarea>
 
                                                     </div>
-                                                    <button onClick={formSubmit} type="button" class="btn btn-primary">Submit</button>
+                                                    <button onClick={formSubmit} type="button" className="btn btn-primary">Submit</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -215,9 +264,11 @@ function CourseDetail() {
                             </>
                         }
                     </p>
-                    {enrollStatus === "success" && userLoginStatus === "success" && <p><span>You are aleady enrolled in this course</span></p>}
+                    {enrollStatus === "success" && userLoginStatus === "success" && <p><span>You are enrolled in this course</span></p>}
                     {userLoginStatus === "success" && enrollStatus !== "success" && <p><button onClick={enrollCourse} type="button" className='btn btn-success'>Enroll in this course</button> </p>}
                     {userLoginStatus !== "success" && <p><Link to='/loginasstudent'>Please login to enroll in this course</Link></p>}
+                    {userLoginStatus === "success" && favouriteStatus !== "success" && <p><button onClick={markasFavourite} title= "Add in your favourite course list" type="button" className='btn btn-outline-danger'><i className="bi bi-heart-fill"></i></button> </p>}
+                    {userLoginStatus === "success" && favouriteStatus === "success" && <p><button onClick={removeFavourite} title= "Remove your favourite course list" type="button" className='btn btn-danger'><i className="bi bi-heart-fill"></i></button> </p>}
 
 
                 </div>
@@ -233,24 +284,18 @@ function CourseDetail() {
                         <ul key={index} className="list-group list-group-flush">
 
 
-                            <li className="list-group-item">{chapter.title}<button className='btn btn-sm btn-danger float-end' data-bs-toggle="modal" data-bs-target="#videoModal1"><i className="bi bi-play" onClick={handleShow}></i></button > </li>
+                            <li className="list-group-item">{chapter.title} <button className='btn btn-sm btn-success float-end' data-bs-toggle="modal" data-bs-target="#videoModal1"><i className="bi bi-play" onClick={handleShow}></i></button > <button className='btn btn-sm btn-danger float-end' data-bs-toggle="modal" data-bs-target="#videoModal1"><i className="bi bi-stop" onClick={handleClose}></i></button > </li>
+                            
                             {isOpen && (
-                                <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-modal="true">
-                                    <div className="modal-dialog modal-xl">
-                                        <div className="modal-content">
-                                            <div className="modal-header">
-                                                <h1 className="modal-title fs-5" id="exampleModalLabel">Video 1</h1>
-                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
-                                            </div>
-                                            <div className="modal-body">
-                                                <div className="ratio ratio-16x9">
-                                                    <iframe src={chapter.video} title={chapter.title} allowFullScreen></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <>
+                            description :{chapter.description}
+                                  <video controls width="250">
+                                  <source src={chapter.video} type="video/webm" />
 
+                              <source src={chapter.video} type="video/mp4" />
+
+                              </video>
+                              </>
                             )}
 
 
@@ -264,11 +309,46 @@ function CourseDetail() {
             <h3 className="pb-1 mb-4 mt-5">Related Courses</h3>
             <div className='row mb-4'>
                 {relatedCourseData.map((rcourse, index) =>
-                    <div key={index} className="col-md-3">
-                        <div className="card">
-                            <Link target="__blank" to={`/detail/${rcourse.pk}`}> <img src={`${siteUrl}media/${rcourse.fields.thumbnail}`} className="card-img-top" alt={rcourse.fields.title} /> </Link>
+                    <div className="col-md-3 mb-4" key={index}>
+                    <div
+                      className="card bg-light border-primary rounded"
+                      style={{
+                        height: "100%",
+                        boxShadow: "0 0.25rem 0.75rem rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
+                            <Link target="__self" to={`/detail/${rcourse.pk}`}> 
+                            <img src={`${siteUrl}media/${rcourse.fields.thumbnail}`} 
+                            alt={rcourse.fields.title}
+                            className="card-img-top rounded-top"
+                            style={{
+                            height: "200px",
+                            width: "100%",
+                            transition: "transform 0.3s ease",
+                            }} 
+                            onMouseOver={(e) => {
+                            e.currentTarget.style.transform = "scale(1.1)";
+                            e.currentTarget.style.boxShadow =
+                                "0 0.5rem 1rem rgba(0, 0, 255, 0.2)";
+                            }}
+                            onMouseOut={(e) => {
+                            e.currentTarget.style.transform = "scale(1)";
+                            e.currentTarget.style.boxShadow = "none";
+                            }} />
+                             </Link>
                             <div className="card-body">
-                                <h5 className="card-title"><Link to={`/detail/${rcourse.pk}`}>{rcourse.fields.title}</Link></h5>
+                            <h5
+                                className="card-title"
+                                style={{
+                                fontFamily: "Times New Roman",
+                                fontWeight: "bold",
+                                color: "#704214",
+                                backgroundColor: "#decfb6",
+                                padding: "0.5rem",
+                                marginBottom: "0",
+                                }}
+                            >{console.log("hello ", rcourse.fields.id)}
+                                <Link target="__self" to={`/detail/${rcourse.pk}`}>{rcourse.fields.title}</Link></h5>
                             </div>
                         </div>
                     </div>

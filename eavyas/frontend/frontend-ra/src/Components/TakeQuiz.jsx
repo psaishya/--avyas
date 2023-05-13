@@ -97,6 +97,7 @@ function TakeQuiz(){
                         </table>
                         {/* <button className="btn btn-dark btn-sm">Skip</button>
                         <button className="btn btn-primary btn-sm ms-2">Submit</button> */}
+                        <Link className="btn btn-info btn-sm ms-2" to ='/course-quiz/1'>Quit</Link>
 
                     </div>
                     </div>

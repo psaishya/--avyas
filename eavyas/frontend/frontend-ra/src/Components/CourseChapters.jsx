@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import Sidebar from "./sidebar";
 import TeacherSide from "./Teacherside";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -40,12 +39,13 @@ function CourseChapters(){
                             <tr>
                                 <th>Title</th>
                                 <th>Video</th>
+                                <th>Description</th>
                             </tr>
                         </thead>
                         <tbody>
                             {chapterData.map((chapter,index)=>
                             <tr key={index}>
-                                <td><Link to ="#">{chapter.title}</Link></td>
+                                <td>{chapter.title}</td>
                                 <td>
                                         <video controls width="250">
                                             <source src={chapter.video} type="video/webm" />
@@ -54,12 +54,15 @@ function CourseChapters(){
                                         </video>
 
                                 </td>
-                                
+                              
+                                <td>
+                                    {chapter.description}
+                                </td>
                             </tr>
                             )}
                         </tbody>
                     </table>
-                    <Link className="btn btn-info btn-sm ms-2" to ='/teacher-courses'>Back to all courses</Link>
+                    <Link className="btn btn-info btn-sm ms-2" to ='/teacher-courses'>Back to all course.</Link>
 
                 </div>
                 </div>

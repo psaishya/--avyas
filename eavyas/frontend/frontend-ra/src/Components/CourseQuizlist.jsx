@@ -50,6 +50,8 @@ function CourseQuizlist(){
                                 )}
                             </tbody>
                         </table>
+                        <Link className="btn btn-info btn-sm ms-2" to ='/my-courses'>Back</Link>
+
                     </div>
                     </div>
                 </section>    

@@ -47,12 +47,15 @@ function EnrolledStudents(){
                                     <td>{row.student.firstName}</td>
                                     <td>{row.student.email}</td>
                                     <td>{row.student.userName}</td>
-                                    
+                                    <td>
+                                        <Link className="btn btn-success btn-sm " to ={'/view-student/'+row.student.id}>View</Link>
+
+                                    </td>
                                 </tr>
                                 )}
                             </tbody>
                         </table>
-                        <Link className="btn btn-info btn-sm ms-2" to ='/teacher-courses'>Back to all courses</Link>
+                        <Link className="btn btn-info btn-sm ms-2" to ='/teacher-courses'>Back to all course.</Link>
 
                     </div>
                     </div>

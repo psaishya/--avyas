@@ -35,6 +35,7 @@ function AddChapter(){
     const {course_id}=useParams();
 
     const formSubmit = ()=>{
+        console.log("submit button");
         const _formData=new FormData();
        
         _formData.append('course',course_id);
@@ -45,9 +46,13 @@ function AddChapter(){
             axios.post('http://127.0.0.1:8000/chapter/',_formData,{
                 'content-type': 'multipart/form-data'
             })
+            // axios.post('http://127.0.0.1:8000/chapter/', _formData).then((res)=>{
+            //     // window.location.href='/add-quiz';
+            //     console.log(res);
+            // });
             .then((res)=>{
-                //console.log(res.data);
-                window.location.href='add-chapter/11';
+                console.log(res.data);
+                window.location.reload();
         });
         }catch(error){
             console.log(error);
@@ -77,12 +82,13 @@ function AddChapter(){
                                     <label htmlFor="video" className="from-label">Video</label>
                                     <input type="file" onChange={handleFileChange} name= "video" id="video" className="form-control"/>
                                 </div>
-                                <button type="submit" onClick={formSubmit} className="btn btn-primary">Submit</button>
-                                <Link className="btn btn-info btn-sm ms-2" to ='/teacher-courses'>Back to all courses</Link>
+                                <button type="button" onClick={formSubmit} className="btn btn-primary">Submit</button>
+                                <Link className="btn btn-info btn-sm ms-2" to ='/teacher-courses'>Back to all course.</Link>
 
                             </form>
+                            
                     </div>
-
+                    
                 </div>
             </div>
         </div>

@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom"
-import Sidebar from "./sidebar";
 import TeacherSide from "./Teacherside";
 import axios from "axios";
 import {useState,useEffect} from 'react'
+import Numberofqn from "./Numberofqn";
 const baseUrl = 'http://localhost:8000';
 
 
 function AllQuiz(){
     const[quizData,setquizData] =useState([]);
     const [totalResult,settotalResult]=useState(0);
+    const [totalQuestion,settotalQuestion]=useState(0);
 
     const loggeduser=localStorage.getItem('loggedteacher');
 
@@ -24,7 +25,9 @@ function AllQuiz(){
         }catch(error){
             console.log(error);
         }
+        
     },[]);
+    
     const  handledelete=(quiz_id)=>{
         try{
             axios.delete(baseUrl+'/quiz/'+quiz_id+'/').then((res)=>
@@ -70,7 +73,8 @@ console.log("handle delete");
                                 {quizData.map((quiz,index)=>
                                 <tr key={index}>
                                     <td><Link to= {`/all-questions/`+quiz.id}>{quiz.title}</Link></td>
-                                    <td><Link to= '#'>123</Link></td>
+                                    <Numberofqn quiz={quiz.id}/>
+                                    {/* <td><Link to= '#'></Link></td> */}
                                     <td>
                                         <Link className="btn btn-info btn-sm ms-2" to ={`/edit-quiz/`+quiz.id}>Edit </Link>
                                         <Link className="btn btn-success btn-sm ms-2" to ={`/add-quiz-question/`+quiz.id}>Add Questions </Link>
