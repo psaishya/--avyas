@@ -29,7 +29,8 @@ function TeacherDash() {
           textShadow: "0 2px 4px rgba(0,0,0,.2)",
         }}
       >
-        Teacher Profile
+        ई Avyas - Teacher
+        <br />
       </h1>
       <div className="row">
         <aside className="col-md-3">
