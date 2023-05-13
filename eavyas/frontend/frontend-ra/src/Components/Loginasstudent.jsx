@@ -26,7 +26,7 @@ const Loginasstudent = (props) => {
         props.setToken(authToken);
         let authUser = localStorage.setItem("user", username);
         props.setUser(authUser);
-        setloginmsg("Successfully logged in");
+        // setloginmsg("Successfully logged in");
 
         const loggedFormData = new FormData();
         loggedFormData.append("userName", loginData.username);
@@ -39,6 +39,8 @@ const Loginasstudent = (props) => {
             localStorage.setItem("userLoginStatus", true);
             console.log(localStorage.getItem("userLoginStatus"));
             window.location.href = "/student-dashboard";
+            setloginmsg("Successfully logged in");
+
           });
       })
       .catch((err) => {

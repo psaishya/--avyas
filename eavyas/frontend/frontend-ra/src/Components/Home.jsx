@@ -15,6 +15,8 @@ const handleChange2 = (event) => {
   window.location.href = "loginasstudent";
 };
 function Home() {
+  const userLoginStatus = localStorage.getItem("userLoginStatus");
+
   return (
     <>
       <section className="hero">
@@ -28,9 +30,10 @@ function Home() {
               Join us now and make the most out of the techonology in your palm.
             </p>
             <div className="button">
+              {!userLoginStatus &&  <>
               <button className="primary-btn" onClick={handleChange2}>
                 GET STARTED NOW <i className="fa fa-long-arrow-alt-right"></i>
-              </button>
+              </button></>}
               <button className="primary-btn" onClick={handleChange}>
                 VIEW COURSE <i className="fa fa-long-arrow-alt-right"></i>
               </button>

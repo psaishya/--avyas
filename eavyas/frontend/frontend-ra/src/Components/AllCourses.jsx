@@ -56,7 +56,7 @@ function AllCourses() {
                       height: "200px",
                       width: "100%",
                       transition: "transform 0.3s ease",
-                    }}
+                    }} 
                     onMouseOver={(e) => {
                       e.currentTarget.style.transform = "scale(1.1)";
                       e.currentTarget.style.boxShadow =

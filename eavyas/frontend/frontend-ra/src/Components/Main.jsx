@@ -40,17 +40,14 @@ import CourseQuizlist from './CourseQuizlist'
 import TakeQuiz from './TakeQuiz'
 import AttemptedStudent from './AttemptedStudent'
 import Search from './search'
-import Head from './Head'
 import FavouriteCourses from './FavouriteCourses'
-import HeaderFile from './HeaderFile'
 // student quiz
 
 const Main = () => {
+  
   return (
     <div>
-      {/* <Header /> */}
-      {/* <Head/>  */}
-      <HeaderFile/> 
+      <Header />
             <Switch>
               <Route path = "/" element ={<Home/>} />
               <Route path = "/courses" element ={<AllCourses/>} />

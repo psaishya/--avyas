@@ -125,9 +125,9 @@ function CourseDetail() {
                }
             })
             .then((res) => {
-                        setfavouriteStatus('succcess');
-                  
-        
+                        setfavouriteStatus('success');
+                        console.log("added");
+                        console.log(favouriteStatus)
              }); 
            }
 
@@ -309,11 +309,46 @@ function CourseDetail() {
             <h3 className="pb-1 mb-4 mt-5">Related Courses</h3>
             <div className='row mb-4'>
                 {relatedCourseData.map((rcourse, index) =>
-                    <div key={index} className="col-md-3">
-                        <div className="card">
-                            <Link target="__blank" to={`/detail/${rcourse.pk}`}> <img src={`${siteUrl}media/${rcourse.fields.thumbnail}`} className="card-img-top" alt={rcourse.fields.title} /> </Link>
+                    <div className="col-md-3 mb-4" key={index}>
+                    <div
+                      className="card bg-light border-primary rounded"
+                      style={{
+                        height: "100%",
+                        boxShadow: "0 0.25rem 0.75rem rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
+                            <Link target="__self" to={`/detail/${rcourse.pk}`}> 
+                            <img src={`${siteUrl}media/${rcourse.fields.thumbnail}`} 
+                            alt={rcourse.fields.title}
+                            className="card-img-top rounded-top"
+                            style={{
+                            height: "200px",
+                            width: "100%",
+                            transition: "transform 0.3s ease",
+                            }} 
+                            onMouseOver={(e) => {
+                            e.currentTarget.style.transform = "scale(1.1)";
+                            e.currentTarget.style.boxShadow =
+                                "0 0.5rem 1rem rgba(0, 0, 255, 0.2)";
+                            }}
+                            onMouseOut={(e) => {
+                            e.currentTarget.style.transform = "scale(1)";
+                            e.currentTarget.style.boxShadow = "none";
+                            }} />
+                             </Link>
                             <div className="card-body">
-                                <h5 className="card-title"><Link to={`/detail/${rcourse.pk}`}>{rcourse.fields.title}</Link></h5>
+                            <h5
+                                className="card-title"
+                                style={{
+                                fontFamily: "Times New Roman",
+                                fontWeight: "bold",
+                                color: "#704214",
+                                backgroundColor: "#decfb6",
+                                padding: "0.5rem",
+                                marginBottom: "0",
+                                }}
+                            >{console.log("hello ", rcourse.fields.id)}
+                                <Link target="__self" to={`/detail/${rcourse.pk}`}>{rcourse.fields.title}</Link></h5>
                             </div>
                         </div>
                     </div>

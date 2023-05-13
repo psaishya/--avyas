@@ -1,6 +1,7 @@
 import React from "react";
 
 function Footer() {
+  
   return (
     <footer
       className="text-muted py-5 border-top mt-auto"
@@ -27,7 +28,7 @@ function Footer() {
             <h5>Links</h5>
             <ul className="list-unstyled">
               <li>
-                <a href="#">Home</a>
+                <a href="/">Home</a>
               </li>
               <li>
                 <a href="#">About Us</a>

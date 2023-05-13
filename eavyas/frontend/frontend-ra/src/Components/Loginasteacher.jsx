@@ -49,7 +49,7 @@ const Loginasteacher = (props) => {
 
         }).catch(err=>{
             console.log(err);
-            // setloginmsg("You have entered invalid email or password");
+            setloginmsg("You have entered invalid email or password");
         });
     }
 
