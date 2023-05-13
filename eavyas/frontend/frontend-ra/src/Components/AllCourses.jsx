@@ -53,8 +53,10 @@ function AllCourses() {
                     className="card-img-top rounded-top"
                     alt={course.title}
                     style={{
-                      height: "100%",
-                      width: "100%",
+                      height: "300px",
+                      width: "300px",
+                      objectFit: "cover",
+                      objectPosition: "center",
                       transition: "transform 0.3s ease",
                     }}
                     onMouseOver={(e) => {
