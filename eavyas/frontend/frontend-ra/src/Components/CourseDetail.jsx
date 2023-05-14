@@ -73,6 +73,23 @@ function CourseDetail() {
             setuserLoginStatus('success');
         }
 
+        try {
+            axios.get('http://localhost:8000/fetch-favourite-status/' + loggedstudentId + '/' + course_id + '/')
+                .then((res) => {
+                    if (res.data.bool === true) {
+                        setfavouriteStatus('success');
+                    }
+                    else { setfavouriteStatus('failure'); }
+                    // setenrollStatus(res.data.bool)
+                    // console.log(res);
+                    // setenrollStatus('success');
+                });
+
+        }
+        catch (error) {
+            console.log(error);
+        }
+        
     }, [course_id, loggedstudentId]);
 
     // fetch rating status
