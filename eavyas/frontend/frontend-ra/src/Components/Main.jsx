@@ -44,10 +44,10 @@ import FavouriteCourses from './FavouriteCourses'
 // student quiz
 
 const Main = () => {
+  
   return (
     <div>
       <Header />
-         
             <Switch>
               <Route path = "/" element ={<Home/>} />
               <Route path = "/courses" element ={<AllCourses/>} />

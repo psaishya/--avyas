@@ -74,7 +74,11 @@ class Chapter(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course_chapters')
     title = models.CharField(max_length=150)
     description = models.TextField()
+<<<<<<< HEAD
     video=models.FileField(upload_to='chapter_videos/', null='False')
+=======
+    video=models.FileField(upload_to='chapter_videos/', null="False")
+>>>>>>> 1f51a7a5cd7f8e04bc7919210a9d13d9bead5f27
 
     class Meta:
         verbose_name_plural = "4. Chapter"
