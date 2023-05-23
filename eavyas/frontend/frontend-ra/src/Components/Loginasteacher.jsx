@@ -81,8 +81,8 @@ const Loginasteacher = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="form-link-fp">
-              <a href="#" className="forgot-pass">
+            <div className="form-link-sgn">
+              <a href="forgot-password-teacher" className="forgot-pass">
                 Forgot password?
               </a>
             </div>
@@ -99,14 +99,18 @@ const Loginasteacher = (props) => {
               <div className="alert alert-warning">
                 <strong>{loginmsg}</strong>
               </div>
-            )}
-          </form>
+            )}</form>
           <div className="line"></div>
           <div className="form-link-sgn">
             <i className="bi bi-house"></i>
             <a href="/" className="link signup-link">
               {" "}
-              Go back to home.
+              Go back to home. <br /> <br />
+            </a>
+            <i className="bi bi-person-circle"></i>
+            <a href="/loginasstudent" className="link signup-link">
+              {" "}
+              Login as Student
             </a>
           </div>
         </div>

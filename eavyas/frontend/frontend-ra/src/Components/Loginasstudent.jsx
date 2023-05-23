@@ -26,6 +26,9 @@ const Loginasstudent = (props) => {
         props.setToken(authToken);
         let authUser = localStorage.setItem("user", username);
         props.setUser(authUser);
+        console.log(res.data);
+        console.log(res);
+
         // setloginmsg("Successfully logged in");
 
         const loggedFormData = new FormData();
@@ -38,7 +41,7 @@ const Loginasstudent = (props) => {
             console.log(localStorage.getItem("loggedstudent"));
             localStorage.setItem("userLoginStatus", true);
             console.log(localStorage.getItem("userLoginStatus"));
-            window.location.href = "/student-dashboard";
+            // window.location.href = "/student-dashboard";
             setloginmsg("Successfully logged in");
 
           });
@@ -75,11 +78,9 @@ const Loginasstudent = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="form-link-fp">
-              <a href="#" className="forgot-pass">
-                Forgot password?
-              </a>
-            </div>
+            
+            <div className="form-link-sgn">
+            <a href="/forgot-password-student" className="forgot-pass">Forgot password?</a></div>
             <button
               type="button"
               className="submit-btna"

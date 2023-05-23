@@ -24,6 +24,8 @@ const SignUpasteacher = () => {
     phoneno: "",
     email: "",
     username: "",
+    security: "",
+
   });
   const { username, email, password1, password2 } = formData;
 
@@ -70,6 +72,7 @@ const SignUpasteacher = () => {
       userFormData.append("phoneNo", teacherData.phoneno);
       userFormData.append("email", teacherData.email);
       userFormData.append("userName", teacherData.username);
+      userFormData.append("security", teacherData.security);
 
       try {
         axios
@@ -87,7 +90,7 @@ const SignUpasteacher = () => {
   };
   return (
     <>
-      <div className="container">
+      <div className="containerb">
         <div className="signup">
           <h2>SignUp as a Teacher</h2>
           <form onSubmit={(e) => onSubmit(e)}>

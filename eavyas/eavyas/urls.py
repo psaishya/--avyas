@@ -16,20 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.views.generic import TemplateView
-from backend.views import GoogleLogin,google_auth
+from backend.views import GoogleLogin
 from backend import views
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-     path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),    
     path('accounts/', include('allauth.urls')),
     path('api-auth/',include('rest_framework.urls')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),  
-    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
     path('google-auth/', views.google_auth, name='google_auth'),
-    
     path('teacher/dashboard/<int:pk>',views.TeacherDash.as_view()),
     path('teacher/',views.TeacherList.as_view()),
     path('teacher/<int:pk>/',views.TeacherDetail.as_view()),
@@ -37,6 +35,9 @@ urlpatterns = [
     path('student/<int:pk>/',views.StudentDetail.as_view()),
     path('loggedteacher/',views.Loggedteacher),
     path('loggedstudent/',views.Loggedstudent),
+    path('studentsecurity/',views.studentsecurity),
+    path('teachersecurity/',views.teachersecurity),
+
 
     # category
     path('category/',views.CategoryList.as_view()),

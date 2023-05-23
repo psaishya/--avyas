@@ -14,6 +14,8 @@ class User_teacher(models.Model):
     email=models.EmailField(max_length=50,default="")
     userName=models.CharField( max_length=50,default="",unique=TRUE)
     profile=models.ImageField(upload_to='teacher_imgs/', null='True')
+    security=models.CharField(max_length=50,default="")
+
     class Meta:
         verbose_name_plural="1. Teachers"
     #no of courses
@@ -88,7 +90,7 @@ class User_student(models.Model):
     email=models.EmailField(max_length=50,default="")
     userName=models.CharField( max_length=50,default="",unique=TRUE)
     interested_categories= models.TextField(default="")
-
+    security=models.CharField(max_length=50,default="")
       # total favorite courses
     def favourite_courses(self):
         favourite_courses= StudentFavouriteCourse.objects.filter(student=self).count()
@@ -185,4 +187,5 @@ class attemptQuiz(models.Model):
     
     class Meta:
         verbose_name_plural ="14. Attempted Question"
+
 

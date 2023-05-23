@@ -50,13 +50,29 @@ INSTALLED_APPS = [
     # 'rest_auth',
     'dj_rest_auth', 
     'dj_rest_auth.registration',
+
     'rest_framework',
     'rest_framework.authtoken',
 
     'backend'
     
     ]
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    ],
+}
+# REST_AUTH = {
+#     'LOGIN_SERIALIZER': 'dj_rest_auth.serializers.LoginSerializer',
+#     'TOKEN_SERIALIZER': 'dj_rest_auth.serializers.TokenSerializer',
+#     'JWT_SERIALIZER': 'dj_rest_auth.serializers.JWTSerializer',
+#     'JWT_SERIALIZER_WITH_EXPIRATION': 'dj_rest_auth.serializers.JWTSerializerWithExpiration',
+#     'JWT_TOKEN_CLAIMS_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenObtainPairSerializer',
+#     'USER_DETAILS_SERIALIZER': 'dj_rest_auth.serializers.UserDetailsSerializer',
+#     'PASSWORD_RESET_SERIALIZER': 'dj_rest_auth.serializers.PasswordResetSerializer',
+#     'PASSWORD_RESET_CONFIRM_SERIALIZER': 'dj_rest_auth.serializers.PasswordResetConfirmSerializer',
+#     'PASSWORD_CHANGE_SERIALIZER': 'dj_rest_auth.serializers.PasswordChangeSerializer'
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

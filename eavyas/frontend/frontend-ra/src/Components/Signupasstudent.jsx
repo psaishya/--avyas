@@ -24,6 +24,7 @@ const SignUpasstudent = () => {
     phoneno: "",
     email: "",
     username: "",
+    security: "",
   });
   const { username, email, password1, password2 } = formData;
 
@@ -70,6 +71,8 @@ const SignUpasstudent = () => {
       userFormData.append("phoneNo", studentData.phoneno);
       userFormData.append("email", studentData.email);
       userFormData.append("userName", studentData.username);
+      userFormData.append("security", studentData.security);
+
       console.log(userFormData.values);
       try {
         axios
@@ -258,7 +261,27 @@ const SignUpasstudent = () => {
               />{" "}
               Female
             </div>
-
+            <div className="box">
+              <label htmlFor="security" className="fl fontLabel">
+                {" "}
+                Answer:{" "}
+              </label>
+              <div className="fl iconBox">
+                <FontAwesomeIcon icon={faPhoneSquare} />
+              </div>
+              <div className="fr">
+                <input
+                  type="text"
+                  name="security"
+                  maxLength={50}
+                  placeholder="Your Answer"
+                  className="textBox"
+                  onChange={(e) => onChange(e)}
+                  required={true}
+                />
+              </div>
+              <div className="clr"></div>
+            </div>
             <button type="submit" className="submit-btn">
               SignUp
             </button>
