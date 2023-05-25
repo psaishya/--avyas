@@ -13,58 +13,53 @@ const Forgotpasswordstudent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const loginData = {
       userName: userName,
-      security:answer      
+      security: answer,
     };
     const securityFormData = new FormData();
     securityFormData.append("userName", loginData.userName);
     securityFormData.append("security", loginData.security);
 
-    
-    try{
-      axios.post("http://localhost:8000/studentsecurity/",securityFormData).then((response)=>{
-        console.log(response.data);
-        if(response.data.bool==true){
-          localStorage.setItem('userLoginStatus',true)
-          console.log(localStorage.getItem('userLoginStatus'));
-    
-        const loggedFormData = new FormData();
-        loggedFormData.append("userName", loginData.userName);
-        axios
-          .post("http://localhost:8000/loggedstudent/", loggedFormData)
-          .then((response) => {
-            const id = response.data.id;
-            localStorage.setItem("loggedstudent", id);
-            console.log(localStorage.getItem("loggedstudent"));
+    try {
+      axios
+        .post("http://localhost:8000/studentsecurity/", securityFormData)
+        .then((response) => {
+          console.log(response.data);
+          if (response.data.bool == true) {
             localStorage.setItem("userLoginStatus", true);
             console.log(localStorage.getItem("userLoginStatus"));
-            window.location.href = "/student-dashboard";
-            setloginmsg("Successfully logged in");
 
-          });
-        }
-        else{
-          localStorage.setItem('userLoginStatus',false)
-          // alert("Could not login");
-        }
-        
-        
-      });
-    }
-    catch(error){
+            const loggedFormData = new FormData();
+            loggedFormData.append("userName", loginData.userName);
+            axios
+              .post("http://localhost:8000/loggedstudent/", loggedFormData)
+              .then((response) => {
+                const id = response.data.id;
+                localStorage.setItem("loggedstudent", id);
+                console.log(localStorage.getItem("loggedstudent"));
+                localStorage.setItem("userLoginStatus", true);
+                console.log(localStorage.getItem("userLoginStatus"));
+                window.location.href = "/student-dashboard";
+                setloginmsg("Successfully logged in");
+              });
+          } else {
+            localStorage.setItem("userLoginStatus", false);
+            // alert("Could not login");
+          }
+        });
+    } catch (error) {
       console.log(error);
     }
-    
-  }
+  };
   return (
     <div>
       <div className="containera">
         <div className="login">
           <h2>Login as a student</h2>
           <form>
-          <div className="login__field">
+            <div className="login__field">
               <FontAwesomeIcon icon={faUser} className="login__icon" />
               <input
                 type="text"
@@ -75,20 +70,27 @@ const Forgotpasswordstudent = () => {
               />
             </div>
             <div className="login__field">
-            <label htmlFor="security" className="fontLabel text-center mb-3">
-                {" "}
-                <b>What is your childhood nickname?</b>{" "}
+              <label
+                htmlFor="security"
+                className="fontLabel text-center mb-3"
+                style={{
+                  textAlign: "center",
+                  color: "grey",
+                  fontSize: "small",
+                }}
+              >
+                <i>What is your childhood nickname?</i>
               </label>
+
               <input
                 type="text"
                 className="login__input"
-                placeholder="Your answer"
+                placeholder="Answer"
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
               />
             </div>
-               
-        
+
             <button
               type="button"
               className="submit-btna"
@@ -97,9 +99,8 @@ const Forgotpasswordstudent = () => {
               Submit
               <br />
             </button>
-            
+
             <div className="form-link-sgn">
-              
               <a href="/loginasstudent" className="link signup-link">
                 Back to Login
               </a>
@@ -117,7 +118,7 @@ const Forgotpasswordstudent = () => {
               {" "}
               Go back to home. <br /> <br />
             </a>
-            
+
             <i className="bi bi-person-circle"></i>
             <a href="/loginasteacher" className="link signup-link">
               {" "}
@@ -127,8 +128,7 @@ const Forgotpasswordstudent = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Forgotpasswordstudent
-
+export default Forgotpasswordstudent;

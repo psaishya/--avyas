@@ -24,6 +24,7 @@ const SignUpasteacher = () => {
     phoneno: "",
     email: "",
     username: "",
+    security: "",
   });
   const { username, email, password1, password2 } = formData;
 
@@ -70,6 +71,7 @@ const SignUpasteacher = () => {
       userFormData.append("phoneNo", teacherData.phoneno);
       userFormData.append("email", teacherData.email);
       userFormData.append("userName", teacherData.username);
+      userFormData.append("security", teacherData.security);
 
       try {
         axios
@@ -258,7 +260,27 @@ const SignUpasteacher = () => {
               />{" "}
               Female
             </div>
-
+            <div className="box">
+              <label htmlFor="security" className="fl fontLabel">
+                {" "}
+                Fav. Nickname:{" "}
+              </label>
+              <div className="fl iconBox">
+                <FontAwesomeIcon icon={faPhoneSquare} />
+              </div>
+              <div className="fr">
+                <input
+                  type="text"
+                  name="security"
+                  maxLength={50}
+                  placeholder="Your Answer"
+                  className="textBox"
+                  onChange={(e) => onChange(e)}
+                  required={true}
+                />
+              </div>
+              <div className="clr"></div>
+            </div>
             <button type="submit" className="submit-btn">
               SignUp
             </button>

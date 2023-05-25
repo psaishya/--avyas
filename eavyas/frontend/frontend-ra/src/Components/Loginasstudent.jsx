@@ -43,7 +43,6 @@ const Loginasstudent = (props) => {
             console.log(localStorage.getItem("userLoginStatus"));
             window.location.href = "/student-dashboard";
             setloginmsg("Successfully logged in");
-
           });
       })
       .catch((err) => {
@@ -63,7 +62,7 @@ const Loginasstudent = (props) => {
               <input
                 type="text"
                 className="login__input"
-                placeholder="Username/Email"
+                placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -78,16 +77,19 @@ const Loginasstudent = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            
-            <div className="form-link-sgn">
-            <a href="/forgot-password-student" className="forgot-pass">Forgot password?</a></div>
+
+            <div className="button">
+              <a href="/forgot-password-student" className="forgot-pass">
+                Forgot password?
+              </a>
+            </div>
+
             <button
               type="button"
               className="submit-btna"
               onClick={handleSubmit}
             >
               Login
-              <br />
             </button>
             <div className="form-link-sgn">
               Don't have an account?{" "}

@@ -66,7 +66,7 @@ const Loginasteacher = (props) => {
               <input
                 type="text"
                 className="login__input"
-                placeholder="Username/Email"
+                placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -81,11 +81,12 @@ const Loginasteacher = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="form-link-sgn">
-              <a href="forgot-password-teacher" className="forgot-pass">
+            <div className="button">
+              <a href="/forgot-password-teacher" className="forgot-pass">
                 Forgot password?
               </a>
             </div>
+
             <button type="button" className="submit-btn" onClick={handleSubmit}>
               Login
             </button>
@@ -99,7 +100,8 @@ const Loginasteacher = (props) => {
               <div className="alert alert-warning">
                 <strong>{loginmsg}</strong>
               </div>
-            )}</form>
+            )}
+          </form>
           <div className="line"></div>
           <div className="form-link-sgn">
             <i className="bi bi-house"></i>
