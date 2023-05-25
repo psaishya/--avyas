@@ -7,6 +7,8 @@ import SignUpasstudent from './Components/Signupasstudent';
 import Loginasteacher from './Components/Loginasteacher';
 import SignUpasteacher from './Components/Signupasteacher';
 import Main from './Components/Main';
+import Forgotpasswordstudent from './Components/Forgotpasswordstudent';
+import Forgotpasswordteacher from './Components/Forgotpasswordteacher';
 
 // import Header from './Components/header';
 
@@ -43,6 +45,9 @@ function App() {
         <Route path="/signupasstudent" element={<SignUpasstudent/>}/>
         <Route path="/loginasteacher" element={<Loginasteacher setToken={setToken} setUser={setUser} />}/>
         <Route path="/signupasteacher" element={<SignUpasteacher/>}/>
+        <Route path ="/forgot-password-student" element ={<Forgotpasswordstudent/>} /> 
+        <Route path ="/forgot-password-teacher" element ={<Forgotpasswordteacher/>} /> 
+
     </Routes> 
     </Router>
     {/* </div> */}

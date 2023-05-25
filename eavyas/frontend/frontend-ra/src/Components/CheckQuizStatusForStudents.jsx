@@ -41,7 +41,7 @@ const CheckQuizStatusForStudents = (props) => {
         <Link className="btn btn-sm btn-warning" to= {`/take-quiz/`+props.quiz}>Take Quiz</Link>
     }
     {assignStatus.bool===true &&
-        <span className="text-success">Attempted (Obtained Marks: {resultData.total_correct_answers}/{resultData.total_questions})</span>
+        <div className="text-success">Attempted (Obtained Marks: {resultData.total_correct_answers}/{resultData.total_questions})</div>
     }
 </td>
   )

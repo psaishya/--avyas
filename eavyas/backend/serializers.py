@@ -7,7 +7,7 @@ class teacherSerializer(serializers.ModelSerializer):
         model=models.User_teacher
 
 
-        fields=['teacherId','firstName','lastName','bio','gender','phoneNo','email','userName','teacher_courses','profile']
+        fields=['teacherId','firstName','lastName','bio','gender','phoneNo','email','userName','teacher_courses','profile','security']
         depth=1
     def __init__(self, *args, **kwargs):
         super(teacherSerializer, self).__init__(*args, **kwargs)
@@ -25,7 +25,7 @@ class TeacherDashSerializer(serializers.ModelSerializer):
 class studentSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.User_student
-        fields=['studentId','firstName','lastName','gender','phoneNo','email','userName']
+        fields=['studentId','firstName','lastName','gender','phoneNo','email','userName','security']
 
 class StudentDashboardSerializer(serializers.ModelSerializer):
     class Meta:

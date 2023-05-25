@@ -354,3 +354,28 @@ def FetchQuizAttemptStatus(request, quiz_id,student_id):
 #     queryset.course_views += 1
 #     queryset.save()
 #     return JsonResponse({'views':queryset.course_views})
+
+@csrf_exempt   
+def studentsecurity(request):
+    userName=request.POST['userName']
+    security=request.POST['security']
+    print(userName,security)
+    queryset=models.User_student.objects.all() 
+    userdata=queryset.filter(userName=userName,security=security)
+    if userdata:
+        return JsonResponse({'bool':True})
+    else:
+        return JsonResponse({'bool':False})
+    
+    
+@csrf_exempt   
+def teachersecurity(request):
+    userName=request.POST['userName']
+    security=request.POST['security']
+    queryset=models.User_teacher.objects.all() 
+    userdata=queryset.filter(userName=userName,security=security)
+    if userdata:
+        return JsonResponse({'bool':True})
+    else:
+        return JsonResponse({'bool':False})
+    

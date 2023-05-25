@@ -26,6 +26,9 @@ const Loginasstudent = (props) => {
         props.setToken(authToken);
         let authUser = localStorage.setItem("user", username);
         props.setUser(authUser);
+        console.log(res.data);
+        console.log(res);
+
         // setloginmsg("Successfully logged in");
 
         const loggedFormData = new FormData();
@@ -75,13 +78,11 @@ const Loginasstudent = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="form-link-fp">
-              <a href="#" className="forgot-pass">
-                Forgot password?
-              </a>
-            </div>
+            
+            <div className="form-link-sgn">
+            <a href="/forgot-password-student" className="forgot-pass">Forgot password?</a></div>
             <button
-              type="submit"
+              type="button"
               className="submit-btna"
               onClick={handleSubmit}
             >

@@ -87,7 +87,7 @@ const SignUpasteacher = () => {
   };
   return (
     <>
-      <div className="container">
+      <div className="containerb">
         <div className="signup">
           <h2>SignUp as a Teacher</h2>
           <form onSubmit={(e) => onSubmit(e)}>

@@ -44,10 +44,10 @@ import FavouriteCourses from './FavouriteCourses'
 // student quiz
 
 const Main = () => {
-  
   return (
     <div>
       <Header />
+         
             <Switch>
               <Route path = "/" element ={<Home/>} />
               <Route path = "/courses" element ={<AllCourses/>} />
@@ -77,7 +77,6 @@ const Main = () => {
                <Route path = "/course-quiz/:course_id" element ={<CourseQuizlist/>} /> 
                <Route path = "/take-quiz/:quiz_id" element ={<TakeQuiz/>} /> 
                <Route path = "/attempted-students/:quiz_id" element ={<AttemptedStudent/>} /> 
-
             </Switch>
       <Footer/>
     </div>

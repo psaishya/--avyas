@@ -49,7 +49,7 @@ function AssignQuiz(){
                 </aside>
                 <section className="col-md-9">
                                 <div className="card">
-                        <h5 className='card-header'>Assign quiz <span className="text-primary">({courseData.title})</span></h5>
+                        <h5 className='card-header'>Assign quiz <div className="text-primary">({courseData.title})</div></h5>
                     <div className="card-body">
                         <table className="table table-bordered">
                             <thead>

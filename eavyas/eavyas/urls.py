@@ -36,6 +36,9 @@ urlpatterns = [
     path('student/<int:pk>/',views.StudentDetail.as_view()),
     path('loggedteacher/',views.Loggedteacher),
     path('loggedstudent/',views.Loggedstudent),
+    path('studentsecurity/',views.studentsecurity),
+    path('teachersecurity/',views.teachersecurity),
+
 
     # category
     path('category/',views.CategoryList.as_view()),
