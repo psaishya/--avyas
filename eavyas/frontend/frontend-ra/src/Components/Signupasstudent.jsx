@@ -10,6 +10,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const SignUpasstudent = () => {
+  const [pwmsg, setpwmsg] = useState("");
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -41,6 +43,8 @@ const SignUpasstudent = () => {
 
     if (password1 !== password2) {
       console.log("Passwords do not match");
+      setpwmsg("Passwords do not match");
+
     } else {
       const newUser = {
         username,
@@ -237,6 +241,7 @@ const SignUpasstudent = () => {
                   required={true}
                 />
               </div>
+              
               <div className="clr"></div>
             </div>
             <div className="box radio">
@@ -280,15 +285,23 @@ const SignUpasstudent = () => {
                   required={true}
                 />
               </div>
+              
               <div className="clr"></div>
             </div>
+            
             <button type="submit" className="submit-btn">
               SignUp
             </button>
+            {pwmsg && (
+              <div className="alert alert-warning">
+                <strong>{pwmsg}</strong>
+              </div>
+            )}
             <div className="line"></div>
             <div className="form-link-sgn">
               Already have an account? <a href="/loginasstudent">Login Here</a>
             </div>
+           
           </form>
         </div>
       </div>

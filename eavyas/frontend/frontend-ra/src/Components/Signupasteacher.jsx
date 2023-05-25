@@ -11,6 +11,8 @@ import {
 import Header from "./header";
 
 const SignUpasteacher = () => {
+  const [pwmsg, setpwmsg] = useState("");
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -41,6 +43,8 @@ const SignUpasteacher = () => {
 
     if (password1 !== password2) {
       console.log("Passwords do not match");
+      setpwmsg("Passwords do not match");
+
     } else {
       const newUser = {
         username,
@@ -279,15 +283,22 @@ const SignUpasteacher = () => {
                   required={true}
                 />
               </div>
+             
               <div className="clr"></div>
             </div>
             <button type="submit" className="submit-btn">
               SignUp
             </button>
+            {pwmsg && (
+              <div className="alert alert-warning">
+                <strong>{pwmsg}</strong>
+              </div>
+            )}
             <div className="line"></div>
             <div className="form-link-sgn">
               Already have an account? <a href="/loginasteacher">Login Here</a>
             </div>
+           
           </form>
         </div>
       </div>
