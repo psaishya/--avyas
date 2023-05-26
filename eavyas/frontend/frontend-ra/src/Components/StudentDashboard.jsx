@@ -34,6 +34,17 @@ function StudentDashboard() {
   }, [loggeduser]);
   return (
     <div className="container mt-4">
+      <h1
+        style={{
+          fontFamily: "Times New Roman",
+          fontSize: "40px",
+          fontWeight: "bold",
+          textShadow: "0 2px 4px rgba(0,0,0,.2)",
+        }}
+      >
+        ई Avyas - Student
+        <br />
+      </h1>
       <div className="row">
         <aside className="col-md-3">
           <Sidebar />
