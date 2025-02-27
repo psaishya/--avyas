@@ -66,7 +66,7 @@
 - **Janak Sitaula**
 
 ## Supervisor
-- **Dr. Rajani Chulyadyo**
+- **Dr. Bal Krishna Bal**
 
 ## License
 This project is licensed under the MIT License.
