@@ -1,0 +1,16 @@
+Django>=3.2
+sqlite3
+react
+react-dom
+axios
+redux
+redux-thunk
+react-redux
+@mui/material
+@mui/icons-material
+@mui/styles
+formik
+yup
+corsheaders
+djangorestframework
+django-cors-headers
